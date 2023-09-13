@@ -8,6 +8,7 @@ import { Route, RouterProvider, createBrowserRouter, createRoutesFromElements } 
 import { AuthLayout } from './components/AuthLayout';
 import { Registration } from './components/Registration';
 import { Login } from './components/Login';
+import { Account } from './components/Account';
 
 const router = createBrowserRouter(
     createRoutesFromElements(
@@ -16,7 +17,7 @@ const router = createBrowserRouter(
             <Route path='login' element={<Login/>}/>
             <Route path='signup' element={<Registration/>}/>
         </Route>
-        {/* <Route path='/users' element={<Users/>}/> */}
+        <Route path='/' element={<Account/>}/>
         </>
     )
 )
