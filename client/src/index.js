@@ -1,14 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import App from './App';
 import store from './store/store';
 import { Provider } from 'react-redux';
 import { Route, RouterProvider, createBrowserRouter, createRoutesFromElements } from "react-router-dom"
 import { AuthLayout } from './components/AuthLayout';
 import { Registration } from './components/Registration';
 import { Login } from './components/Login';
-import { Account } from './components/Account';
+import App from './App'
+import Things from './components/Things';
+import Employees from './components/Employees';
 
 const router = createBrowserRouter(
     createRoutesFromElements(
@@ -17,7 +18,10 @@ const router = createBrowserRouter(
             <Route path='login' element={<Login/>}/>
             <Route path='signup' element={<Registration/>}/>
         </Route>
-        <Route path='/' element={<Account/>}/>
+        <Route path='/' element={<App/>}>
+            <Route path='things' element={<Things/>}/>
+            <Route path='employees' element={<Employees/>}/>
+        </Route>
         </>
     )
 )
@@ -26,9 +30,7 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
     <React.StrictMode>
         <Provider store={store}>
-            <RouterProvider router={router}>
-                <App />
-            </RouterProvider>
+            <RouterProvider router={router} />
         </Provider>
     </React.StrictMode>
 );

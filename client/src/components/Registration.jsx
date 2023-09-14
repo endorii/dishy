@@ -3,7 +3,6 @@ import { useDispatch } from 'react-redux';
 import PhoneInput from 'react-phone-input-2';
 import 'react-phone-input-2/lib/style.css';
 import { registration } from '../modules/auth/user';
-// import "PhoneNumber.css";
 
 export const Registration = () => {
 
