@@ -1,77 +1,96 @@
 import Plus from '../assets/icons/plus.svg'
 import { useState } from 'react';
+import { useEffect } from 'react';
+import AddEmployee from './AddEmployee';
+import { fetchEmployees } from '../store/slices/employeesSlice';
+import { useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux/es/hooks/useSelector';
 
 const Employees = () => {
     const [open, setOpen] = useState(false);
+    const dispatch = useDispatch();
+
+    const {employees} = useSelector(state => state.employees);
+    console.log(employees);
+
+    useEffect(() => {
+        dispatch(fetchEmployees());
+    }, [])
+
     return (
-        <div>
-            <div className="flex justify-between ">
-                <h2 className="text-3xl font-medium">Працівники</h2>
-                <button className="flex items-center bg-green-500 hover:bg-green-600 rounded-lg px-7 py-2 text-white font-medium drop-shadow-md">Додати
-                    <img className='w-7 inline pl-2' src={Plus} alt="" />
-                </button>
-                {open ? <div>
-                    
-                </div> : null}
-            </div>
-            <hr className='border-t-1 border-slate-300 my-10'/>
+        <>
+            <div className='flex flex-col'>
 
-            <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
-                <table class="w-full text-sm text-left text-gray-500">
-                    <thead class="text-xs text-gray-700 uppercase bg-gray-300">
-                        <tr>
-                            <th scope="col" class="px-6 py-3">
-                                Ім'я
-                            </th>
-                            <th scope="col" class="px-6 py-3">
-                                Логін
-                            </th>
-                            <th scope="col" class="px-6 py-3">
-                                Пінкод
-                            </th>
-                            <th scope="col" class="px-6 py-3">
-                                Посада
-                            </th>
-                            <th scope="col" class="px-6 py-3">
-                                Востаннє здійснено вхід
-                            </th>
-                            <th scope="col" class="px-1 py-1">
-                                <span class="sr-only">Змінити</span>
-                            </th>
-                            <th scope="col" class="px-1 py-1">
-                                <span class="sr-only">Опції</span>
-                            </th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr class="bg-white border-b border-gray-300 text-gray-700">
-                            <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
-                                Сергій
-                            </th>
-                            <td class="px-6 py-4">
-                                job.tenshi@gmail.com
-                            </td>
-                            <td class="px-6 py-4">
-                                0000
-                            </td>
-                            <td class="px-6 py-4">
-                                Офіціант
-                            </td>
-                            <td class="px-6 py-4">
-                                14 вересня 13:30
-                            </td>
-                            <td class="px-2 py-1 text-right">
-                                <a href="#" class="font-medium text-blue-600 hover:underline">,,,</a>
-                            </td>
-                            <td class="px-2 py-1 text-left">
-                                <a href="#" class="font-medium text-blue-600 hover:underline">...</a>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
+                {open ? <AddEmployee setOpen={setOpen} /> : null}
 
-        </div>
+                <div className="flex justify-between ">
+                    <h2 className="text-3xl font-medium">Працівники</h2>
+                    <button className="flex items-center bg-green-500 hover:bg-green-600 rounded-lg px-7 py-2 text-white font-medium drop-shadow-md"
+                        onClick={() => setOpen(true)}>Додати
+                        <img className='w-7 inline pl-2' src={Plus} alt="" />
+                    </button>
+                </div>
+                <hr className='border-t-1 border-slate-300 my-10' />
+
+                <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
+                    <table className="w-full text-sm text-left text-gray-500">
+                        <thead className="text-xs text-gray-700 uppercase bg-gray-300">
+                            <tr>
+                                <th scope="col" className="px-6 py-3">
+                                    Ім'я
+                                </th>
+                                <th scope="col" className="px-6 py-3">
+                                    Логін
+                                </th>
+                                <th scope="col" className="px-6 py-3">
+                                    Пінкод
+                                </th>
+                                <th scope="col" className="px-6 py-3">
+                                    Посада
+                                </th>
+                                <th scope="col" className="px-6 py-3">
+                                    Востаннє здійснено вхід
+                                </th>
+                                <th scope="col" className="px-1 py-1">
+                                    <span className="sr-only">Змінити</span>
+                                </th>
+                                <th scope="col" className="px-1 py-1">
+                                    <span className="sr-only">Опції</span>
+                                </th>
+                            </tr>
+                        </thead>
+                        {employees.map((employee, i) => 
+                            <tbody>
+                            <tr className="bg-white border-b border-gray-300 text-gray-700">
+                                <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
+                                    {employee.name}
+                                </th>
+                                <td className="px-6 py-4">
+                                    {employee.login}
+                                </td>
+                                <td className="px-6 py-4">
+                                    {employee.pin}
+                                </td>
+                                <td className="px-6 py-4">
+                                    {employee.position}
+                                </td>
+                                <td className="px-6 py-4">
+                                    14 вересня 13:30
+                                </td>
+                                <td className="px-2 py-1 text-right">
+                                    <a href="#" className="font-medium text-blue-600 hover:underline">,,,</a>
+                                </td>
+                                <td className="px-2 py-1 text-left">
+                                    <a href="#" className="font-medium text-blue-600 hover:underline">...</a>
+                                </td>
+                            </tr>
+                        </tbody>
+                        )}
+                    </table>
+                </div>
+
+            </div>
+        </>
     )
 }
 

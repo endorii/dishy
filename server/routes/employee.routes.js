@@ -1,23 +1,22 @@
 const Router = require('express');
 const Employee = require('../models/Employee');
+const authMiddleware = require('../middlewares/auth.middleware');
 
 const router = new Router();
 
-router.post('/employees', 
+router.post('/employees', authMiddleware,
     async (req, res) => {
         try {
 
             const {name, login, pin, position} = req.body;
 
-            const candidate = await Employee.findOne({
-                $or: [{ login }, { pin}]
-            });
+            const candidate = await Employee.findOne({user: req.user.id, pin});
 
             if (candidate) {
-                return res.status(400).json({message: `Користувач з поштою ${login} або пін-кодом ${pin} вже існує`})
+                return res.status(400).json({message: `Користувач пін-кодом ${pin} вже існує`})
             }
 
-            const employee = new Employee({name, login, pin, position});
+            const employee = new Employee({user: req.user.id, name, login, pin, position});
 
             await employee.save();
 
@@ -26,6 +25,20 @@ router.post('/employees',
         } catch (e) {
             console.log(e);
             res.send({message: "Помилка сервера"})
+        }
+    }
+);
+
+router.get('/employees', authMiddleware,
+    async (req, res) => {
+        try {
+            const employees = await Employee.find({user: req.user.id});
+
+            return res.json({employees});
+
+        } catch (e) {
+            console.log(e);
+            res.send({message: "Server error"});
         }
     }
 );

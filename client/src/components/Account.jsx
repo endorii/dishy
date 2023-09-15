@@ -106,7 +106,7 @@ const Account = () => {
 
     return (
         <div className="flex">
-            <aside className={menuOpen ? "w-[260px] h-screen bg-slate-100 p-7 border-r border-slate-300 overflow-auto" : "w-[85px] h-screen bg-slate-100 p-7 border-r border-slate-300 overflow-auto"}>
+            <aside className={menuOpen ? "w-[260px] h-screen bg-slate-200 p-7 border-r border-slate-300 overflow-auto" : "w-[85px] h-screen bg-slate-100 p-7 border-r border-slate-300 overflow-auto"}>
                 <div>
                     <svg onClick={() => setMenuOpen(!menuOpen)} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className={`mb-6 h-6 w-6 inline transform transition duration-150 ease-out ${menuOpen ? 'rotate-90' : 'rotate-[260deg]'}`}>
                         <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5"></path>
@@ -119,8 +119,8 @@ const Account = () => {
                 <hr className='border-t-1 border-slate-300 mt-3'/>
                 <Accordion menuOpen={menuOpen} setMenuOpen={setMenuOpen} />
             </aside>
-            <main className="flex-1 ml">
-                <div className="h-screen bg-slate-50 p-10">
+            <main className="flex-1 ">
+                <div className="h-screen bg-slate-100 p-10">
                     <Outlet/>
                 </div>
             </main>
