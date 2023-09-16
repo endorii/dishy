@@ -5,14 +5,14 @@ import AddEmployee from './AddEmployee';
 import { fetchEmployees } from '../store/slices/employeesSlice';
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux/es/hooks/useSelector';
+import { deleteEmployee } from './employee';
 
 const Employees = () => {
     const [open, setOpen] = useState(false);
     const dispatch = useDispatch();
 
     const {employees} = useSelector(state => state.employees);
-    console.log(employees);
-
+    
     useEffect(() => {
         dispatch(fetchEmployees());
     }, [])
@@ -48,7 +48,7 @@ const Employees = () => {
                                 <th scope="col" className="px-6 py-3">
                                     Посада
                                 </th>
-                                <th scope="col" className="px-6 py-3">
+                                <th scope="col" className="px-1 py-3">
                                     Востаннє здійснено вхід
                                 </th>
                                 <th scope="col" className="px-1 py-1">
@@ -60,7 +60,7 @@ const Employees = () => {
                             </tr>
                         </thead>
                         {employees.map((employee, i) => 
-                            <tbody>
+                            <tbody key={i}>
                             <tr className="bg-white border-b border-gray-300 text-gray-700">
                                 <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
                                     {employee.name}
@@ -74,14 +74,14 @@ const Employees = () => {
                                 <td className="px-6 py-4">
                                     {employee.position}
                                 </td>
-                                <td className="px-6 py-4">
+                                <td className="px-1 py-4">
                                     14 вересня 13:30
                                 </td>
                                 <td className="px-2 py-1 text-right">
-                                    <a href="#" className="font-medium text-blue-600 hover:underline">,,,</a>
+                                    <a href="#" className="font-medium text-blue-600 hover:underline">Ред.</a>
                                 </td>
                                 <td className="px-2 py-1 text-left">
-                                    <a href="#" className="font-medium text-blue-600 hover:underline">...</a>
+                                    <a onClick={async () => { await deleteEmployee(employee._id); dispatch(fetchEmployees())}} href="#" className="font-medium text-blue-600 hover:underline">Видалити</a>
                                 </td>
                             </tr>
                         </tbody>

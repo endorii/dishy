@@ -43,4 +43,22 @@ router.get('/employees', authMiddleware,
     }
 );
 
+router.delete('/employees/:_id', authMiddleware,
+    async (req, res) => {
+        try {
+            const { _id } = req.params;
+
+            const updatedTransaction = await Employee.findOneAndDelete({ _id });
+
+            if (!updatedTransaction) {
+                return res.status(404).json({ message: `Employee with id ${_id} not found` });
+            }
+
+            return res.json({ message: "Employee was deleted"});
+        } catch (e) {
+            console.log(e);
+            res.send({ message: "Server error" });
+        }
+});
+
 module.exports = router;

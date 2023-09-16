@@ -21,3 +21,12 @@ export const getAllEmployees = async () => {
         console.log(e.response.data.message);
     }
 } 
+
+export const deleteEmployee = async (_id) => {
+    try {
+        const response = await axios.delete(`http://localhost:5000/api/employees/${_id}`, {headers: {Authorization: `Bearer ${localStorage.getItem('token')}`}});
+        return response.data
+    } catch (e) {
+        console.log(e.response.data.message);
+    }
+}

@@ -12,8 +12,6 @@ export const Registration = () => {
     const [company, setCompany] = useState('')
     const [password, setPassword] = useState('')
 
-    const dispatch = useDispatch();
-
     return (
         <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
             <div className="sm:mx-auto sm:w-full sm:max-w-sm">
@@ -35,8 +33,8 @@ export const Registration = () => {
                         </label>
                         <div className="mt-2">
                             <input
-                            value={email}
-                            onChange={(e) => setEmail(e.target.value)}
+                                value={email}
+                                onChange={(e) => setEmail(e.target.value)}
                                 id="email"
                                 name="email"
                                 type="email"
@@ -53,8 +51,8 @@ export const Registration = () => {
                         </label>
                         <div className="mt-2">
                             <input
-                            value={name}
-                            onChange={(e) => setName(e.target.value)}
+                                value={name}
+                                onChange={(e) => setName(e.target.value)}
                                 id="name"
                                 name="name"
                                 type="text"
@@ -63,8 +61,6 @@ export const Registration = () => {
                             />
                         </div>
                     </div>
-
-                    {/* react-phone-number-input */}
                     <div>
                         <label htmlFor="phone" className="block text-sm font-medium leading-6 text-gray-900">Номер телефону</label>
                         <PhoneInput
@@ -89,8 +85,8 @@ export const Registration = () => {
                         </label>
                         <div className="mt-2">
                             <input
-                            value={company}
-                            onChange={(e) => setCompany(e.target.value)}
+                                value={company}
+                                onChange={(e) => setCompany(e.target.value)}
                                 id="company"
                                 name="company"
                                 type="text"
@@ -108,8 +104,8 @@ export const Registration = () => {
                         </div>
                         <div className="mt-2">
                             <input
-                            value={password}
-                            onChange={(e) => setPassword(e.target.value)}
+                                value={password}
+                                onChange={(e) => setPassword(e.target.value)}
                                 id="password"
                                 name="password"
                                 type="password"
@@ -122,12 +118,16 @@ export const Registration = () => {
 
                     <div>
                         <button
-                        onClick={(e) => {e.preventDefault(); dispatch(registration(email, name, phone, company, password))}}
+                            onClick={async (e) => {
+                                e.preventDefault();
+                                await registration(email, name, phone, company, password);
+                            }}
                             type="submit"
                             className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                         >
                             Зареєструватися
                         </button>
+
                     </div>
                 </form>
 

@@ -1,9 +1,9 @@
 import axios from 'axios';
 import { setUser } from "../../store/slices/userSlice";
 
-export const registration = async (email, name, phone, comapany, password) => {
+export const registration = async (email, name, phone, company, password) => {
     try {
-        const response = await axios.post("http://localhost:5000/api/auth/signup", {email, name, phone, comapany, password});
+        const response = await axios.post("http://localhost:5000/api/auth/signup", {email, name, phone, company, password});
         
         console.log(response.data.message);
 
