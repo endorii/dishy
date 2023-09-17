@@ -43,14 +43,37 @@ router.get('/employees', authMiddleware,
     }
 );
 
+router.put('/employees/:_id', authMiddleware,
+    async (req, res) => {
+        try {
+            const { _id } = req.params;
+            const {name, login, pin, position} = req.body;
+
+            const updatedEmployee = await Employee.findOneAndUpdate(
+                { _id },
+                {user: req.user.id, name, login, pin, position},
+                { new: true}
+            );
+
+            if (!updatedEmployee) {
+                return res.status(404).json({ message: `Employee with id ${_id} not found` });
+            }
+
+            return res.json({ message: "Employee was updated"});
+        } catch (e) {
+            console.log(e);
+            res.send({ message: "Server error" });
+        }
+});
+
 router.delete('/employees/:_id', authMiddleware,
     async (req, res) => {
         try {
             const { _id } = req.params;
 
-            const updatedTransaction = await Employee.findOneAndDelete({ _id });
+            const updatedEmployee = await Employee.findOneAndDelete({ _id });
 
-            if (!updatedTransaction) {
+            if (!updatedEmployee) {
                 return res.status(404).json({ message: `Employee with id ${_id} not found` });
             }
 

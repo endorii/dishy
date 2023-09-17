@@ -6,27 +6,40 @@ import { fetchEmployees } from '../store/slices/employeesSlice';
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux/es/hooks/useSelector';
 import { deleteEmployee } from './employee';
+import EditEmployee from './EditEmployee';
+import { Modal } from './Modal';
 
 const Employees = () => {
-    const [open, setOpen] = useState(false);
+    const [addEmployeeModalOpen, setAddEmployeeModalOpen] = useState(false);
+    const [editEmployeeModalOpen, setEditEmployeeModalOpen] = useState(false);
+    const [currentEmployee, setCurrentEmployee] = useState(null);
+
     const dispatch = useDispatch();
 
-    const {employees} = useSelector(state => state.employees);
-    
+    const { employees } = useSelector(state => state.employees);
+
     useEffect(() => {
         dispatch(fetchEmployees());
     }, [])
 
     return (
         <>
-            <div className='flex flex-col'>
+            {addEmployeeModalOpen && 
+                <Modal>
+                    <AddEmployee setOpen={setAddEmployeeModalOpen} />
+                </Modal>
+            }
+            {editEmployeeModalOpen && 
+                <Modal>
+                    <EditEmployee setOpen={setEditEmployeeModalOpen} currentEmployee={currentEmployee} />
+                </Modal>
+            }
 
-                {open ? <AddEmployee setOpen={setOpen} /> : null}
-
+            <div className='flex flex-col' >
                 <div className="flex justify-between ">
                     <h2 className="text-3xl font-medium">Працівники</h2>
                     <button className="flex items-center bg-green-500 hover:bg-green-600 rounded-lg px-7 py-2 text-white font-medium drop-shadow-md"
-                        onClick={() => setOpen(true)}>Додати
+                        onClick={() => setAddEmployeeModalOpen(true)}>Додати
                         <img className='w-7 inline pl-2' src={Plus} alt="" />
                     </button>
                 </div>
@@ -59,32 +72,41 @@ const Employees = () => {
                                 </th>
                             </tr>
                         </thead>
-                        {employees.map((employee, i) => 
-                            <tbody key={i}>
-                            <tr className="bg-white border-b border-gray-300 text-gray-700">
-                                <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
-                                    {employee.name}
-                                </th>
-                                <td className="px-6 py-4">
-                                    {employee.login}
-                                </td>
-                                <td className="px-6 py-4">
-                                    {employee.pin}
-                                </td>
-                                <td className="px-6 py-4">
-                                    {employee.position}
-                                </td>
-                                <td className="px-1 py-4">
-                                    14 вересня 13:30
-                                </td>
-                                <td className="px-2 py-1 text-right">
-                                    <a href="#" className="font-medium text-blue-600 hover:underline">Ред.</a>
-                                </td>
-                                <td className="px-2 py-1 text-left">
-                                    <a onClick={async () => { await deleteEmployee(employee._id); dispatch(fetchEmployees())}} href="#" className="font-medium text-blue-600 hover:underline">Видалити</a>
-                                </td>
-                            </tr>
-                        </tbody>
+                        {employees.map((employee, i) =>
+                            <>
+                                <tbody key={i}>
+                                    <tr className="bg-white border-b border-gray-300 text-gray-700">
+                                        <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
+                                            {employee.name}
+                                        </th>
+                                        <td className="px-6 py-4">
+                                            {employee.login}
+                                        </td>
+                                        <td className="px-6 py-4">
+                                            {employee.pin}
+                                        </td>
+                                        <td className="px-6 py-4">
+                                            {employee.position}
+                                        </td>
+                                        <td className="px-1 py-4">
+                                            14 вересня 13:30
+                                        </td>
+                                        <td className="px-2 py-1 text-right">
+                                            <a onClick={async () => {
+                                                setCurrentEmployee(employee)
+                                                setEditEmployeeModalOpen(true);
+                                                dispatch(fetchEmployees())
+                                            }}
+
+                                                href="#" className="font-medium text-blue-600 hover:underline">Редагувати</a>
+                                        </td>
+                                        <td className="px-2 py-1 text-left">
+                                            <a onClick={async () => { await deleteEmployee(employee._id); dispatch(fetchEmployees()) }} href="#" className="font-medium text-blue-600 hover:underline">Видалити</a>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </>
+
                         )}
                     </table>
                 </div>

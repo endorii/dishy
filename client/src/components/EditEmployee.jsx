@@ -1,15 +1,16 @@
 import { useState } from "react";
-import { addEmployee } from "./employee";
+import { editEmployee } from "./employee";
 import Plus from '../assets/icons/plus.svg';
 import { useDispatch } from "react-redux";
 import { fetchEmployees } from "../store/slices/employeesSlice";
 
-const AddEmployee = ({setOpen}) => {
+const EditEmployee = ({setOpen, currentEmployee}) => {
 
-    const [name, setName] = useState('');
-    const [login, setLogin] = useState('');
-    const [pin, setPin] = useState('');
-    const [position, setPosition] = useState('');
+    const [id, setId] = useState(currentEmployee._id);
+    const [name, setName] = useState(currentEmployee.name);
+    const [login, setLogin] = useState(currentEmployee.login);
+    const [pin, setPin] = useState(currentEmployee.pin);
+    const [position, setPosition] = useState(currentEmployee.position);
 
     const dispatch = useDispatch();
 
@@ -43,7 +44,7 @@ const AddEmployee = ({setOpen}) => {
                     <button className="flex items-center bg-green-500 hover:bg-green-600 rounded-lg mb-7 mx-[30%] px-7 py-2 text-white font-medium drop-shadow-md"
                         onClick={async() => {
                             setOpen(false); 
-                            await addEmployee(name, login, pin, position); 
+                            await editEmployee(id, name, login, pin, position); 
                             dispatch(fetchEmployees());}}
                             
                             >Підтвердити
@@ -55,4 +56,4 @@ const AddEmployee = ({setOpen}) => {
     )
 }
 
-export default AddEmployee;
+export default EditEmployee;
