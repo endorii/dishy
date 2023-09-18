@@ -30,7 +30,7 @@ const AccordionItem = ({ title, children, icon, menuOpen, setMenuOpen }) => {
         <li className="">
             <div className='cursor-pointer' onClick={() => setMenuOpen(true)}>
                 <img src={icon} alt="" className='inline w-6' />
-                
+
                 <div className="px-3 py-2 inline text-lg" onClick={() => children ? setOpen(!open) : null}>
                     {menuOpen ? title : null} {' '}
                     {children && menuOpen ? <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className={`h-3 w-3 inline transform transition duration-150 ease-out ${open ? 'rotate-180' : ''}`}>
@@ -48,37 +48,41 @@ const Accordion = ({ menuOpen, setMenuOpen }) => {
     const items = [
         { title: "Статистика", icon: Statistic },
         { title: "Фінанси", icon: Finances },
-        { title: "Меню", icon: Menu, children: 
-            [
-                {title: "Товари", path: "things"},
-                {title: "Інгредієнти", path: "ingredients"},
-                {title: "QR - меню", path: "qrmenu"}
-            ]
+        {
+            title: "Меню", icon: Menu, children:
+                [
+                    { title: "Товари", path: "things" },
+                    { title: "Інгредієнти", path: "ingredients" },
+                    { title: "QR - меню", path: "qrmenu" }
+                ]
         },
-        { title: "Склад", icon: Storage, children: 
-            [
-                {title: "Залишки", path: "residues"},
-                {title: "Постачання", path: "supply"},
-                {title: "Виробництво", path: "production"},
-            ]
+        {
+            title: "Склад", icon: Storage, children:
+                [
+                    { title: "Залишки", path: "residues" },
+                    { title: "Постачання", path: "supply" },
+                    { title: "Виробництво", path: "production" },
+                ]
         },
-        { title: "Доступ", icon: Access, children: 
-            [
-                {title: "Працівники", path: "employees"},
-                {title: "Посади", path: "positions"},
+        {
+            title: "Доступ", icon: Access, children:
+                [
+                    { title: "Працівники", path: "employees" },
+                    { title: "Посади", path: "positions" },
 
-                {title: "Працівники", path: "employees"},
-                {title: "Посади", path: "positions"},
+                    { title: "Працівники", path: "employees" },
+                    { title: "Посади", path: "positions" },
 
-                {title: "Касси", path: "cash-registers"} 
-            ]
+                    { title: "Касси", path: "cash-registers" }
+                ]
         },
-            
-        { title: "Налаштування", icon: Settings, children: 
-            [
-                {title: "Аккаунт", path: "account"},
-                {title: "Сповіщення", path: "notifications"},
-            ]
+
+        {
+            title: "Налаштування", icon: Settings, children:
+                [
+                    { title: "Аккаунт", path: "account" },
+                    { title: "Сповіщення", path: "notifications" },
+                ]
         }
     ];
 
@@ -114,14 +118,14 @@ const Account = () => {
                 </div>
                 <div className='flex justify-center '>
                     <button className='font-bold'><img className='w-10 ' src={Waiter} alt="" />GO</button>
-                    
+
                 </div>
-                <hr className='border-t-1 border-slate-300 mt-3'/>
+                <hr className='border-t-1 border-slate-300 mt-3' />
                 <Accordion menuOpen={menuOpen} setMenuOpen={setMenuOpen} />
             </aside>
             <main className="flex-1 ">
                 <div className="h-screen bg-slate-100 p-10">
-                    <Outlet/>
+                    <Outlet />
                 </div>
             </main>
         </div>

@@ -10,18 +10,20 @@ import { Login } from './components/Login';
 import App from './App'
 import Things from './components/Things';
 import Employees from './components/Employees';
+import UserAccount from './components/UserAccount';
 
 const router = createBrowserRouter(
     createRoutesFromElements(
         <>
-        <Route path='/auth' element={<AuthLayout/>}>
-            <Route path='login' element={<Login/>}/>
-            <Route path='signup' element={<Registration/>}/>
-        </Route>
-        <Route path='/' element={<App/>}>
-            <Route path='things' element={<Things/>}/>
-            <Route path='employees' element={<Employees/>}/>
-        </Route>
+            <Route path='/auth' element={<AuthLayout />}>
+                <Route path='login' element={<Login />} />
+                <Route path='signup' element={<Registration />} />
+            </Route>
+            <Route path='/' element={<App />}>
+                <Route path='things' element={<Things />} />
+                <Route path='employees' element={<Employees />} />
+                <Route path='account' element={<UserAccount />}/>
+            </Route>
         </>
     )
 )

@@ -24,12 +24,12 @@ const Employees = () => {
 
     return (
         <>
-            {addEmployeeModalOpen && 
+            {addEmployeeModalOpen &&
                 <Modal>
                     <AddEmployee setOpen={setAddEmployeeModalOpen} />
                 </Modal>
             }
-            {editEmployeeModalOpen && 
+            {editEmployeeModalOpen &&
                 <Modal>
                     <EditEmployee setOpen={setEditEmployeeModalOpen} currentEmployee={currentEmployee} />
                 </Modal>

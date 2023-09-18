@@ -1,13 +1,26 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
+import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { login } from "../modules/auth/user";
+import { useNavigate } from "react-router-dom";
 
 export const Login = () => {
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
+    const { isAuth } = useSelector(state => state.user)
+    const navigate = useNavigate();
     const dispatch = useDispatch();
+
+    useEffect(() => {
+
+        if (isAuth === true) {
+            navigate('/')
+        }
+
+        console.log(isAuth);
+    }, [isAuth])
 
     return (
         <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
@@ -30,8 +43,8 @@ export const Login = () => {
                         </label>
                         <div className="mt-2">
                             <input
-                            value={email}
-                            onChange={(e) => setEmail(e.target.value)}
+                                value={email}
+                                onChange={(e) => setEmail(e.target.value)}
                                 id="email"
                                 name="email"
                                 type="email"
@@ -50,8 +63,8 @@ export const Login = () => {
                         </div>
                         <div className="mt-2">
                             <input
-                            value={password}
-                            onChange={(e) => setPassword(e.target.value)}
+                                value={password}
+                                onChange={(e) => setPassword(e.target.value)}
                                 id="password"
                                 name="password"
                                 type="password"
@@ -64,10 +77,10 @@ export const Login = () => {
 
                     <div>
                         <button
-                        onClick={(e) => {
-                            e.preventDefault();
-                            dispatch(login(email, password));
-                        }}
+                            onClick={(e) => {
+                                e.preventDefault();
+                                dispatch(login(email, password));
+                            }}
                             type="submit"
                             className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                         >

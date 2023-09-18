@@ -4,7 +4,7 @@ import Plus from '../assets/icons/plus.svg';
 import { useDispatch } from "react-redux";
 import { fetchEmployees } from "../store/slices/employeesSlice";
 
-const EditEmployee = ({setOpen, currentEmployee}) => {
+const EditEmployee = ({ setOpen, currentEmployee }) => {
 
     const [id, setId] = useState(currentEmployee._id);
     const [name, setName] = useState(currentEmployee.name);
@@ -21,7 +21,7 @@ const EditEmployee = ({setOpen, currentEmployee}) => {
                     <span className='top-2 right-2 absolute cursor-pointer'
                         onClick={() => setOpen(false)}>✖
                     </span>
-                    <span className='text-center text-2xl mt-6 font-semibold'>Ведіть дані нового працівника</span>
+                    <span className='text-center text-2xl mt-6 font-semibold'>Змінити дані працівника</span>
                     <ul className='flex flex-col justify-center m-10 w-[35%] gap-3'>
                         <li>
                             <label htmlFor="first_name" className="block text-sm font-medium text-gray-900 mb-1 ">Ім'я</label>
@@ -42,12 +42,13 @@ const EditEmployee = ({setOpen, currentEmployee}) => {
                     </ul>
 
                     <button className="flex items-center bg-green-500 hover:bg-green-600 rounded-lg mb-7 mx-[30%] px-7 py-2 text-white font-medium drop-shadow-md"
-                        onClick={async() => {
-                            setOpen(false); 
-                            await editEmployee(id, name, login, pin, position); 
-                            dispatch(fetchEmployees());}}
-                            
-                            >Підтвердити
+                        onClick={async () => {
+                            setOpen(false);
+                            await editEmployee(id, name, login, pin, position);
+                            dispatch(fetchEmployees());
+                        }}
+
+                    >Підтвердити
                         <img className='w-7 inline pl-2' src={Plus} alt="" />
                     </button>
                 </div>
