@@ -117,7 +117,7 @@ const Account = () => {
                     </svg>
                 </div>
                 <div className='flex justify-center '>
-                    <button className='font-bold'><img className='w-10 ' src={Waiter} alt="" />GO</button>
+                    <Link to='/service' className='font-bold'><img className='w-10 ' src={Waiter} alt="" />GO</Link>
 
                 </div>
                 <hr className='border-t-1 border-slate-300 mt-3' />

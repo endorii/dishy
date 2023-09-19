@@ -11,6 +11,7 @@ import App from './App'
 import Things from './components/Things';
 import Employees from './components/Employees';
 import UserAccount from './components/UserAccount';
+import { Service } from './components/Service';
 
 const router = createBrowserRouter(
     createRoutesFromElements(
@@ -23,6 +24,9 @@ const router = createBrowserRouter(
                 <Route path='things' element={<Things />} />
                 <Route path='employees' element={<Employees />} />
                 <Route path='account' element={<UserAccount />}/>
+            </Route>
+            <Route path='service' element={<Service />}> 
+            
             </Route>
         </>
     )

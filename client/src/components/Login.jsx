@@ -2,7 +2,7 @@ import { useEffect, useState } from "react"
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { login } from "../modules/auth/user";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export const Login = () => {
 
@@ -91,9 +91,9 @@ export const Login = () => {
 
                 <p className="mt-10 text-center text-sm text-gray-500">
                     Не маєте акаунту?{' '}
-                    <a href="/auth/signup" className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500">
+                    <Link to="/auth/signup" className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500">
                         Зареєструватися
-                    </a>
+                    </Link>
                 </p>
             </div>
         </div>

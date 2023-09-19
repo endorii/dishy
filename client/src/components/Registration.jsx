@@ -2,6 +2,7 @@ import { useState } from 'react';
 import PhoneInput from 'react-phone-input-2';
 import 'react-phone-input-2/lib/style.css';
 import { registration } from '../modules/auth/user';
+import { Link } from 'react-router-dom';
 
 export const Registration = () => {
 
@@ -132,9 +133,9 @@ export const Registration = () => {
 
                 <p className="mt-10 text-center text-sm text-gray-500">
                     Маєте акаунт ?{' '}
-                    <a href="/auth/login" className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500">
+                    <Link to="/auth/login" className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500">
                         Увійти
-                    </a>
+                    </Link>
                 </p>
             </div>
         </div>

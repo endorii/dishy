@@ -72,7 +72,7 @@ const Employees = () => {
                                 </th>
                             </tr>
                         </thead>
-                        {employees.map((employee, i) =>
+                        {employees.length > 0 ? employees.map((employee, i) =>
                             <>
                                 <tbody key={i}>
                                     <tr className="bg-white border-b border-gray-300 text-gray-700">
@@ -107,8 +107,9 @@ const Employees = () => {
                                 </tbody>
                             </>
 
-                        )}
+                        ) : null}
                     </table>
+                    {employees.length > 0 ? null : <h2 className='text-4xl p-6 text-center font-light bg-white'>Працівників не знайдено</h2>}
                 </div>
 
             </div>
