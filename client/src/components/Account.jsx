@@ -53,7 +53,7 @@ const Accordion = ({ menuOpen, setMenuOpen }) => {
                 [
                     { title: "Товари", path: "things" },
                     { title: "Інгредієнти", path: "ingredients" },
-                    { title: "QR - меню", path: "qrmenu" }
+                    // { title: "QR - меню", path: "qrmenu" }
                 ]
         },
         {
@@ -69,10 +69,6 @@ const Accordion = ({ menuOpen, setMenuOpen }) => {
                 [
                     { title: "Працівники", path: "employees" },
                     { title: "Посади", path: "positions" },
-
-                    { title: "Працівники", path: "employees" },
-                    { title: "Посади", path: "positions" },
-
                     { title: "Касси", path: "cash-registers" }
                 ]
         },
@@ -80,8 +76,10 @@ const Accordion = ({ menuOpen, setMenuOpen }) => {
         {
             title: "Налаштування", icon: Settings, children:
                 [
+                    { title: "Загальні", path: "general" },
                     { title: "Аккаунт", path: "account" },
-                    { title: "Сповіщення", path: "notifications" },
+                    { title: "Столи", path: "tables" },
+                    // { title: "Сповіщення", path: "notifications" },
                 ]
         }
     ];
