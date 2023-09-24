@@ -12,6 +12,14 @@ import Things from './components/Things';
 import Employees from './components/Employees';
 import UserAccount from './components/UserAccount';
 import { Service } from './components/Service';
+import Ingredients from './components/Ingredients';
+import Residues from './components/Residues';
+import Supply from './components/Supply';
+import Production from './components/Production';
+import PositionsList from './components/PositionsList';
+import CashRegisters from './components/CashRegisters';
+import Genereal from './components/General';
+import Tables from './components/Tables';
 
 const router = createBrowserRouter(
     createRoutesFromElements(
@@ -22,11 +30,19 @@ const router = createBrowserRouter(
             </Route>
             <Route path='/' element={<App />}>
                 <Route path='things' element={<Things />} />
-                <Route path='employees' element={<Employees />} />
+                <Route path='ingredients' element={<Ingredients />}/>
+                <Route path='residues' element={<Residues />} />
+                <Route path='supply' element={<Supply />}/>
+                <Route path='production' element={<Production />}/>
+                <Route path='employees' element={<Employees />}/>
+                <Route path='positions' element={<PositionsList />}/>
+                <Route path='cash-registers' element={<CashRegisters />}/>
+                <Route path='general' element={<Genereal />}/>
+                <Route path='tables' element={<Tables />}/>
                 <Route path='account' element={<UserAccount />}/>
             </Route>
-            <Route path='service' element={<Service />}> 
-            
+            <Route path='/service' element={<Service />}> 
+                {/* <Route path='tables' element={<UserAccount />}/> */}
             </Route>
         </>
     )
