@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { editEmployee } from "./employee";
 import Plus from '../assets/icons/plus.svg';
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { fetchEmployees } from "../store/slices/employeesSlice";
 
 const EditEmployee = ({ setOpen, currentEmployee }) => {
@@ -11,6 +11,8 @@ const EditEmployee = ({ setOpen, currentEmployee }) => {
     const [login, setLogin] = useState(currentEmployee.login);
     const [pin, setPin] = useState(currentEmployee.pin);
     const [position, setPosition] = useState(currentEmployee.position);
+
+    const { positions } = useSelector(state => state.positions)
 
     const dispatch = useDispatch();
 
@@ -24,20 +26,25 @@ const EditEmployee = ({ setOpen, currentEmployee }) => {
                     <span className='text-center text-2xl mt-6 font-semibold'>Змінити дані працівника</span>
                     <ul className='flex flex-col justify-center m-10 w-[35%] gap-3'>
                         <li>
-                            <label htmlFor="first_name" className="block text-sm font-medium text-gray-900 mb-1 ">Ім'я</label>
-                            <input value={name} onChange={(e) => setName(e.target.value)} type="text" id="first_name" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 " required />
+                            <label htmlFor="name" className="block text-sm font-medium text-gray-900 mb-1 ">Ім'я</label>
+                            <input value={name} onChange={(e) => setName(e.target.value)} type="text" id="name" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 " required />
                         </li>
                         <li>
-                            <label htmlFor="first_name" className="block text-sm font-medium text-gray-900 mb-1 ">Логін</label>
-                            <input value={login} onChange={(e) => setLogin(e.target.value)} type="text" id="first_name" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 " required />
+                            <label htmlFor="login" className="block text-sm font-medium text-gray-900 mb-1 ">Логін</label>
+                            <input value={login} onChange={(e) => setLogin(e.target.value)} type="text" id="login" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 " required />
                         </li>
                         <li>
-                            <label htmlFor="first_name" className="block text-sm font-medium text-gray-900 mb-1 ">ПІН-код</label>
-                            <input value={pin} onChange={(e) => setPin(e.target.value)} type="text" id="first_name" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 " required />
+                            <label htmlFor="pin" className="block text-sm font-medium text-gray-900 mb-1 ">ПІН-код</label>
+                            <input value={pin} onChange={(e) => setPin(e.target.value)} type="text" id="pin" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 " required />
                         </li>
                         <li>
-                            <label htmlFor="first_name" className="block text-sm font-medium text-gray-900 mb-1 ">Посада</label>
-                            <input value={position} onChange={(e) => setPosition(e.target.value)} type="text" id="first_name" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 " required />
+                            <label htmlFor="positions" className="block text-sm font-medium text-gray-900 mb-1 ">Посада</label>
+                            <select id='positions' value={position} onChange={(e) => setPosition(e.target.value)} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" required >
+                            {positions.map((position, i) => {
+                                return <option key={i} value={position.name}>{position.name}</option>
+                            })}
+                            </select>
+
                         </li>
                     </ul>
 
