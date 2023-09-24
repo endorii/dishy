@@ -1,8 +1,10 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { addEmployee } from "./employee";
 import Plus from '../assets/icons/plus.svg';
 import { useDispatch } from "react-redux";
 import { fetchEmployees } from "../store/slices/employeesSlice";
+import { useSelector } from "react-redux/es/hooks/useSelector";
+import { fetchPositions } from "../store/slices/positions.Slice";
 
 const AddEmployee = ({setOpen}) => {
 
@@ -11,7 +13,13 @@ const AddEmployee = ({setOpen}) => {
     const [pin, setPin] = useState('');
     const [position, setPosition] = useState('');
 
+    const {positions} = useSelector(state => state.positions)
+
     const dispatch = useDispatch();
+
+    useEffect(() => {
+        dispatch(fetchPositions());
+    }, [])
 
     return (
         <div className='flex justify-center '>
@@ -36,7 +44,11 @@ const AddEmployee = ({setOpen}) => {
                         </li>
                         <li>
                             <label htmlFor="first_name" className="block text-sm font-medium text-gray-900 mb-1 ">Посада</label>
-                            <input value={position} onChange={(e) => setPosition(e.target.value)} type="text" id="first_name" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 " required />
+                            <select id='positions' value={position} onChange={(e) => setPosition(e.target.value)} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" required >
+                            {positions.map((position, i) => {
+                                return <option key={i} value={position.name}>{position.name}</option>
+                            })}
+                            </select>
                         </li>
                     </ul>
 

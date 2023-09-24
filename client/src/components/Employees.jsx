@@ -8,6 +8,7 @@ import { useSelector } from 'react-redux/es/hooks/useSelector';
 import { deleteEmployee } from './employee';
 import EditEmployee from './EditEmployee';
 import { Modal } from './Modal';
+import { fetchPositions } from '../store/slices/positions.Slice';
 
 const Employees = () => {
     const [addEmployeeModalOpen, setAddEmployeeModalOpen] = useState(false);
@@ -20,6 +21,7 @@ const Employees = () => {
 
     useEffect(() => {
         dispatch(fetchEmployees());
+        dispatch(fetchPositions());
     }, [])
 
     return (

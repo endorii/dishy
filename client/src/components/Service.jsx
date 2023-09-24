@@ -43,8 +43,8 @@ export const Service = () => {
     return (
         <div className="bg-slate-900 p-1 w-screen h-screen">
             <div className='grid items-center justify-center bg-white gap-4 m-8 p-10' style={{ gridTemplateColumns: 'repeat(6, 1fr)' }}>
-                {tables.map((table) => (
-                    <div className="flex flex-col items-center gap-1">
+                {tables.map((table, i) => (
+                    <div key={i} className="flex flex-col items-center gap-1">
                         <p className="text-center font-thin">№{table.id}</p>
                         <div key={table.id} className={`flex items-center justify-center p-1 cursor-pointer hover:bg-emerald-100 ${table.status === "busy" ? "bg-red-300 hover:bg-red-300": null}`} style={{ border: '3px solid black', width: `${(table.seats * 5) + 55}px`, borderRadius: `${table.seats === 1 || table.seats === 3 || table.seats === 5 ? '40%' : '10%'}`, height: `${(table.seats * 5) + 55}px` }}>
                             <img className='w-6 inline' src={People} alt="" />  <p className='pl-1'>{table.seats}</p>

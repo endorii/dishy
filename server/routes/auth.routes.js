@@ -69,6 +69,9 @@ router.post('/login',
                 message: "Ви успішно увійшли в аккаунт!",
                 token,
                 user: {
+                    name: user.name, 
+                    phone: user.phone,
+                    company: user.company,
                     id: user.id,
                     email: user.email
                 }
@@ -90,6 +93,9 @@ router.get('/auth', authMiddleware,
             return res.json({
                 token,
                 user: {
+                    name: user.name, 
+                    phone: user.phone,
+                    company: user.company,
                     id: user.id,
                     email: user.email
                 }
