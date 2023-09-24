@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const config = require('config');
 const authRouter = require('./routes/auth.routes');
 const employeesRouter = require('./routes/employee.routes');
+const positionsRouter = require('./routes/positions.rotes');
 const app = express();
 const PORT = config.get('PORT')
 const cors = require('cors');
@@ -11,6 +12,7 @@ app.use(cors());
 app.use(express.json());
 app.use("/api/auth", authRouter);
 app.use("/api/", employeesRouter);
+app.use("/api/", positionsRouter);
 
 const start = async () => {
     try {
