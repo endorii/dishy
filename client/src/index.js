@@ -17,9 +17,14 @@ import Residues from './components/Residues';
 import Supply from './components/Supply';
 import Production from './components/Production';
 import PositionsList from './components/PositionsList';
+import { Tables } from './components/Tables';
 import CashRegisters from './components/CashRegisters';
 import Genereal from './components/General';
-import Tables from './components/Tables';
+import TablesSettings from './components/TablesSetting';
+import ServiceLogin from './components/ServiceLogin';
+import { EmployeeAuthLayout } from './components/EmployeeAuthLayout';
+import { EmployeeLogin } from './components/EmployeeLogin';
+import { Orders } from './components/Orders';
 
 const router = createBrowserRouter(
     createRoutesFromElements(
@@ -38,11 +43,16 @@ const router = createBrowserRouter(
                 <Route path='positions' element={<PositionsList />}/>
                 <Route path='cash-registers' element={<CashRegisters />}/>
                 <Route path='general' element={<Genereal />}/>
-                <Route path='tables' element={<Tables />}/>
+                <Route path='tables-settings' element={<TablesSettings />}/>
                 <Route path='account' element={<UserAccount />}/>
             </Route>
+
+            <Route path='employee/auth' element={<EmployeeAuthLayout />}>
+                <Route path='login' element={<EmployeeLogin />} />
+            </Route>
             <Route path='/service' element={<Service />}> 
-                {/* <Route path='tables' element={<UserAccount />}/> */}
+                <Route path='tables' element={<Tables />}/>
+                <Route path='orders' element={<Orders />}/>
             </Route>
         </>
     )
