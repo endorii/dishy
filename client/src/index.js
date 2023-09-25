@@ -21,7 +21,6 @@ import { Tables } from './components/Tables';
 import CashRegisters from './components/CashRegisters';
 import Genereal from './components/General';
 import TablesSettings from './components/TablesSetting';
-import ServiceLogin from './components/ServiceLogin';
 import { EmployeeAuthLayout } from './components/EmployeeAuthLayout';
 import { EmployeeLogin } from './components/EmployeeLogin';
 import { Orders } from './components/Orders';

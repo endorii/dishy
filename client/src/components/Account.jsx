@@ -9,6 +9,7 @@ import Storage from '../assets/icons/storage.svg';
 import Access from '../assets/icons/access.svg';
 import Settings from '../assets/icons/settings.svg';
 import Waiter from '../assets/icons/waiter.svg';
+
 import { NavLink, Link, Outlet } from 'react-router-dom';
 
 const NestedItem = ({ item }) => (
@@ -108,14 +109,14 @@ const Account = () => {
 
     return (
         <div className="flex">
-            <aside className={menuOpen ? "w-[260px] h-screen bg-slate-200 p-7 border-r border-slate-300 overflow-auto" : "w-[85px] h-screen bg-slate-100 p-7 border-r border-slate-300 overflow-auto"}>
+            <aside className={menuOpen ? "w-[260px] h-screen bg-slate-200 p-7 border-r border-slate-300 overflow-auto" : "w-[85px] h-screen bg-slate-200 p-7 border-r border-slate-300 overflow-auto"}>
                 <div>
                     <svg onClick={() => setMenuOpen(!menuOpen)} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className={`mb-6 h-6 w-6 inline transform transition duration-150 ease-out ${menuOpen ? 'rotate-90' : 'rotate-[260deg]'}`}>
                         <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5"></path>
                     </svg>
                 </div>
                 <div className='flex justify-center '>
-                    <Link to='/service' className='font-bold'><img className='w-10 ' src={Waiter} alt="" />GO</Link>
+                    <Link to='employee/auth/login' className='font-bold text-center'><img className='w-10 ' src={Waiter} alt="" />GO</Link>
 
                 </div>
                 <hr className='border-t-1 border-slate-300 mt-3' />
