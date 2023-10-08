@@ -1,4 +1,5 @@
 import axios from "axios";
+import { setCurrentEmployee } from "../store/slices/currentEmployee.Slice";
 
 export const addEmployee = async (name, login, pin, position) => {
     try {
@@ -42,3 +43,16 @@ export const editEmployee = async (_id, name, login, pin, position) => {
         console.log(e.response.data.message);
     }
 }
+
+export const loginCurrentEmployee = (pin) => {
+    return async dispatch => {
+        try {
+            const response = await axios.post("http://localhost:5000/api/currentEmployee", {pin}, {headers: {Authorization: `Bearer ${localStorage.getItem('token')}`}});
+            dispatch(setCurrentEmployee(response.data));
+            console.log(response.data);
+
+        } catch (e) {
+            console.log(e.response.data.message);
+        }       
+    }
+} 
