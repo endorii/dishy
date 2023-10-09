@@ -1,6 +1,7 @@
 const Router = require('express');
 const Employee = require('../models/Employee');
 const authMiddleware = require('../middlewares/auth.middleware');
+const CurrentEmployee = require('../models/CurrentEmployee');
 
 const router = new Router();
 
@@ -43,13 +44,33 @@ router.get('/employees', authMiddleware,
     }
 );
 
+router.get('/currentEmployee', authMiddleware,
+    async (req, res) => {
+        try {
+            const employee = await CurrentEmployee.findOne({ user: req.user.id });
+
+            console.log(employee);
+            return res.json({ employee });
+
+        } catch (e) {
+            console.log(e);
+            res.send({ message: "Помилка сервера" });
+        }
+    }
+);
+
 router.post('/currentEmployee', authMiddleware,
     async (req, res) => {
         try {
             const { pin } = req.body;
             const employee = await Employee.findOne({ pin, user: req.user.id });
             if (employee) {
-                return res.json(employee);
+
+                const currentEmployee = new CurrentEmployee({ ...employee._doc })
+
+                await currentEmployee.save();
+
+                return res.json(currentEmployee);
             } else {
                 res.status(404).json({ message: 'Співробітник не знайдений' });
             }
@@ -92,6 +113,24 @@ router.delete('/employees/:_id', authMiddleware,
             const updatedEmployee = await Employee.findOneAndDelete({ _id });
 
             if (!updatedEmployee) {
+                return res.status(404).json({ message: `Employee with id ${_id} not found` });
+            }
+
+            return res.json({ message: "Employee was deleted" });
+        } catch (e) {
+            console.log(e);
+            res.send({ message: "Server error" });
+        }
+    });
+
+router.delete('/currentEmployee/:_id', authMiddleware,
+    async (req, res) => {
+        try {
+            const { _id } = req.params;
+
+            const employee = await CurrentEmployee.findOneAndDelete({ _id });
+
+            if (!employee) {
                 return res.status(404).json({ message: `Employee with id ${_id} not found` });
             }
 
