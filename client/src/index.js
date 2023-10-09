@@ -24,6 +24,7 @@ import TablesSettings from './components/TablesSetting';
 import { EmployeeAuthLayout } from './components/EmployeeAuthLayout';
 import { EmployeeLogin } from './components/EmployeeLogin';
 import { Orders } from './components/Orders';
+import { CurrentEmployeeAccount } from './components/CurrentEmployeeAccount';
 
 const router = createBrowserRouter(
     createRoutesFromElements(
@@ -52,6 +53,7 @@ const router = createBrowserRouter(
             <Route path='/service' element={<Service />}> 
                 <Route path='tables' element={<Tables />}/>
                 <Route path='orders' element={<Orders />}/>
+                <Route path='account' element={<CurrentEmployeeAccount />}/>
             </Route>
         </>
     )
