@@ -49,7 +49,6 @@ router.get('/currentEmployee', authMiddleware,
         try {
             const employee = await CurrentEmployee.findOne({ user: req.user.id });
 
-            console.log(employee);
             return res.json({ employee });
 
         } catch (e) {
