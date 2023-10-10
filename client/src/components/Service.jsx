@@ -17,7 +17,7 @@ export const Service = () => {
     const {name} = useSelector(state => state.currentEmployee.currentEmployee);
     const {isAuth} = useSelector(state => state.currentEmployee);
     return (
-        <div className="flex flex-col h-screen w-screen text-white justify-center fixed">
+        <div className="flex flex-col w-screen text-white justify-center fixed">
             <aside className="">
                 <div className="w-full h-16 bg-gray-700">
                     <div className="flex justify-between items-center h-full">
@@ -39,8 +39,8 @@ export const Service = () => {
                     </div>
                 </div>
             </aside>
-            <main className="flex-1 ">
-                <div className="h-full bg-slate-100 text-black">
+            <main className="flex-1">
+                <div className="bg-slate-100 text-black">
                     <Outlet />
                 </div>
             </main>
