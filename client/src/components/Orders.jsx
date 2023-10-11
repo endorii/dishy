@@ -1,12 +1,23 @@
+import { useState } from "react"
+
+import { Modal } from "./Modal";
+import { NewOrderModal } from "./NewOrderModal";
 
 
 export const Orders = () => {
-    return (
 
+    const [openNewOrderMenu, setOpenNewOrderMenu] = useState(false);
+
+    return (
         <>
+            {openNewOrderMenu ? <Modal>
+                <NewOrderModal/>
+                </Modal> : null}
             <div className="flex flex-col w-screen text-white justify-center fixed bg-gray-600">
                 <div className='flex justify-end p-3'>
-                    <button className='px-6 py-3 bg-green-600 rounded-lg hover:bg-green-700'>Нове замовлення</button>
+                    <button className='px-6 py-3 bg-green-600 rounded-lg hover:bg-green-700' onClick={() => {
+                        setOpenNewOrderMenu(true)
+                    }}>Нове замовлення</button>
                 </div>
                 <div className="relative overflow-x-auto shadow-md">
                     <table className="w-full text-sm text-left text-gray-500">
