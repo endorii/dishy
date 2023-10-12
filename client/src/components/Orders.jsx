@@ -11,7 +11,7 @@ export const Orders = () => {
     return (
         <>
             {openNewOrderMenu ? <Modal>
-                <NewOrderModal/>
+                <NewOrderModal setOpenNewOrderMenu={setOpenNewOrderMenu}/>
                 </Modal> : null}
             <div className="flex flex-col w-screen text-white justify-center fixed bg-gray-600">
                 <div className='flex justify-end p-3'>
