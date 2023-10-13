@@ -3,10 +3,11 @@ import { useState } from "react"
 import { Modal } from "./Modal";
 import { NewOrderModal } from "./NewOrderModal";
 
-
 export const Orders = () => {
 
     const [openNewOrderMenu, setOpenNewOrderMenu] = useState(false);
+
+
 
     return (
         <>
@@ -19,7 +20,7 @@ export const Orders = () => {
                         setOpenNewOrderMenu(true)
                     }}>Нове замовлення</button>
                 </div>
-                <div className="relative overflow-x-auto shadow-md">
+                <div className="relative shadow-md">
                     <table className="w-full text-sm text-left text-gray-500">
                         <thead className="text-xs text-gray-700 uppercase bg-gray-300">
                             <tr>
