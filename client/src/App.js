@@ -17,7 +17,7 @@ const App = () => {
         if (!token) {
             navigate('/auth/login')
         }
-    }, [])
+    }, [token])
 
     return (
         <Account />
