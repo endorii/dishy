@@ -20,16 +20,18 @@ export const MenuItems = [
         ]
     },
     {
-        src: Test, title: "Паста", items: [
-            { name: "Сирники", src: Test, value: 40, time: 10, amount: 10 },
-            { name: "Оладки", src: Test, value: 50, time: 20, amount: 10 },
-            { name: "Млинці", src: Test, value: 40, time: 10, amount: 10 },
-            { name: "Омлет з сиром", src: Test, value: 50, time: 15, amount: 10 },
-            { name: "Вареники з вишнями", src: Test, value: 40, time: 20, amount: 10 },
+        src: Test, title: "Салати", items: [
+            { name: "Нісуаз", src: Test, value: 60, time: 10, amount: 10 },
+            { name: "Вальдорф", src: Test, value: 60, time: 20, amount: 10 },
+            { name: "Краб Луї", src: Test, value: 60, time: 10, amount: 10 },
+            { name: "Орловський", src: Test, value: 60, time: 15, amount: 10 },
+            { name: "Цезар ", src: Test, value: 60, time: 20, amount: 10 },
+            { name: "Цезар з креветками", src: Test, value: 60, time: 15, amount: 10 },
+            { name: "Черчілль ", src: Test, value: 60, time: 20, amount: 10 },
         ]
     },
     {
-        src: Test, title: "Салати", items: [
+        src: Test, title: "Паста", items: [
             { name: "Спагеті карбонара", src: Test, value: 110, time: 20, amount: 10 },
             { name: "Спагеті з кревертками", src: Test, value: 210, time: 20, amount: 10 },
             { name: "Паста з соусом Болоньєзе", src: Test, value: 200, time: 40, amount: 10 },
@@ -65,20 +67,25 @@ export const MenuItems = [
     },
     {
         src: Test, title: "Піца", items: [
-            { name: "Сирники", src: Test, value: 40, time: 10, amount: 10 },
-            { name: "Оладки", src: Test, value: 50, time: 20, amount: 10 },
-            { name: "Млинці", src: Test, value: 40, time: 10, amount: 10 },
-            { name: "Омлет з сиром", src: Test, value: 50, time: 15, amount: 10 },
-            { name: "Вареники з вишнями", src: Test, value: 40, time: 20, amount: 10 },
+            { name: "Піца Маргарита", src: Test, value: 140, time: 25, amount: 10 },
+            { name: "Сицилійська піца", src: Test, value: 140, time: 25, amount: 10 },
+            { name: "Пепероні", src: Test, value: 140, time: 25, amount: 10 },
+            { name: "Чотири сири", src: Test, value: 140, time: 25, amount: 10 },
+            { name: "Баварська", src: Test, value: 140, time: 25, amount: 10 },
+            { name: "Гостра Мексикано", src: Test, value: 140, time: 25, amount: 10 },
+            { name: "Грибна", src: Test, value: 140, time: 25, amount: 10 },
+            { name: "М’ясна", src: Test, value: 140, time: 25, amount: 10 },
+            { name: "Чотири пори року", src: Test, value: 140, time: 25, amount: 10 },
+            { name: "Гавайська", src: Test, value: 140, time: 25, amount: 10 },
         ]
     },
     {
         src: Test, title: "Холодні напої", items: [
-            { name: "Сирники", src: Test, value: 40, time: 10, amount: 10 },
-            { name: "Оладки", src: Test, value: 50, time: 20, amount: 10 },
-            { name: "Млинці", src: Test, value: 40, time: 10, amount: 10 },
-            { name: "Омлет з сиром", src: Test, value: 50, time: 15, amount: 10 },
-            { name: "Вареники з вишнями", src: Test, value: 40, time: 20, amount: 10 },
+            { name: "Лимонад", src: Test, value: 40, time: 10, amount: 10 },
+            { name: "Холодний чай", src: Test, value: 50, time: 20, amount: 10 },
+            { name: "Мірінда", src: Test, value: 40, time: 10, amount: 10 },
+            { name: "Пепсі", src: Test, value: 50, time: 15, amount: 10 },
+            { name: "Coca-Cola", src: Test, value: 40, time: 20, amount: 10 },
         ]
     },
 ];

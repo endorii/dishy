@@ -17,20 +17,20 @@ export const Service = () => {
     const {name} = useSelector(state => state.currentEmployee.currentEmployee);
     const {isAuth} = useSelector(state => state.currentEmployee);
     return (
-        <div className="flex flex-col w-screen text-white justify-center fixed">
+        <div className="flex flex-col text-white justify-center">
             <aside className="">
-                <div className="w-full h-16 bg-gray-700">
-                    <div className="flex justify-between items-center h-full">
-                        <ul className="flex h-full items-center">
+                <div className="h-16 bg-gray-700">
+                    <div className="flex justify-between items-center">
+                        <ul className="flex items-center">
                             <li>
-                                <Link to="orders" className="p-5  text-center hover:bg-gray-600">Замовлення</Link>
+                                <Link to="orders" className="p-5 text-center hover:bg-gray-600">Замовлення</Link>
                             </li>
                             <li>
                                 <Link to="tables" className="p-5 text-center hover:bg-gray-600">Столи</Link>
                             </li>
                         </ul>
                         <div className="flex">
-                            <div className="p-4  text-center hover:bg-gray-600">
+                            <div className="p-4 text-center hover:bg-gray-600">
                                 <img className="w-9" src={Notification} alt="" />
                             </div>
                             <div className="p-5 text-center hover:bg-gray-600 font-medium"><Link to="account">{name}</Link></div>
@@ -39,7 +39,7 @@ export const Service = () => {
                     </div>
                 </div>
             </aside>
-            <main className="flex-1">
+            <main className="flex-1 overflow-auto">
                 <div className="bg-slate-100 text-black">
                     <Outlet />
                 </div>

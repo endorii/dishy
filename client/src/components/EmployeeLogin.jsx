@@ -1,21 +1,8 @@
-import { useEffect, useState } from "react"
-import { useSelector } from "react-redux";
-import { useDispatch } from "react-redux";
 import Left from '../assets/icons/angle-left.svg';
-import { login } from "../modules/auth/user";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import NumberPad from "./NumberPad";
 
 export const EmployeeLogin = () => {
-
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-
-    const { isAuth } = useSelector(state => state.user)
-    const navigate = useNavigate();
-    const dispatch = useDispatch();
-
-
     return (
         <div className="flex h-screen flex-1 flex-col justify-center px-6 lg:px-8 bg-gray-900">
             <Link to="/employees" className="absolute flex flex-row items-center top-10 left-10 text-white text-center bg-emerald-400/10 text-lg px-5 py-1 hover:bg-emerald-400/30 font-medium"> <img className="w-12" src={Left} alt="" />Повернутися назад</Link> 

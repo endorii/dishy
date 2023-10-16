@@ -98,7 +98,7 @@ export const NewOrderModal = ({ setOpenNewOrderMenu }) => {
                                             <li key={i} onClick={() => {
                                                 setCurrentFood(item);
 
-                                            }} className="bg-gray-100 rounded-lg shadow-md">
+                                            }} className="bg-gray-100 rounded-lg shadow-md cursor-pointer">
                                                 <img className="w-[260px] h-[200px] object-cover object-[50% 100%] rounded-t-lg" src={item.src} alt={item.alt} />
                                                 <div className="font-thin text-lg px-4 py-2">{item.title}</div>
                                             </li>
