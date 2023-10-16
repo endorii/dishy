@@ -75,40 +75,37 @@ const Employees = () => {
                             </tr>
                         </thead>
                         {employees.length > 0 ? employees.map((employee, i) =>
-                            <>
-                                <tbody key={i}>
-                                    <tr className="bg-white border-b border-gray-300 text-gray-700">
-                                        <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
-                                            {employee.name}
-                                        </th>
-                                        <td className="px-6 py-4">
-                                            {employee.login}
-                                        </td>
-                                        <td className="px-6 py-4">
-                                            {employee.pin}
-                                        </td>
-                                        <td className="px-6 py-4">
-                                            {employee.position}
-                                        </td>
-                                        <td className="px-1 py-4">
-                                            14 вересня 13:30
-                                        </td>
-                                        <td className="px-2 py-1 text-right">
-                                            <a onClick={async () => {
-                                                setCurrentEmployee(employee)
-                                                setEditEmployeeModalOpen(true);
-                                                dispatch(fetchEmployees())
-                                            }}
+                            <tbody key={i}>
+                                <tr className="bg-white border-b border-gray-300 text-gray-700">
+                                    <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
+                                        {employee.name}
+                                    </th>
+                                    <td className="px-6 py-4">
+                                        {employee.login}
+                                    </td>
+                                    <td className="px-6 py-4">
+                                        {employee.pin}
+                                    </td>
+                                    <td className="px-6 py-4">
+                                        {employee.position}
+                                    </td>
+                                    <td className="px-1 py-4">
+                                        14 вересня 13:30
+                                    </td>
+                                    <td className="px-2 py-1 text-right">
+                                        <a onClick={async () => {
+                                            setCurrentEmployee(employee)
+                                            setEditEmployeeModalOpen(true);
+                                            dispatch(fetchEmployees())
+                                        }}
 
-                                                href="#" className="font-medium text-blue-600 hover:underline">Редагувати</a>
-                                        </td>
-                                        <td className="px-2 py-1 text-left">
-                                            <a onClick={async () => { await deleteEmployee(employee._id); dispatch(fetchEmployees()) }} href="#" className="font-medium text-blue-600 hover:underline">Видалити</a>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </>
-
+                                            href="#" className="font-medium text-blue-600 hover:underline">Редагувати</a>
+                                    </td>
+                                    <td className="px-2 py-1 text-left">
+                                        <a onClick={async () => { await deleteEmployee(employee._id); dispatch(fetchEmployees()) }} href="#" className="font-medium text-blue-600 hover:underline">Видалити</a>
+                                    </td>
+                                </tr>
+                            </tbody>
                         ) : null}
                     </table>
                     {employees.length > 0 ? null : <h2 className='text-4xl p-6 text-center font-light bg-white'>Працівників не знайдено</h2>}
