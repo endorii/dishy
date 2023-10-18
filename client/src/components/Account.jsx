@@ -13,8 +13,10 @@ import Waiter from '../assets/icons/waiter.svg';
 import { NavLink, Link, Outlet } from 'react-router-dom';
 
 const NestedItem = ({ item }) => (
-    <div className="px-1 mt-3 text-blue-600 text-lg">
-        <NavLink to={item.path}>{item.title}</NavLink>
+    <div className="px-1 mt-3 text-blue-600 text-lg font-medium text-gray-800">
+        <NavLink className={({ isActive, isPending }) =>
+            isPending ? "pending" : isActive ? "text-[#4e9117] border-r-4 pr-10 border-[#4e9117]" : "font-light"
+        } to={item.path}>{item.title}</NavLink>
     </div>
 );
 
@@ -32,7 +34,7 @@ const AccordionItem = ({ title, children, icon, menuOpen, setMenuOpen }) => {
             <div className='cursor-pointer' onClick={() => setMenuOpen(true)}>
                 <img src={icon} alt="" className='inline w-6' />
 
-                <div className="px-3 py-2 inline text-lg" onClick={() => children ? setOpen(!open) : null}>
+                <div className="px-3 py-2 inline text-lg font-medium" onClick={() => children ? setOpen(!open) : null}>
                     {menuOpen ? title : null} {' '}
                     {children && menuOpen ? <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className={`h-3 w-3 inline transform transition duration-150 ease-out ${open ? 'rotate-180' : ''}`}>
                         <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5"></path>
@@ -47,7 +49,13 @@ const AccordionItem = ({ title, children, icon, menuOpen, setMenuOpen }) => {
 
 const Accordion = ({ menuOpen, setMenuOpen }) => {
     const items = [
-        { title: "Статистика", icon: Statistic },
+        {
+            title: "Статистика", icon: Statistic, children:
+                [
+                    { title: "Продажі", path: "sales" },
+                    { title: "Чеки", path: "checks" },
+                ]
+        },
         { title: "Фінанси", icon: Finances },
         {
             title: "Меню", icon: Menu, children:
@@ -104,7 +112,7 @@ const Account = () => {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        dispatch(auth());
+
     }, [])
 
     return (

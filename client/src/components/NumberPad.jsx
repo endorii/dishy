@@ -19,7 +19,7 @@ const NumberPad = () => {
     const [inputText, setInputText] = useState('');
     const [open, setOpen] = useState(false);
 
-    const { name } = useSelector(state => state.currentEmployee.currentEmployee);
+    const { currentEmployee } = useSelector(state => state.currentEmployee);
 
     const dispatch = useDispatch()
 
@@ -35,7 +35,6 @@ const NumberPad = () => {
     }
 
     const [now, setNow] = useState(new Date().toLocaleTimeString());
-
 
     const notify = () => toast.info("Робочу зміну почато!", {
         position: "top-right",
@@ -62,9 +61,9 @@ const NumberPad = () => {
                     <div className='flex justify-center '>
                         <div className='absolute bg-gray-200 shadow-xl w-1/3 h-auto z-10 rounded-md mt-16'>
                             <div className='flex flex-col items-center mx-3 gap-4 mt-5'>
-                                {name ?
+                                {currentEmployee ?
                                     <>
-                                        <div className="font-thin text-xl">Вітаємо, {name}</div>
+                                        <div className="font-thin text-xl">Вітаємо, {currentEmployee.name}</div>
                                         <div className="font-thin text-xl">Розпочати робочу зміну?</div>
                                         <div className="font-thin text-xl">Початок зміни о: {now}</div>
                                         <div className="flex flex-row gap-x-5 mt-4">
@@ -126,7 +125,6 @@ const NumberPad = () => {
                 }} disabled={inputText.length < 4} className="w-1/2 text-center bg-emerald-400/10 w-24 h-24 text-2xl hover:bg-emerald-400/30 font-medium disabled:opacity-25 disabled:hover:bg-emerald-400/10">
                     Go
                 </button>
-
             </div>
         </>
     );

@@ -6,14 +6,14 @@ import { fetchEmployees } from "../store/slices/employeesSlice";
 import { useSelector } from "react-redux/es/hooks/useSelector";
 import { fetchPositions } from "../store/slices/positions.Slice";
 
-const AddEmployee = ({setOpen}) => {
+const AddEmployee = ({ setOpen }) => {
 
     const [name, setName] = useState('');
     const [login, setLogin] = useState('');
     const [pin, setPin] = useState('');
-    const [position, setPosition] = useState('');
+    const [position, setPosition] = useState('Офіціант');
 
-    const {positions} = useSelector(state => state.positions)
+    const { positions } = useSelector(state => state.positions)
 
     const dispatch = useDispatch();
 
@@ -45,21 +45,21 @@ const AddEmployee = ({setOpen}) => {
                         <li>
                             <label htmlFor="first_name" className="block text-sm font-medium text-gray-900 mb-1 ">Посада</label>
                             <select id='positions' value={position} onChange={(e) => setPosition(e.target.value)} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" required >
-                            {positions.map((position, i) => {
-                                return <option key={i} value={position.name}>{position.name}</option>
-                            })}
+                                {positions.map((position, i) => {
+                                    return <option key={i} value={position.name}>{position.name}</option>
+                                })}
                             </select>
                         </li>
                     </ul>
 
                     <button className="flex items-center bg-green-500 hover:bg-green-600 rounded-lg mb-7 mx-[30%] px-7 py-2 text-white font-medium drop-shadow-md"
-                        onClick={async() => {
-                            setOpen(false); 
-                            await addEmployee(name, login, pin, position); 
-                            dispatch(fetchEmployees());}}
-                            
-                            >Підтвердити
-                        <img className='w-7 inline pl-2' src={Plus} alt="" />
+                        onClick={async () => {
+                            setOpen(false);
+                            await addEmployee(name, login, pin, position);
+                            dispatch(fetchEmployees());
+                        }}
+
+                    >Підтвердити
                     </button>
                 </div>
             </div>

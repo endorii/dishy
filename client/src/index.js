@@ -25,6 +25,8 @@ import { EmployeeAuthLayout } from './components/EmployeeAuthLayout';
 import { EmployeeLogin } from './components/EmployeeLogin';
 import { Orders } from './components/Orders';
 import { CurrentEmployeeAccount } from './components/CurrentEmployeeAccount';
+import { Sales } from './components/Sales';
+import { Checks } from './components/Checks';
 
 const router = createBrowserRouter(
     createRoutesFromElements(
@@ -45,6 +47,8 @@ const router = createBrowserRouter(
                 <Route path='general' element={<Genereal />}/>
                 <Route path='tables-settings' element={<TablesSettings />}/>
                 <Route path='account' element={<UserAccount />}/>
+                <Route path='sales' element={<Sales/>}/>
+                <Route path='checks' element={<Checks/>}/>
             </Route>
 
             <Route path='employee/auth' element={<EmployeeAuthLayout />}>

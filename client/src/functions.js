@@ -2,7 +2,9 @@ import Test from '../src/assets/img/test.jpg'
 
 export const MenuItems = [
     {
-        src: Test, title: "Сніданки", items: [
+        logo: Test, 
+        title: "Сніданки", 
+        items: [
             { name: "Сирники", src: Test, value: 40, time: 10, amount: 10},
             { name: "Оладки", src: Test, value: 50, time: 20, amount: 10 },
             { name: "Млинці", src: Test, value: 40, time: 10, amount: 10 },
@@ -11,7 +13,7 @@ export const MenuItems = [
         ]
     },
     {
-        src: Test, title: "Коктейлі", items: [
+        logo: Test, title: "Коктейлі", items: [
             { name: "Джміль", src: Test, value: 40, time: 10, amount: 10 },
             { name: "Мохіто", src: Test, value: 40, time: 10, amount: 10 },
             { name: "Полуничний мілкшейк", src: Test, value: 40, time: 10, amount: 10 },
@@ -20,7 +22,7 @@ export const MenuItems = [
         ]
     },
     {
-        src: Test, title: "Салати", items: [
+        logo: Test, title: "Салати", items: [
             { name: "Нісуаз", src: Test, value: 60, time: 10, amount: 10 },
             { name: "Вальдорф", src: Test, value: 60, time: 20, amount: 10 },
             { name: "Краб Луї", src: Test, value: 60, time: 10, amount: 10 },
@@ -31,7 +33,7 @@ export const MenuItems = [
         ]
     },
     {
-        src: Test, title: "Паста", items: [
+        logo: Test, title: "Паста", items: [
             { name: "Спагеті карбонара", src: Test, value: 110, time: 20, amount: 10 },
             { name: "Спагеті з кревертками", src: Test, value: 210, time: 20, amount: 10 },
             { name: "Паста з соусом Болоньєзе", src: Test, value: 200, time: 40, amount: 10 },
@@ -40,7 +42,7 @@ export const MenuItems = [
         ]
     },
     {
-        src: Test, title: "Чай", items: [
+        logo: Test, title: "Чай", items: [
             { name: "Чай імбирний", src: Test, value: 20, time: 10, amount: 10 },
             { name: "Чай шипшиновий", src: Test, value: 20, time: 10, amount: 10 },
             { name: "Чай з корицею", src: Test, value: 20, time: 10, amount: 10 },
@@ -53,7 +55,7 @@ export const MenuItems = [
         ]
     },
     {
-        src: Test, title: "Кава", items: [
+        logo: Test, title: "Кава", items: [
             { name: "Еспрессо", src: Test, value: 40, time: 10, amount: 10 },
             { name: "Американо", src: Test, value: 40, time: 10, amount: 10 },
             { name: "Капучино", src: Test, value: 40, time: 10, amount: 10 },
@@ -66,7 +68,7 @@ export const MenuItems = [
         ]
     },
     {
-        src: Test, title: "Піца", items: [
+        logo: Test, title: "Піца", items: [
             { name: "Піца Маргарита", src: Test, value: 140, time: 25, amount: 10 },
             { name: "Сицилійська піца", src: Test, value: 140, time: 25, amount: 10 },
             { name: "Пепероні", src: Test, value: 140, time: 25, amount: 10 },
@@ -80,7 +82,7 @@ export const MenuItems = [
         ]
     },
     {
-        src: Test, title: "Холодні напої", items: [
+        logo: Test, title: "Холодні напої", items: [
             { name: "Лимонад", src: Test, value: 40, time: 10, amount: 10 },
             { name: "Холодний чай", src: Test, value: 50, time: 20, amount: 10 },
             { name: "Мірінда", src: Test, value: 40, time: 10, amount: 10 },

@@ -5,15 +5,15 @@ import { auth } from './modules/auth/user';
 import { useDispatch } from 'react-redux';
 
 const App = () => {
-
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const token = localStorage.getItem('token')
 
     useEffect(() => {
-
         dispatch(auth());
+    }, [])
 
+    useEffect(() => {
         if (!token) {
             navigate('/auth/login')
         }
@@ -22,7 +22,6 @@ const App = () => {
     return (
         <Account />
     )
-
 }
 
 export default App;
