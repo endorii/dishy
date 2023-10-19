@@ -5,11 +5,11 @@ export const MenuItems = [
         logo: Test, 
         title: "Сніданки", 
         items: [
-            { name: "Сирники", src: Test, value: 40, time: 10, amount: 10},
-            { name: "Оладки", src: Test, value: 50, time: 20, amount: 10 },
-            { name: "Млинці", src: Test, value: 40, time: 10, amount: 10 },
-            { name: "Омлет з сиром", src: Test, value: 50, time: 15, amount: 10 },
-            { name: "Вареники з вишнями", src: Test, value: 40, time: 20, amount: 10 },
+            { name: "Сирники", src: Test, value: 40, time: 10, amount: 10, weight: 200, ingredients: ['Сир: 140 грам', 'Яйце: 30 грам', 'Сіль: 10 грам', 'Борошно: 10 грам', 'Олія/Масло: 10 грам']},
+            { name: "Оладки", src: Test, value: 50, time: 20, amount: 10, weight: 200 },
+            { name: "Млинці", src: Test, value: 40, time: 10, amount: 10, weight: 200 },
+            { name: "Омлет з сиром", src: Test, value: 50, time: 15, amount: 10, weight: 200 },
+            { name: "Вареники з вишнями", src: Test, value: 40, time: 20, amount: 10, weight: 200 },
         ]
     },
     {

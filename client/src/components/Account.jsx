@@ -61,7 +61,7 @@ const Accordion = ({ menuOpen, setMenuOpen }) => {
             title: "Меню", icon: Menu, children:
                 [
                     { title: "Товари", path: "things" },
-                    { title: "Інгредієнти", path: "ingredients" },
+                    // { title: "Інгредієнти", path: "ingredients" },
                     // { title: "QR - меню", path: "qrmenu" }
                 ]
         },

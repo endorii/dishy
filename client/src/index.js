@@ -8,7 +8,7 @@ import { AuthLayout } from './components/AuthLayout';
 import { Registration } from './components/Registration';
 import { Login } from './components/Login';
 import App from './App'
-import Things from './components/Things';
+import Dishes from './components/Dishes';
 import Employees from './components/Employees';
 import UserAccount from './components/UserAccount';
 import { Service } from './components/Service';
@@ -36,8 +36,8 @@ const router = createBrowserRouter(
                 <Route path='signup' element={<Registration />} />
             </Route>
             <Route path='/' element={<App />}>
-                <Route path='things' element={<Things />} />
-                <Route path='ingredients' element={<Ingredients />}/>
+                <Route path='things' element={<Dishes />} />
+                {/* <Route path='ingredients' element={<Ingredients />}/> */}
                 <Route path='residues' element={<Residues />} />
                 <Route path='supply' element={<Supply />}/>
                 <Route path='production' element={<Production />}/>

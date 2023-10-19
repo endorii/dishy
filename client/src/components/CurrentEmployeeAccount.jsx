@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react"
 import { useSelector } from "react-redux"
-import { deleteСurrentEmployee } from "./employee"
 import { setCurrentEmployee } from "../store/slices/currentEmployee.Slice"
 import { useNavigate } from "react-router-dom"
+import { useDispatch } from "react-redux"
+import { changeIsCurrentEmployee } from "./employee"
 
 export const CurrentEmployeeAccount = () => {
 
@@ -12,6 +13,8 @@ export const CurrentEmployeeAccount = () => {
     const navigate = useNavigate();
 
     const [currentTime, setCurrentTime] = useState('');
+
+    const dispatch = useDispatch()
 
     const getCurrentOnlineTime = (startTime) => {
         const now = new Date();
@@ -41,7 +44,7 @@ export const CurrentEmployeeAccount = () => {
                             {currentTime}
                         </div>
                         <div>
-                            <button className="px-6 py-3 bg-red-500 text-3xl text-white rounded-lg" onClick={() => {deleteСurrentEmployee(id); setCurrentEmployee({}); navigate('/')}}>Завершити робочу зміну</button>
+                            <button className="px-6 py-3 bg-red-500 text-3xl text-white rounded-lg" onClick={() => { dispatch(changeIsCurrentEmployee()); dispatch(setCurrentEmployee({})); navigate('/employees') }}>Завершити робочу зміну</button>
                         </div>
 
                     </div>
@@ -65,7 +68,7 @@ export const CurrentEmployeeAccount = () => {
                             </li>
                             <li>
                                 <p>
-                                    Робочі години за весь час: 1000
+                                    Робочі години за весь час: {currentEmployee.totalWorkingTime}
                                 </p>
                             </li>
                             <li>
@@ -84,7 +87,7 @@ export const CurrentEmployeeAccount = () => {
             </div>
 
 
-            
+
         </>
     )
 }

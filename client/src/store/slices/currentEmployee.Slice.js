@@ -3,8 +3,6 @@ import { getCurrentEmployee } from "../../components/employee";
 
 const initialState = {
     currentEmployee: {},
-    initialWorkingTime: '',
-    finalWorkingTime: '',
     isAuth: false
 }
 
@@ -20,14 +18,6 @@ const currentEmployeeSlice = createSlice({
     name: "currentEmployee",
     initialState,
     reducers: {
-        setCurrentEmployee(state, action){
-            state.isAuth = true;
-            state.currentEmployee = action.payload;
-        },
-        setInitialWorkingTime(state, action){
-            state.isAuth = true;
-            state.initialWorkingTime = action.payload;
-        },
         logout(state) {
             state.isAuth = false;
             state.currentEmployee = {};
@@ -35,19 +25,19 @@ const currentEmployeeSlice = createSlice({
     },
     extraReducers: (builder) => {
         builder
-        .addCase(fetchCurrentEmployee.pending, (state) => {
-            state.isLoading = true;
-            state.error = null;
-        })
-        .addCase(fetchCurrentEmployee.fulfilled, (state, action) => {
-            state.isLoading = false;
-            state.isAuth = true;
-            state.currentEmployee = action.payload;
-        })
-        .addCase(fetchCurrentEmployee.rejected, (state, action) => {
-            state.isLoading = false;
-            state.error = action.error;
-        })
+            .addCase(fetchCurrentEmployee.pending, (state) => {
+                state.isLoading = true;
+                state.error = null;
+            })
+            .addCase(fetchCurrentEmployee.fulfilled, (state, action) => {
+                state.isLoading = false;
+                state.isAuth = true;
+                state.currentEmployee = action.payload;
+            })
+            .addCase(fetchCurrentEmployee.rejected, (state, action) => {
+                state.isLoading = false;
+                state.error = action.error;
+            })
     }
 })
 

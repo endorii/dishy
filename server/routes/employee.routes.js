@@ -1,8 +1,6 @@
 const Router = require('express');
 const Employee = require('../models/Employee');
 const authMiddleware = require('../middlewares/auth.middleware');
-const CurrentEmployee = require('../models/CurrentEmployee');
-
 const router = new Router();
 
 router.post('/employees', authMiddleware,
