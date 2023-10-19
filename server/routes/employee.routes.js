@@ -44,43 +44,6 @@ router.get('/employees', authMiddleware,
     }
 );
 
-router.get('/currentEmployee', authMiddleware,
-    async (req, res) => {
-        try {
-            const employee = await CurrentEmployee.findOne({ user: req.user.id });
-
-            return res.json({ employee });
-
-        } catch (e) {
-            console.log(e);
-            res.send({ message: "Помилка сервера" });
-        }
-    }
-);
-
-router.post('/currentEmployee', authMiddleware,
-    async (req, res) => {
-        try {
-            const { pin } = req.body;
-            const employee = await Employee.findOne({ pin, user: req.user.id });
-            if (employee) {
-
-                const currentEmployee = new CurrentEmployee({ ...employee._doc })
-
-                await currentEmployee.save();
-
-                return res.json(currentEmployee);
-            } else {
-                res.status(404).json({ message: 'Співробітник не знайдений' });
-            }
-
-        } catch (e) {
-            console.log(e);
-            res.send({ message: "Помилка сервера" })
-        }
-    }
-);
-
 router.put('/employees/:_id', authMiddleware,
     async (req, res) => {
         try {
@@ -122,22 +85,59 @@ router.delete('/employees/:_id', authMiddleware,
         }
     });
 
-router.delete('/currentEmployee/:_id', authMiddleware,
+router.get('/currentEmployee', authMiddleware,
     async (req, res) => {
         try {
-            const { _id } = req.params;
-
-            const employee = await CurrentEmployee.findOneAndDelete({ _id });
-
-            if (!employee) {
-                return res.status(404).json({ message: `Employee with id ${_id} not found` });
-            }
-
-            return res.json({ message: "Employee was deleted" });
+            const currentEmployee = await Employee.findOne({ user: req.user.id, isCurrent: true });
+            return res.json({ currentEmployee });
         } catch (e) {
             console.log(e);
-            res.send({ message: "Server error" });
+            res.send({ message: "Помилка сервера" });
+        }
+    }
+);
+
+router.post('/currentEmployee', authMiddleware,
+    async (req, res) => {
+        try {
+            const { pin } = req.body;
+            const currentEmployee = await Employee.findOne({ pin, user: req.user.id });
+            if (currentEmployee) {
+
+                await Employee.updateMany({ user: req.user.id }, { isCurrent: false });
+
+                await Employee.updateOne({ _id: currentEmployee._id }, { isCurrent: true });
+
+            } else {
+                res.status(404).json({ message: 'Співробітник не знайдений' });
+            }
+        } catch (e) {
+            console.log(e);
+            res.send({ message: "Помилка сервера" })
+        }
+    }
+);
+
+router.put('/currentEmployee', authMiddleware,
+    async (req, res) => {
+        try {
+            const currentEmployee = await Employee.findOneAndUpdate(
+                { isCurrent: true, user: req.user.id }, // умова пошуку
+                { isCurrent: false, user: req.user.id }, // оновлення поля
+                { new: true } // повернення оновленого документа
+            );
+
+            if (!currentEmployee) {
+                return res.status(404).json({ message: 'Співробітник не знайдений' });
+            }
+
+            res.json({ message: 'Співробітник успішно оновлений', employee: currentEmployee });
+        } catch (err) {
+            console.error(err);
+            res.status(500).json({ message: 'Помилка сервера' });
         }
     });
+
+
 
 module.exports = router;
