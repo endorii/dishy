@@ -9,7 +9,6 @@ export const CurrentEmployeeAccount = () => {
 
     const currentEmployee = useSelector(state => state.currentEmployee.currentEmployee)
     const startTime = new Date('Mon Oct 16 2023 19:30:57 GMT+0300');
-    const id = useSelector(state => state.currentEmployee.currentEmployee._id)
     const navigate = useNavigate();
 
     const [currentTime, setCurrentTime] = useState('');
@@ -44,7 +43,7 @@ export const CurrentEmployeeAccount = () => {
                             {currentTime}
                         </div>
                         <div>
-                            <button className="px-6 py-3 bg-red-500 text-3xl text-white rounded-lg" onClick={() => { dispatch(changeIsCurrentEmployee()); dispatch(setCurrentEmployee({})); navigate('/employees') }}>Завершити робочу зміну</button>
+                            <button className="px-6 py-3 bg-red-500 text-3xl text-white rounded-lg" onClick={() => {navigate('/employees'); dispatch(changeIsCurrentEmployee()); dispatch(setCurrentEmployee({})); }}>Завершити робочу зміну</button>
                         </div>
 
                     </div>
