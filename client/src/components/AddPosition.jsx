@@ -1,15 +1,51 @@
 import { useState } from "react";
 import { addPosition } from "./positions";
-import Plus from '../assets/icons/plus.svg';
 import { useDispatch } from "react-redux";
 import { fetchPositions } from "../store/slices/positions.Slice";
 
-const AddPosition = ({setOpen}) => {
+const AddPosition = ({ setOpen }) => {
 
     const [name, setName] = useState('');
     const [permissions, setPermissions] = useState('');
 
+    const [nameTouched, setNameTouched] = useState(false);
+    const [permissionsTouched, setPermissionsTouched] = useState(false);
+
+    const [nameError, setNameError] = useState('Поле не може бути пустим');
+    const [permissionsError, setPermissionsError] = useState('Поле не може бути пустим');
+
     const dispatch = useDispatch();
+
+    const handleName = (e) => {
+        setName(e.target.value)
+        const re = /^[а-яА-ЯҐґЄєІіЇїҐґa-zA-Z\s]+$/;
+        if (!re.test(String(e.target.value).toLowerCase())){
+            setNameError('Невірно введено назву посади');
+        } else (
+            setNameError('')
+        )
+    }
+
+    const handlePermissions = (e) => {
+        setPermissions(e.target.value);
+        const re = /^[а-яА-ЯҐґЄєІіЇїҐґa-zA-Z\s,]+$/;
+        if (!re.test(String(e.target.value).toLowerCase())){
+            setPermissionsError('Невірно вказані права та обов`язки')
+        } else (
+            setPermissionsError('')
+        )
+    }
+
+    const blurHandler = (e) => {
+        switch (e.target.name) {
+            case "name":
+                setNameTouched(true);
+                break;
+            case "permissions":
+                setPermissionsTouched(true);
+                break;
+        }
+    }
 
     return (
         <div className='flex justify-center '>
@@ -22,22 +58,40 @@ const AddPosition = ({setOpen}) => {
                     <ul className='flex flex-col justify-center m-10 w-[35%] gap-3'>
                         <li>
                             <label htmlFor="first_name" className="block text-sm font-medium text-gray-900 mb-1 ">Посада</label>
-                            <input value={name} onChange={(e) => setName(e.target.value)} type="text" id="first_name" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 " required />
+                            <input
+                                value={name}
+                                onChange={(e) => {handleName(e)}}
+                                onBlur={(e) => blurHandler(e)}
+                                name="name"
+                                type="text"
+                                id="first_name"
+                                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 " required />
+                            {(nameTouched && nameError) && <div className="text-red-600">{nameError}</div>}
                         </li>
                         <li>
-                            <label htmlFor="permissions" className="block text-sm font-medium text-gray-900 mb-1 ">Права та обов'язки</label>
-                            <input value={permissions} onChange={(e) => setPermissions(e.target.value)} type="text" id="permissions" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 " required />
+                            <label
+                                htmlFor="permissions"
+                                className="block text-sm font-medium text-gray-900 mb-1 ">Права та обов'язки</label>
+                            <input
+                                value={permissions}
+                                onChange={(e) => {handlePermissions(e)}}
+                                onBlur={(e) => blurHandler(e)}
+                                name="permissions"
+                                type="text"
+                                id="permissions"
+                                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 " required />
+                            {(permissionsTouched && permissionsError) && <div className="text-red-600">{permissionsError}</div>}
                         </li>
                     </ul>
 
-                    <button className="flex items-center bg-green-500 hover:bg-green-600 rounded-lg mb-7 mx-[30%] px-7 py-2 text-white font-medium drop-shadow-md"
-                        onClick={async() => {
-                            setOpen(false); 
-                            await addPosition(name, permissions); 
-                            dispatch(fetchPositions());}}
-                            
-                            >Підтвердити
-                        <img className='w-7 inline pl-2' src={Plus} alt="" />
+                    <button disabled={nameError || permissionsError} className="flex items-center bg-green-500 hover:bg-green-600 rounded-lg mb-7 mx-[30%] px-7 py-2 text-white font-medium drop-shadow-md disabled:bg-green-900/20 disabled:hover:bg-green-900/20 disabled:text-gray-100 disabled:cursor-not-allowed"
+                        onClick={async () => {
+                            setOpen(false);
+                            await addPosition(name, permissions);
+                            dispatch(fetchPositions());
+                        }}
+
+                    >Підтвердити
                     </button>
                 </div>
             </div>
