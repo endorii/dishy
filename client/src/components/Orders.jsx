@@ -2,18 +2,23 @@ import { useState } from "react"
 
 import { Modal } from "./Modal";
 import { NewOrderModal } from "./NewOrderModal";
+import { PayOrder } from "./PayOrder";
 
 export const Orders = () => {
 
     const [openNewOrderMenu, setOpenNewOrderMenu] = useState(false);
+    const [openPayOrder, setOpenPayOrder] = useState(false);
 
 
 
     return (
         <>
             {openNewOrderMenu ? <Modal>
-                <NewOrderModal setOpenNewOrderMenu={setOpenNewOrderMenu}/>
-                </Modal> : null}
+                <NewOrderModal setOpenNewOrderMenu={setOpenNewOrderMenu} setOpenPayOrder={setOpenPayOrder} />
+            </Modal> : null}
+            {openPayOrder ? <Modal>
+                <PayOrder setOpenPayOrder={setOpenPayOrder} />
+            </Modal> : null}
             <div className="flex flex-col w-screen text-white justify-center fixed bg-gray-600">
                 <div className='flex justify-end p-3'>
                     <button className='px-6 py-3 bg-green-600 rounded-lg hover:bg-green-700' onClick={() => {
@@ -51,7 +56,7 @@ export const Orders = () => {
                                     <td className="px-6 py-4">
                                         <div className="flex justify items-center">
                                             <div className="mr-7">Нове</div>
-                                            <button className='px-6 py-3 bg-blue-400 rounded-lg hover:bg-blue-500 text-white'>Оплатити замовлення</button>
+                                            <button onClick={() => { setOpenPayOrder(true) }} className='px-6 py-3 bg-blue-400 rounded-lg hover:bg-blue-500 text-white'>Оплатити замовлення</button>
                                         </div>
                                     </td>
                                     <td className="px-6 py-4 ">

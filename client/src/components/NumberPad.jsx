@@ -7,7 +7,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { fetchCurrentEmployee } from "../store/slices/currentEmployee.Slice";
 import { loginCurrentEmployee } from "./employee";
 
-const NumberPad = () => {
+export const NumberPad = () => {
 
     const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9];
     const [inputText, setInputText] = useState('');

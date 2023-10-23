@@ -1,29 +1,24 @@
-import Dinners from "../assets/img/dinners.jpg";
-import Coctailes from "../assets/img/coctaіles.jpg";
-import Pasta from "../assets/img/pasta.jpg";
-import Salades from "../assets/img/salades.jpg";
-import Tea from "../assets/img/tea.jpg";
-import Coffee from "../assets/img/coffee.jpg";
-import Pizza from "../assets/img/pizza.jpg";
-import ColdDrinks from "../assets/img/coldDrinks.jpg";
+// import Dinners from "../assets/img/dinners.jpg";
+// import Coctailes from "../assets/img/coctaіles.jpg";
+// import Pasta from "../assets/img/pasta.jpg";
+// import Salades from "../assets/img/salades.jpg";
+// import Tea from "../assets/img/tea.jpg";
+// import Coffee from "../assets/img/coffee.jpg";
+// import Pizza from "../assets/img/pizza.jpg";
+// import ColdDrinks from "../assets/img/coldDrinks.jpg";
+// import Sirniki from "../assets/img/sirniki.jpg";
+// import Oladki from "../assets/img/oladki.jpg";
+// import Mlintsi from "../assets/img/mlintsi.jpg";
+// import Egg from "../assets/img/egg.jpg";
+// import Vareniki from "../assets/img/vareniki.jpg";
 import Close from '../assets/icons/close.svg'
-import Sirniki from "../assets/img/sirniki.jpg";
-import Oladki from "../assets/img/oladki.jpg";
-import Mlintsi from "../assets/img/mlintsi.jpg";
-import Egg from "../assets/img/egg.jpg";
-import Vareniki from "../assets/img/vareniki.jpg";
 import Time from '../assets/icons/time.svg'
 import { useState } from "react";
 import { MenuItems } from "../functions";
 
-
-
-
-export const NewOrderModal = ({ setOpenNewOrderMenu }) => {
+export const NewOrderModal = ({ setOpenNewOrderMenu, setOpenPayOrder }) => {
 
     const [currentFood, setCurrentFood] = useState('');
-
-    
 
     return (
         <>
@@ -72,7 +67,7 @@ export const NewOrderModal = ({ setOpenNewOrderMenu }) => {
                                     </div>
                                     <div className="flex justify-between">
                                         <button className="bg-white p-3 border-2 text-blue-500 border-blue-200 text-2xl rounded-lg text-blue-600 font-medium w-[47%]">. . .</button>
-                                        <button className="w-[47%] bg-green-500 p-3 rounded-lg text-white font-medium">Оплатити замовлення</button>
+                                        <button onClick={() => {setOpenPayOrder(true)}} className="w-[47%] bg-green-500 p-3 rounded-lg text-white font-medium">Оплатити замовлення</button>
                                     </div>
                                 </div>
                             </div>
