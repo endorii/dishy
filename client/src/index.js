@@ -5,28 +5,28 @@ import store from './store/store';
 import { Provider } from 'react-redux';
 import { Route, RouterProvider, createBrowserRouter, createRoutesFromElements } from "react-router-dom"
 import { AuthLayout } from './components/AuthLayout';
-import { Registration } from './components/Registration';
-import { Login } from './components/Login';
+import { Registration } from './view/pages/Auth/Registration/Registration';
+import { Login } from './view/pages/Auth/Login/Login';
 import App from './App'
-import Dishes from './components/Dishes';
-import Employees from './components/Employees';
+import Dishes from './view/pages/Menu/Dishes/Dishes';
+import Employees from './view/pages/Access/Employees/Employees';
 import UserAccount from './components/UserAccount';
 import { Service } from './components/Service';
-import Ingredients from './components/Ingredients';
-import Residues from './components/Residues';
-import Supply from './components/Supply';
-import Production from './components/Production';
-import PositionsList from './components/PositionsList';
+// import Ingredients from './components/Ingredients';
+import Residues from './view/pages/Storage/Recidues/Residues';
+import Supply from './view/pages/Storage/Supply/Supply';
+import Production from './view/pages/Storage/Production/Production';
+import PositionsList from './view/pages/Access/Positions/PositionsList';
 import { Tables } from './components/Tables';
-import CashRegisters from './components/CashRegisters';
+import CashRegisters from './view/pages/Access/CashRegisters/CashRegisters';
 import Genereal from './components/General';
 import TablesSettings from './components/TablesSetting';
 import { EmployeeAuthLayout } from './components/EmployeeAuthLayout';
 import { EmployeeLogin } from './components/EmployeeLogin';
 import { Orders } from './components/Orders';
 import { CurrentEmployeeAccount } from './components/CurrentEmployeeAccount';
-import { Sales } from './components/Sales';
-import { Checks } from './components/Checks';
+import { Sales } from './view/pages/Statistis/Sales/Sales';
+import { Checks } from './view/pages/Statistis/Checks/Checks';
 
 const router = createBrowserRouter(
     createRoutesFromElements(

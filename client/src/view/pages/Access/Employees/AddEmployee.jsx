@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react";
 import { addEmployee } from "./employee";
 import { useDispatch } from "react-redux";
-import { fetchEmployees } from "../store/slices/employeesSlice";
+import { fetchEmployees } from "../../../../store/slices/employeesSlice";
 import { useSelector } from "react-redux/es/hooks/useSelector";
-import { fetchPositions } from "../store/slices/positions.Slice";
+import { fetchPositions } from "../../../../store/slices/positions.Slice";
 
 const AddEmployee = ({ setOpen }) => {
 

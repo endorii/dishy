@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import PhoneInput from 'react-phone-input-2';
 import 'react-phone-input-2/lib/style.css';
-import { registration } from '../modules/auth/user';
+import { registration } from '../../../../modules/auth/user';
 import { Link } from 'react-router-dom';
-import Logo from "../assets/brand/logo.png";
+import Logo from "../../../../assets/brand/logo.png";
 
 export const Registration = () => {
 

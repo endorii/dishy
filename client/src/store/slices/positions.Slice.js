@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { getAllPositions } from "../../components/positions";
+import { getAllPositions } from "../../view/pages/Access/Positions/positions";
 
 const initialState = {
     positions: [],

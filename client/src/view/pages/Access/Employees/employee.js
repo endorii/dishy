@@ -1,5 +1,5 @@
 import axios from "axios";
-import { setCurrentEmployee } from "../store/slices/currentEmployee.Slice";
+import { setCurrentEmployee } from "../../../../store/slices/currentEmployee.Slice";
 
 export const addEmployee = async (name, login, pin, position) => {
     try {

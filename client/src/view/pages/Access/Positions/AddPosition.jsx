@@ -1,7 +1,7 @@
 import { useState } from "react";
-import { addPosition } from "./positions";
+import { addPosition } from "./positions.js";
 import { useDispatch } from "react-redux";
-import { fetchPositions } from "../store/slices/positions.Slice";
+import { fetchPositions } from "../../../../store/slices/positions.Slice";
 
 const AddPosition = ({ setOpen }) => {
 

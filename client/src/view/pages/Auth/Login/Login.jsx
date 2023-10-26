@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react"
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
-import { login } from "../modules/auth/user";
+import { login } from "../../../../modules/auth/user";
 import { Link, useNavigate } from "react-router-dom";
 
-import Logo from "../assets/brand/logo.png";
+import Logo from "../../../../assets/brand/logo.png";
 
 export const Login = () => {
 

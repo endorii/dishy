@@ -3,7 +3,7 @@ import { fetchCurrentEmployee } from "../store/slices/currentEmployee.Slice";
 import { useDispatch, useSelector } from "react-redux";
 import { Modal } from "./Modal";
 import { useNavigate } from "react-router-dom";
-import { changeIsCurrentEmployee } from "./employee";
+import { changeIsCurrentEmployee } from "../view/pages/Access/Employees/employee";
 import { toast } from 'react-toastify';
 
 export const NumPadWelcomeModal = ({ setOpen }) => {

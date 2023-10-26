@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { editPosition } from "./positions";
-import Plus from '../assets/icons/plus.svg';
-import { useDispatch, useSelector } from "react-redux";
-import { fetchPositions } from "../store/slices/positions.Slice";
+import Plus from '../../../../assets/icons/plus.svg';
+import { useDispatch } from "react-redux";
+import { fetchPositions } from "../../../../store/slices/positions.Slice";
 
 const EditPosition = ({ setOpen, currentPosition }) => {
 

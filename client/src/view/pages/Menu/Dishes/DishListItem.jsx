@@ -1,7 +1,5 @@
 import { useState } from "react"
 
-
-
 export const DishListItem = ({ dish }) => {
 
     const [openInfo, setOpenInfo] = useState(false);
@@ -43,11 +41,14 @@ export const DishListItem = ({ dish }) => {
             {openInfo ?
                 <div className="flex flex-col justify-center items-center w-full h-auto bg-white m-5 p-[5%]">
                     <div className="font-medium text-lg mb-2">Інгредієнти для приготування:</div>
-                    <div className="flex flex-col justify-start w-full p-2 text-lg gap-1">{dish.ingredients.map((ingredient, i) => (
+                    <div className="flex flex-col justify-start w-full p-2 text-lg gap-1">{dish.ingredients ? dish.ingredients.map((ingredient, i) => (
                         <div key={i}>{ingredient}</div>
-                    ))}</div>
+                    )) : <div className="flex flex-col justify-center items-center w-full h-auto bg-white m-5 p-[5%]">
+                        <div className="font-medium text-2xl mb-2">Вибачте, інгредієнти не доступні</div>
+                    </div>}</div>
                 </div>
                 : null}
         </>
     )
 }
+

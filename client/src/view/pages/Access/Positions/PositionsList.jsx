@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
-import { fetchPositions } from "../store/slices/positions.Slice";
+import { fetchPositions } from "../../../../store/slices/positions.Slice";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux/es/hooks/useSelector";
-import { Modal } from "./Modal";
+import { Modal } from "../../../../components/Modal";
 import AddPosition from "./AddPosition";
 import EditPosition from "./EditPosition";
 import { deletePosition } from "./positions";
-import Plus from '../assets/icons/plus.svg';
+import Plus from '../../../../assets/icons/plus.svg';
 
 const PositionsList = () => {
 

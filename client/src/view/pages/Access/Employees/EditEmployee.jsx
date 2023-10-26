@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { editEmployee } from "./employee";
-import Plus from '../assets/icons/plus.svg';
+import Plus from '../../../../assets/icons/plus.svg';
 import { useDispatch, useSelector } from "react-redux";
-import { fetchEmployees } from "../store/slices/employeesSlice";
+import { fetchEmployees } from "../../../../store/slices/employeesSlice";
 
 const EditEmployee = ({ setOpen, currentEmployee }) => {
 

@@ -5,7 +5,7 @@ import { useDispatch } from "react-redux";
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { fetchCurrentEmployee } from "../store/slices/currentEmployee.Slice";
-import { loginCurrentEmployee } from "./employee";
+import { loginCurrentEmployee } from "../view/pages/Access/Employees/employee";
 
 export const NumberPad = () => {
 

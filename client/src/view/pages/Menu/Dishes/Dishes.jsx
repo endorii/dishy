@@ -1,5 +1,5 @@
-import { MenuItems } from "../functions";
-import Search from '../assets/icons/search.svg'
+import { MenuItems } from "../../../../functions";
+import Search from '../../../../assets/icons/search.svg'
 import { useState } from "react";
 import { DishListItem } from "./DishListItem";
 
@@ -64,7 +64,7 @@ const Dishes = () => {
                         }
                     </tbody>
                 </table>
-                {MenuItems.length > 0 ? null : <h2 className='text-4xl p-6 text-center font-light bg-white'>Страв не знайдено не знайдено</h2>}
+                {MenuItems.length > 0 ? null : <h2 className='text-4xl p-6 text-center font-light bg-white'>Страв не знайдено</h2>}
             </div>
 
         </div>

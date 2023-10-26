@@ -1,14 +1,14 @@
-import Plus from '../assets/icons/plus.svg'
+import Plus from '../../../../assets/icons/plus.svg'
 import { useState } from 'react';
 import { useEffect } from 'react';
 import AddEmployee from './AddEmployee';
-import { fetchEmployees } from '../store/slices/employeesSlice';
+import { fetchEmployees } from '../../../../store/slices/employeesSlice';
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux/es/hooks/useSelector';
 import { deleteEmployee } from './employee';
 import EditEmployee from './EditEmployee';
-import { Modal } from './Modal';
-import { fetchPositions } from '../store/slices/positions.Slice';
+import { Modal } from '../../../../components/Modal';
+import { fetchPositions } from '../../../../store/slices/positions.Slice';
 
 const Employees = () => {
     const [addEmployeeModalOpen, setAddEmployeeModalOpen] = useState(false);
