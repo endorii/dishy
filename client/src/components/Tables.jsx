@@ -47,13 +47,14 @@ export const Tables = () => {
 
     const [open, setOpen] = useState({});
     const [openNewOrderMenu, setOpenNewOrderMenu] = useState(false);
+    const [openPayOrder, setOpenPayOrder] = useState(false);
 
     const guests = [1, 2, 3, 4, 5, 6]
 
     return (
         <>
             {openNewOrderMenu ? <Modal>
-                <NewOrderModal setOpenNewOrderMenu={setOpenNewOrderMenu} />
+                <NewOrderModal setOpenNewOrderMenu={setOpenNewOrderMenu} setOpenPayOrder={setOpenPayOrder} openPayOrder={openPayOrder}/>
             </Modal> : null}
             <div className="flex flex-col w-screen text-white justify-center bg-gray-600">
                 <div className='flex justify-end p-3'>
