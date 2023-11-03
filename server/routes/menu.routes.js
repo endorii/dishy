@@ -4,20 +4,18 @@ const authMiddleware = require('../middlewares/auth.middleware');
 
 const router = new Router();
 
-router.post('/menu',
-    async (req, res) => {
-        try {
-            const {logo, title, items:[{name, src, value, time, amount}]} = req.body;
-            
-            const menuCategory = new Menu({logo, title, items:[{name, src, value, time, amount}]});
+router.post('/menu', async (req, res) => {
 
-            await menuCategory.save();
+    const menu = new MenuModel(req.body);
 
-        } catch (e) {
-            console.log(e);
-            res.send({message: "Помилка сервера"})
-        }
-    }    
-)
+    try {
+        await menu.save();
+        res.status(201).send(menu);
+
+    } catch (e) {
+        console.log(e);
+        res.send({ message: "Помилка сервера" });
+    }
+});
 
 module.exports = router;

@@ -20,7 +20,7 @@ import PositionsList from './view/pages/Access/Positions/PositionsList';
 import { Tables } from './components/Tables';
 import CashRegisters from './view/pages/Access/CashRegisters/CashRegisters';
 import Genereal from './components/General';
-import TablesSettings from './components/TablesSetting';
+import TablesSettings from './components/TablesSettings';
 import { EmployeeAuthLayout } from './components/EmployeeAuthLayout';
 import { EmployeeLogin } from './components/EmployeeLogin';
 import { Orders } from './components/Orders';

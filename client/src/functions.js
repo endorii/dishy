@@ -2,10 +2,10 @@ import Test from '../src/assets/img/test.jpg'
 
 export const MenuItems = [
     {
-        logo: Test, 
-        title: "Сніданки", 
+        logo: Test,
+        title: "Сніданки",
         items: [
-            { name: "Сирники", src: Test, value: 40, time: 10, amount: 10, weight: 200, ingredients: ['Сир: 140 грам', 'Яйце: 30 грам', 'Сіль: 10 грам', 'Борошно: 10 грам', 'Олія/Масло: 10 грам']},
+            { name: "Сирники", src: Test, value: 40, time: 10, amount: 10, weight: 200, ingredients: ['Сир: 140 грам', 'Яйце: 30 грам', 'Сіль: 10 грам', 'Борошно: 10 грам', 'Олія/Масло: 10 грам'] },
             { name: "Оладки", src: Test, value: 50, time: 20, amount: 10, weight: 200 },
             { name: "Млинці", src: Test, value: 40, time: 10, amount: 10, weight: 200 },
             { name: "Омлет з сиром", src: Test, value: 50, time: 15, amount: 10, weight: 200 },
@@ -49,7 +49,7 @@ export const MenuItems = [
             { name: "Чай з калиною та яблуком", src: Test, value: 20, time: 10, amount: 10 },
             { name: "Чорний чай", src: Test, value: 20, time: 10, amount: 10 },
             { name: "Зелений чай", src: Test, value: 20, time: 10, amount: 10 },
-            { name: "Чай з апельсином та облепихою", src: Test, value: 20, time: 10, amount: 10 },
+            { name: "Чай з апельсином", src: Test, value: 20, time: 10, amount: 10 },
             { name: "Безалкогольний глінтвейн", src: Test, value: 20, time: 10, amount: 10 },
             { name: "Чай з травами", src: Test, value: 20, time: 10, amount: 10 },
         ]
