@@ -1,10 +1,49 @@
 const {Schema, model} = require('mongoose');
 
-const Order = new Schema({
-    user: { type: Schema.Types.ObjectId, ref: "User" },
-    name: { type: String, require: true},
-    openingTime: {type: String, require: true},
-    amount: {type: String, require: true}
-})
+const OrderItemSchema = new Schema({
+    name: {
+        type: String,
+        required: true
+    },
+    src: {
+        type: String,
+        required: true
+    },
+    value: {
+        type: Number,
+        required: true
+    },
+    time: {
+        type: Number,
+        required: true
+    },
+    amount: {
+        type: Number,
+        required: true
+    },
+    weight: {
+        type: Number,
+        required: false
+    },
+    ingredients: {
+        type: [String],
+        required: false
+    }
+});
 
-module.exports = model("Order", Order);
+const GuestSchema = new Schema({
+    id: {
+        type: Number
+    },
+    guest: [OrderItemSchema]
+});
+
+const OrderSchema = new Schema({
+    user: {
+        type: Schema.Types.ObjectId,
+        ref: 'User'
+    },
+    order: [GuestSchema]
+});
+
+module.exports = model('Order', OrderSchema);

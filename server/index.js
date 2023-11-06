@@ -5,6 +5,7 @@ const authRouter = require('./routes/auth.routes');
 const employeesRouter = require('./routes/employee.routes');
 const positionsRouter = require('./routes/positions.rotes');
 const menuRouter = require('./routes/menu.routes');
+const ordersRouter = require("./routes/order.routes");
 const app = express();
 const PORT = config.get('PORT')
 const cors = require('cors');
@@ -15,6 +16,7 @@ app.use("/api/auth", authRouter);
 app.use("/api/", employeesRouter);
 app.use("/api/", positionsRouter);
 app.use("/api/", menuRouter);
+app.use("/api/", ordersRouter)
 
 const start = async () => {
     try {
