@@ -91,3 +91,14 @@ export const MenuItems = [
         ]
     },
 ];
+
+export const getTotalOrderValue = (order) => {
+    let totalValue = 0;
+
+    for (let i = 0; i < order.order.length; i++) {
+        for (let j = 0; j < order.order[i].guest.length; j++) {
+            totalValue += order.order[i].guest[j].value;
+        }
+    }
+    return totalValue
+}
