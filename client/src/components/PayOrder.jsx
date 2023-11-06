@@ -1,8 +1,9 @@
 import { useState } from 'react'
 import Close from '../assets/icons/close.svg'
 import { PayNumberPad } from './PayNumberPad'
+import { getTotalOrderValue } from '../functions'
 
-export const PayOrder = ({ setOpenPayOrder }) => {
+export const PayOrder = ({ setOpenPayOrder, currentOrder }) => {
 
     const [cashInputValue, setCashInputValue] = useState(0)
     const [cardInputValue, setCardInputValue] = useState(0)
@@ -21,7 +22,8 @@ export const PayOrder = ({ setOpenPayOrder }) => {
                     <div className="flex-1 flex flex-col bg-white px-32 py-10 overflow-x-auto justify-between">
                         <div>
                             <div className='font-medium text-3xl mb-10'>
-                                Разом до сплати: {300}$
+                                Замовлення: {currentOrder._id},
+                                <p>Разом до сплати: {getTotalOrderValue(currentOrder)}UAH</p>
                             </div>
 
                             <div>
@@ -30,7 +32,7 @@ export const PayOrder = ({ setOpenPayOrder }) => {
                                         <div className='flex w-full justify-between items-center'>
                                             <p>💵 Готівкою</p>
                                             <div className='flex'>
-                                                <input onChange={(e) => {setCashInputValue(e.target.value)}} value={cashInputValue} className='w-auto text-right px-1 text-3xl focus:outline-none' type="number" />
+                                                <input onChange={(e) => { setCashInputValue(e.target.value) }} value={cashInputValue} className='w-auto text-right px-1 text-3xl focus:outline-none' type="number" />
                                                 <p className='text-3xl'>$</p>
                                             </div>
                                         </div>
@@ -39,7 +41,7 @@ export const PayOrder = ({ setOpenPayOrder }) => {
                                         <div className='flex w-full justify-between items-center'>
                                             <p>💳 Карткою</p>
                                             <div className='flex'>
-                                                <input onChange={(e) => {setCardInputValue(e.target.value)}} value={cardInputValue} className='text-right text-3xl px-1 focus:outline-none' type="number" />
+                                                <input onChange={(e) => { setCardInputValue(e.target.value) }} value={cardInputValue} className='text-right text-3xl px-1 focus:outline-none' type="number" />
                                                 <p className='text-3xl'>$</p>
                                             </div>
                                         </div>
@@ -47,11 +49,11 @@ export const PayOrder = ({ setOpenPayOrder }) => {
                                 </ul>
                             </div>
                             <div className='flex p-5 items-center'>
-                                <label class="relative inline-flex items-center mr-5 cursor-pointer">
-                                    <input type="checkbox" value="" class="sr-only peer" />
-                                    <div class="w-11 h-6 bg-gray-200 rounded-full peer dark:bg-gray-700 peer-focus:ring-4 peer-focus:ring-green-300 dark:peer-focus:ring-green-800 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-green-600"></div>
+                                <label className="relative inline-flex items-center mr-5 cursor-pointer">
+                                    <input type="checkbox" value="" className="sr-only peer" />
+                                    <div className="w-11 h-6 bg-gray-200 rounded-full peer dark:bg-gray-700 peer-focus:ring-4 peer-focus:ring-green-300 dark:peer-focus:ring-green-800 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-green-600"></div>
                                 </label>
-                                <span class="text-l text-black pb-1">Друкувати чек</span>
+                                <span className="text-l text-black pb-1">Друкувати чек</span>
                             </div>
                         </div>
                         <div className='flex gap-[20%] justify-center items-center text-white'>

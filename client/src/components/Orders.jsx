@@ -1,15 +1,23 @@
-import { useState } from "react"
-
+import { useEffect, useState } from "react"
 import { Modal } from "./Modal";
 import { NewOrderModal } from "./NewOrderModal";
 import { PayOrder } from "./PayOrder";
+import { useDispatch, useSelector } from 'react-redux'
+import { fetchOrders } from "../store/slices/ordersSlice";
+import { getTotalOrderValue } from "../functions";
 
 export const Orders = () => {
 
     const [openNewOrderMenu, setOpenNewOrderMenu] = useState(false);
     const [openPayOrder, setOpenPayOrder] = useState(false);
+    const [currentOrder, setcurrentOrder] = useState([])
 
+    const dispatch = useDispatch()
+    const { orders } = useSelector(state => state.orders)
 
+    useEffect(() => {
+        dispatch(fetchOrders())
+    }, [])
 
     return (
         <>
@@ -17,7 +25,7 @@ export const Orders = () => {
                 <NewOrderModal setOpenNewOrderMenu={setOpenNewOrderMenu} setOpenPayOrder={setOpenPayOrder} />
             </Modal> : null}
             {openPayOrder ? <Modal>
-                <PayOrder setOpenPayOrder={setOpenPayOrder} />
+                <PayOrder setOpenPayOrder={setOpenPayOrder} currentOrder={currentOrder}/>
             </Modal> : null}
             <div className="flex flex-col w-screen text-white justify-center fixed bg-gray-600">
                 <div className='flex justify-end p-3'>
@@ -43,30 +51,31 @@ export const Orders = () => {
                                 </th>
                             </tr>
                         </thead>
-                        {/* {employees.length > 0 ? employees.map((employee, i) => */}
-                        <>
-                            <tbody>
-                                <tr className="bg-white border-b border-gray-300 text-gray-700">
-                                    <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
-                                        №18674 | Стіл номер 1
-                                    </th>
-                                    <td className="px-6 py-4">
-                                        17:44
-                                    </td>
-                                    <td className="px-6 py-4">
-                                        <div className="flex justify items-center">
-                                            <div className="mr-7">Нове</div>
-                                            <button onClick={() => { setOpenPayOrder(true) }} className='px-6 py-3 bg-blue-400 rounded-lg hover:bg-blue-500 text-white'>Оплатити замовлення</button>
-                                        </div>
-                                    </td>
-                                    <td className="px-6 py-4 ">
-                                        108.00 ГРН
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </>
+                        {orders.length > 0 ? orders.map((order, i) => {
 
-                        {/* ) : null} */}
+                            return (
+                                <tbody key={i}>
+                                    <tr className="bg-white border-b border-gray-300 text-gray-700">
+                                        <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
+                                            Замовлення {order._id}
+                                        </th>
+                                        <td className="px-6 py-4">
+                                            17:44
+                                        </td>
+                                        <td className="px-6 py-4">
+                                            <div className="flex justify items-center">
+                                                <div className="mr-7">Нове</div>
+                                                <button onClick={() => { setcurrentOrder(order);setOpenPayOrder(true) }} className='px-6 py-3 bg-blue-400 rounded-lg hover:bg-blue-500 text-white'>Оплатити замовлення</button>
+                                            </div>
+                                        </td>
+                                        <td className="px-6 py-4 ">
+                                        {getTotalOrderValue(order)}
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            )
+                        }) : null}
+
                     </table>
                     {/* {employees.length > 0 ? null : <h2 className='text-4xl p-6 text-center font-light bg-white'>Працівників не знайдено</h2>} */}
                 </div>

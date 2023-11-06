@@ -17,6 +17,9 @@ import { useState } from "react";
 import { MenuItems } from "../functions";
 import { Modal } from './Modal';
 import { PayOrder } from './PayOrder';
+import { addOrder } from './ordersActions';
+import { fetchOrders } from '../store/slices/ordersSlice';
+import { useDispatch } from 'react-redux';
 
 export const NewOrderModal = ({ setOpenNewOrderMenu, setOpenPayOrder, openPayOrder }) => {
 
@@ -24,10 +27,12 @@ export const NewOrderModal = ({ setOpenNewOrderMenu, setOpenPayOrder, openPayOrd
     const [currentCategoryFood, setCurrentCategoryFood] = useState('');
     const [currentGuest, setCurrentGuest] = useState({})
 
+    const dispatch = useDispatch();
+
     const addGuest = () => {
         const newGuest = {
             id: guests.length + 1,
-            order: [],
+            guest: [],
         };
 
         setGuests([...guests, newGuest]);
@@ -35,7 +40,7 @@ export const NewOrderModal = ({ setOpenNewOrderMenu, setOpenPayOrder, openPayOrd
 
     const selectFoodForGuest = (currentGuest, foodItem) => {
         const updatedGuests = [...guests];
-        currentGuest.order.push(foodItem);
+        currentGuest.guest.push(foodItem);
         setGuests(updatedGuests);
     };
 
@@ -43,6 +48,13 @@ export const NewOrderModal = ({ setOpenNewOrderMenu, setOpenPayOrder, openPayOrd
         const updatedGuests = guests.filter((guest) => guest.id !== guestId);
         setGuests(updatedGuests);
     };
+
+    const configureOrder = (guests) => {
+        const order = {
+            order: [...guests],
+        }
+        addOrder(order);
+    }
 
     return (
         <>
@@ -78,9 +90,6 @@ export const NewOrderModal = ({ setOpenNewOrderMenu, setOpenPayOrder, openPayOrd
                                                 </th>
                                             </tr>
                                         </thead>
-                                        <tbody>
-
-                                        </tbody>
                                     </table>
 
                                     <div className="p-5 flex flex-col gap-y-3 items-start">
@@ -92,11 +101,10 @@ export const NewOrderModal = ({ setOpenNewOrderMenu, setOpenPayOrder, openPayOrd
                                                         <div className="text-lg font-medium" onClick={() => { removeGuest(guest.id) }}>Видалити</div>
                                                     </div>
                                                     <div className='w-full'>
-
                                                         <tbody className='bg-gray-100 p-3 m-2 rounded-xl w-full'>
-                                                            {guest.order.map((dish, i) => {
+                                                            {guest.guest.map((dish, i) => {
                                                                 return (
-                                                                    <tr className="bg-white border-b border-gray-300 text-gray-700">
+                                                                    <tr key={i} className="bg-white border-b border-gray-300 text-gray-700">
                                                                         <td className="px-3 py-3">
                                                                             {dish.name}
                                                                         </td>
@@ -113,7 +121,6 @@ export const NewOrderModal = ({ setOpenNewOrderMenu, setOpenPayOrder, openPayOrd
                                                                 )
                                                             })}
                                                         </tbody>
-
                                                     </div>
                                                 </div>
                                             )
@@ -122,14 +129,19 @@ export const NewOrderModal = ({ setOpenNewOrderMenu, setOpenPayOrder, openPayOrd
                                     </div>
                                 </div>
 
-                                <div className="flex flex-col px-8 py-5 gap-6 bg-white m-7 rounded-lg">
-                                    <div className="flex justify-between items-center">
-                                        <div className="font-thin text-2xl">Разом до сплати</div>
-                                        <div className="text-xl font-medium">450,00</div>
+                                <div className="flex flex-col gap-3 m-7 rounded-lg">
+                                    <div className="flex justify-center bg-white px-7 py-5 rounded-lg">
+                                        <button onClick={() => { dispatch(fetchOrders()); configureOrder(guests) }} className="w-full bg-sky-500 p-3 rounded-lg text-white font-medium">Відправити на кухню</button>
                                     </div>
-                                    <div className="flex justify-between">
-                                        <button className="bg-white p-3 border-2 text-blue-500 border-blue-200 text-2xl rounded-lg text-blue-600 font-medium w-[47%]">. . .</button>
-                                        <button onClick={() => { setOpenPayOrder(true) }} className="w-[47%] bg-green-500 p-3 rounded-lg text-white font-medium">Оплатити замовлення</button>
+                                    <div className='bg-white rounded-lg p-7 flex flex-col gap-3'>
+                                        <div className="flex justify-between items-center">
+                                            <div className="font-thin text-2xl">Разом до сплати</div>
+                                            <div className="text-xl font-medium">450,00</div>
+                                        </div>
+                                        <div className=" flex justify-between">
+                                            <button className="bg-white p-3 border-2 text-blue-500 border-blue-200 text-2xl rounded-lg text-blue-600 font-medium w-[47%]">. . .</button>
+                                            <button onClick={() => { setOpenPayOrder(true) }} className="w-[47%] bg-green-500 p-3 rounded-lg text-white font-medium">Оплатити замовлення</button>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -148,7 +160,7 @@ export const NewOrderModal = ({ setOpenNewOrderMenu, setOpenPayOrder, openPayOrd
                                                 <div className="font-thin text-lg px-4 py-2">{item.name}</div>
                                                 <div className="flex justify-between">
                                                     <div className=" flex items-center font-thin px-4 py-2"> <img className="w-4 mr-1" src={Time} alt="" />{item.time} хвилин</div>
-                                                    <div className="font-thin px-4 py-2">Ціна {item.time} ₴</div>
+                                                    <div className="font-thin px-4 py-2">Ціна {item.value} ₴</div>
                                                 </div>
                                             </li>
                                         )) : MenuItems.map((item, i) => (
