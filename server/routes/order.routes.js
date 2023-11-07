@@ -7,9 +7,9 @@ const router = new Router();
 router.post('/orders', authMiddleware,
     async (req, res) => {
         try {
-            const { order } = req.body;
+            const { order, openingTime, tableNumber } = req.body;
 
-            const newOrder = new Order({ user: req.user.id, order });
+            const newOrder = new Order({ user: req.user.id, order, openingTime, tableNumber });
 
             await newOrder.save();
 

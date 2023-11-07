@@ -16,8 +16,8 @@ export const Orders = () => {
     const { orders } = useSelector(state => state.orders)
 
     useEffect(() => {
-        dispatch(fetchOrders())
-    }, [])
+        dispatch(fetchOrders());
+    }, [orders])
 
     return (
         <>
@@ -25,7 +25,7 @@ export const Orders = () => {
                 <NewOrderModal setOpenNewOrderMenu={setOpenNewOrderMenu} setOpenPayOrder={setOpenPayOrder} />
             </Modal> : null}
             {openPayOrder ? <Modal>
-                <PayOrder setOpenPayOrder={setOpenPayOrder} currentOrder={currentOrder}/>
+                <PayOrder setOpenPayOrder={setOpenPayOrder} currentOrder={currentOrder} />
             </Modal> : null}
             <div className="flex flex-col w-screen text-white justify-center fixed bg-gray-600">
                 <div className='flex justify-end p-3'>
@@ -34,50 +34,49 @@ export const Orders = () => {
                     }}>Нове замовлення</button>
                 </div>
                 <div className="relative shadow-md">
-                    <table className="w-full text-sm text-left text-gray-500">
-                        <thead className="text-xs text-gray-700 uppercase bg-gray-300">
-                            <tr>
-                                <th scope="col" className="px-6 py-3">
-                                    Замовлення
-                                </th>
-                                <th scope="col" className="px-6 py-3">
-                                    Дата відкриття
-                                </th>
-                                <th scope="col" className="px-6 py-3">
-                                    Статус
-                                </th>
-                                <th scope="col" className="px-6 py-3">
-                                    Сума
-                                </th>
-                            </tr>
-                        </thead>
-                        {orders.length > 0 ? orders.map((order, i) => {
-
-                            return (
-                                <tbody key={i}>
-                                    <tr className="bg-white border-b border-gray-300 text-gray-700">
-                                        <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
-                                            Замовлення {order._id}
-                                        </th>
-                                        <td className="px-6 py-4">
-                                            17:44
-                                        </td>
-                                        <td className="px-6 py-4">
-                                            <div className="flex justify items-center">
-                                                <div className="mr-7">Нове</div>
-                                                <button onClick={() => { setcurrentOrder(order);setOpenPayOrder(true) }} className='px-6 py-3 bg-blue-400 rounded-lg hover:bg-blue-500 text-white'>Оплатити замовлення</button>
-                                            </div>
-                                        </td>
-                                        <td className="px-6 py-4 ">
-                                        {getTotalOrderValue(order)}
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            )
-                        }) : null}
-
-                    </table>
-                    {/* {employees.length > 0 ? null : <h2 className='text-4xl p-6 text-center font-light bg-white'>Працівників не знайдено</h2>} */}
+                    {orders.length > 0 ?
+                        <table className="w-full text-sm text-left text-gray-500">
+                            <thead className="text-xs text-gray-700 uppercase bg-gray-300">
+                                <tr>
+                                    <th scope="col" className="px-6 py-3">
+                                        Замовлення
+                                    </th>
+                                    <th scope="col" className="px-6 py-3">
+                                        Дата відкриття
+                                    </th>
+                                    <th scope="col" className="px-6 py-3">
+                                        Статус
+                                    </th>
+                                    <th scope="col" className="px-6 py-3">
+                                        Сума
+                                    </th>
+                                </tr>
+                            </thead>
+                            {orders.length > 0 ? orders.map((order, i) => {
+                                return (
+                                    <tbody key={i}>
+                                        <tr className="bg-white border-b border-gray-300 text-gray-700">
+                                            <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
+                                                {order.tableNumber !== undefined ? `Столик ${order.tableNumber}` : "З  собою"} | Замовлення {order._id}
+                                            </th>
+                                            <td className="px-6 py-4">
+                                                {order.openingTime}
+                                            </td>
+                                            <td className="px-6 py-4">
+                                                <div className="flex justify items-center">
+                                                    <div className="mr-7">Нове</div>
+                                                    <button onClick={() => { setcurrentOrder(order); setOpenPayOrder(true) }} className='px-6 py-3 bg-blue-400 rounded-lg hover:bg-blue-500 text-white'>Оплатити замовлення</button>
+                                                </div>
+                                            </td>
+                                            <td className="px-6 py-4 ">
+                                                {getTotalOrderValue(order)}
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                )
+                            }) : null}
+                        </table>
+                        : <div className="text-3xl bg-white text-black p-10 text-center">Немає доступних замовлень, створіть нове, щоб побачити</div>}
                 </div>
             </div>
         </>

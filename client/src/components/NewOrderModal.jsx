@@ -14,15 +14,13 @@
 import Close from '../assets/icons/close.svg'
 import Time from '../assets/icons/time.svg'
 import { useState } from "react";
-import { MenuItems } from "../functions";
+import { MenuItems, configureOrder, getTotalInsideOrderValue } from "../functions";
 import { Modal } from './Modal';
 import { PayOrder } from './PayOrder';
-import { addOrder } from './ordersActions';
 import { fetchOrders } from '../store/slices/ordersSlice';
 import { useDispatch } from 'react-redux';
 
-export const NewOrderModal = ({ setOpenNewOrderMenu, setOpenPayOrder, openPayOrder }) => {
-
+export const NewOrderModal = ({ setOpenNewOrderMenu, setOpenPayOrder, openPayOrder, currentTable }) => {
     const [guests, setGuests] = useState([]);
     const [currentCategoryFood, setCurrentCategoryFood] = useState('');
     const [currentGuest, setCurrentGuest] = useState({})
@@ -48,13 +46,6 @@ export const NewOrderModal = ({ setOpenNewOrderMenu, setOpenPayOrder, openPayOrd
         const updatedGuests = guests.filter((guest) => guest.id !== guestId);
         setGuests(updatedGuests);
     };
-
-    const configureOrder = (guests) => {
-        const order = {
-            order: [...guests],
-        }
-        addOrder(order);
-    }
 
     return (
         <>
@@ -131,12 +122,13 @@ export const NewOrderModal = ({ setOpenNewOrderMenu, setOpenPayOrder, openPayOrd
 
                                 <div className="flex flex-col gap-3 m-7 rounded-lg">
                                     <div className="flex justify-center bg-white px-7 py-5 rounded-lg">
-                                        <button onClick={() => { dispatch(fetchOrders()); configureOrder(guests) }} className="w-full bg-sky-500 p-3 rounded-lg text-white font-medium">Відправити на кухню</button>
+                                        <button onClick={() => { dispatch(fetchOrders()); configureOrder(guests, currentTable) }} className="w-full bg-sky-500 p-3 rounded-lg text-white font-medium">Відправити на кухню</button>
+
                                     </div>
                                     <div className='bg-white rounded-lg p-7 flex flex-col gap-3'>
                                         <div className="flex justify-between items-center">
                                             <div className="font-thin text-2xl">Разом до сплати</div>
-                                            <div className="text-xl font-medium">450,00</div>
+                                            <div className="text-xl font-medium">{getTotalInsideOrderValue(guests)} ₴</div>
                                         </div>
                                         <div className=" flex justify-between">
                                             <button className="bg-white p-3 border-2 text-blue-500 border-blue-200 text-2xl rounded-lg text-blue-600 font-medium w-[47%]">. . .</button>

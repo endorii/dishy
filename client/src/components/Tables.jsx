@@ -49,12 +49,14 @@ export const Tables = () => {
     const [openNewOrderMenu, setOpenNewOrderMenu] = useState(false);
     const [openPayOrder, setOpenPayOrder] = useState(false);
 
+    const [currentTable, setCurrentTable] = useState();
+
     const guests = [1, 2, 3, 4, 5, 6]
 
     return (
         <>
             {openNewOrderMenu ? <Modal>
-                <NewOrderModal setOpenNewOrderMenu={setOpenNewOrderMenu} setOpenPayOrder={setOpenPayOrder} openPayOrder={openPayOrder}/>
+                <NewOrderModal setOpenNewOrderMenu={setOpenNewOrderMenu} setOpenPayOrder={setOpenPayOrder} openPayOrder={openPayOrder} currentTable={currentTable}/>
             </Modal> : null}
             <div className="flex flex-col w-screen text-white justify-center bg-gray-600">
                 <div className='flex justify-end p-3'>
@@ -68,7 +70,7 @@ export const Tables = () => {
 
                             //Change this into table component
 
-                            <div key={table.table_id} className="relative flex flex-col items-center justify-center w-1/6 p-8">
+                            <div onClick={() => {setCurrentTable(table.table_id)}} key={table.table_id} className="relative flex flex-col items-center justify-center w-1/6 p-8">
                                 <button onClick={() => {
                                     setOpen(prevState => ({ [table.table_id]: !prevState[table.table_id] }));
                                 }} className=" h-12 bg-gray-700 text-white rounded-md w-[200px] h-[60px] hover:bg-gray-800">
@@ -83,7 +85,7 @@ export const Tables = () => {
                                         {guests.map(guest => {
                                             return (
                                                 <li className='w-[30%] h-full '>
-                                                    <button className='text-lg font-medium bg-gray-200 px-5 py-2 rounded-xl'>
+                                                    <button onClick={() => {setOpenNewOrderMenu(true);}} className='text-lg font-medium bg-gray-200 px-5 py-2 rounded-xl'>
                                                         {guest}
                                                     </button>
                                                 </li>

@@ -43,6 +43,13 @@ const OrderSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: 'User'
     },
+    openingTime: {
+        type: String,
+        required: true
+    },
+    tableNumber: {
+        type: Number
+    },
     order: [GuestSchema]
 });
 
