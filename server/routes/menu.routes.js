@@ -8,9 +8,13 @@ router.post('/menu', authMiddleware,
     async (req, res) => {
         try {
 
-            const { title, logo } = req.body;
+            const { category, logo } = req.body;
 
-            const menuCategory = new Menu({ user: req.user.id, title, logo })
+            const candidate = await Menu.findOne({user: req.user.id, category});
+            if (candidate) {
+                return res.status(400).json({message: 'Невірний запит', errors})
+            }
+            const menuCategory = new Menu({ user: req.user.id, logo, category })
 
             await menuCategory.save();
 

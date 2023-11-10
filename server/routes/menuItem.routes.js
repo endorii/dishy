@@ -1,5 +1,5 @@
 const Router = require('express');
-const MenuItem = require('../models/Menu');
+const MenuItem = require('../models/MenuItem');
 const authMiddleware = require('../middlewares/auth.middleware');
 
 const router = new Router();
@@ -8,9 +8,9 @@ router.post('/menuItem', authMiddleware,
     async (req, res) => {
         try {
 
-            const { name, src, value, time, amount, weight, category, ingredients } = req.body;
+            const { name, src, value, time, amount, weight, toCategory, ingredients } = req.body;
 
-            const menuItem = new MenuItem({ user: req.user.id, name, src, value, time, amount, weight, category, ingredients })
+            const menuItem = new MenuItem({ user: req.user.id, name, src, value, time, amount, weight, toCategory, ingredients })
 
             await menuItem.save();
 
