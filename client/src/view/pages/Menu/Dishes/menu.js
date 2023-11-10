@@ -1,14 +1,14 @@
 import axios from "axios";
 
-export const addMenu = async (logo, title, items) => {
-    try {
-        const response = await axios.post("http://localhost:5000/api/menu", {logo, title, items}, {headers: {Authorization: `Bearer ${localStorage.getItem('token')}`}});
+// export const addMenuCategory = async (logo, title, items) => {
+//     try {
+//         const response = await axios.post("http://localhost:5000/api/menu", {logo, title}, {headers: {Authorization: `Bearer ${localStorage.getItem('token')}`}});
 
-        console.log(response.data.message);
-    } catch (e) {
-        console.log(e.response.data.message);
-    }
-};
+//         console.log(response.data.message);
+//     } catch (e) {
+//         console.log(e.response.data.message);
+//     }
+// };
 
 // export const getMenu = async () => {
 //     try {

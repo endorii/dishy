@@ -4,18 +4,22 @@ const authMiddleware = require('../middlewares/auth.middleware');
 
 const router = new Router();
 
-router.post('/menu', async (req, res) => {
+router.post('/menu', authMiddleware,
+    async (req, res) => {
+        try {
 
-    const menu = new MenuModel(req.body);
+            const { title, logo } = req.body;
 
-    try {
-        await menu.save();
-        res.status(201).send(menu);
+            const menuCategory = new Menu({ user: req.user.id, title, logo })
 
-    } catch (e) {
-        console.log(e);
-        res.send({ message: "Помилка сервера" });
-    }
-});
+            await menuCategory.save();
+
+            return res.json({ message: 'Категорію меню було додано' });
+
+        } catch (e) {
+            console.log(e);
+            res.send({ message: "Помилка сервера" });
+        }
+    });
 
 module.exports = router;
