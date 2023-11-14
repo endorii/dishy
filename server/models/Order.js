@@ -47,6 +47,11 @@ const OrderSchema = new Schema({
         type: String,
         required: true
     },
+    isOpen: {
+        type: Boolean,
+        default: true,
+        required: true
+    },
     tableNumber: {
         type: Number
     },
