@@ -2,11 +2,16 @@ import { useState } from 'react'
 import Close from '../assets/icons/close.svg'
 import { PayNumberPad } from './PayNumberPad'
 import { getTotalOrderValue } from '../functions'
+import { closeOrder } from './ordersActions'
+import { useDispatch } from 'react-redux'
+import { fetchOrders } from '../store/slices/ordersSlice'
 
 export const PayOrder = ({ setOpenPayOrder, currentOrder }) => {
 
     const [cashInputValue, setCashInputValue] = useState(0)
     const [cardInputValue, setCardInputValue] = useState(0)
+
+    const dispatch = useDispatch();
 
     return (
         <div className='flex justify-center'>
@@ -64,11 +69,10 @@ export const PayOrder = ({ setOpenPayOrder, currentOrder }) => {
                         </div>
                         <div className='flex gap-[20%] justify-center items-center text-white'>
                             <button className='bg-red-600 px-6 py-4 text-xl font-medium hover:bg-red-700'>Закрити без оплати</button>
-                            <button className='bg-green-600 px-6 py-4 text-xl font-medium hover:bg-green-700'>Сплатити замовлення</button>
+                            <button onClick={() => {closeOrder(currentOrder._id); setOpenPayOrder(false); dispatch(fetchOrders())}} className='bg-green-600 px-6 py-4 text-xl font-medium hover:bg-green-700'>Сплатити замовлення</button>
                         </div>
                     </div>
                 </div>
-
             </div>
         </div>
     )

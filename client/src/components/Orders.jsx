@@ -15,9 +15,11 @@ export const Orders = () => {
     const dispatch = useDispatch()
     const { orders } = useSelector(state => state.orders)
 
+    const openOrders = orders.filter(order => order.isOpen);
+
     useEffect(() => {
         dispatch(fetchOrders());
-    }, [orders])
+    }, [])
 
     return (
         <>
@@ -34,7 +36,7 @@ export const Orders = () => {
                     }}>Нове замовлення</button>
                 </div>
                 <div className="relative shadow-md">
-                    {orders.length > 0 ?
+                    {openOrders.length > 0 ?
                         <table className="w-full text-sm text-left text-gray-500">
                             <thead className="text-xs text-gray-700 uppercase bg-gray-300">
                                 <tr>
@@ -52,7 +54,7 @@ export const Orders = () => {
                                     </th>
                                 </tr>
                             </thead>
-                            {orders.length > 0 ? orders.map((order, i) => {
+                            {openOrders.length > 0 ? openOrders.map((order, i) => {
                                 return (
                                     <tbody key={i}>
                                         <tr className="bg-white border-b border-gray-300 text-gray-700">

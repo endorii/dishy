@@ -122,7 +122,7 @@ export const NewOrderModal = ({ setOpenNewOrderMenu, setOpenPayOrder, openPayOrd
 
                                 <div className="flex flex-col gap-3 m-7 rounded-lg">
                                     <div className="flex justify-center bg-white px-7 py-5 rounded-lg">
-                                        <button onClick={() => { dispatch(fetchOrders()); configureOrder(guests, currentTable) }} className="w-full bg-sky-500 p-3 rounded-lg text-white font-medium">Відправити на кухню</button>
+                                        <button onClick={() => { configureOrder(guests, currentTable); dispatch(fetchOrders()); setOpenNewOrderMenu(false) }} className="w-full bg-sky-500 p-3 rounded-lg text-white font-medium">Відправити на кухню</button>
 
                                     </div>
                                     <div className='bg-white rounded-lg p-7 flex flex-col gap-3'>
@@ -130,10 +130,10 @@ export const NewOrderModal = ({ setOpenNewOrderMenu, setOpenPayOrder, openPayOrd
                                             <div className="font-thin text-2xl">Разом до сплати</div>
                                             <div className="text-xl font-medium">{getTotalInsideOrderValue(guests)} ₴</div>
                                         </div>
-                                        <div className=" flex justify-between">
+                                        {/* <div className=" flex justify-between">
                                             <button className="bg-white p-3 border-2 text-blue-500 border-blue-200 text-2xl rounded-lg text-blue-600 font-medium w-[47%]">. . .</button>
-                                            <button onClick={() => { setOpenPayOrder(true) }} className="w-[47%] bg-green-500 p-3 rounded-lg text-white font-medium">Оплатити замовлення</button>
-                                        </div>
+                                            <button onClick={() => { setOpenPayOrder(true); setcurrentOrder() }} className="w-[47%] bg-green-500 p-3 rounded-lg text-white font-medium">Оплатити замовлення</button>
+                                        </div> */}
                                     </div>
                                 </div>
                             </div>
