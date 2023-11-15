@@ -86,26 +86,26 @@ export const NewOrderModal = ({ setOpenNewOrderMenu, setOpenPayOrder, openPayOrd
                                     <div className="p-5 flex flex-col gap-y-3 items-start">
                                         {guests.map((guest, i) => {
                                             return (
-                                                <div key={i} className='bg-white w-full rounded-lg p-2' onClick={() => setCurrentGuest(guest)}>
-                                                    <div className='flex justify-between px-4'>
-                                                        <div className="text-lg font-medium">Гість {guest.id}</div>
-                                                        <div className="text-lg font-medium" onClick={() => { removeGuest(guest.id) }}>Видалити</div>
+                                                <div key={i} className='bg-white w-full rounded-lg px-8 py-3 cursor-pointer' onClick={() => setCurrentGuest(guest)}>
+                                                    <div className='flex justify-between px-4 py-5 items-center'>
+                                                        <div className="text-lg font-bold">Гість {guest.id}</div>
+                                                        <button className="text-lg font-bold px-4 py-2 bg-red-500 text-white rounded-xl" onClick={() => { removeGuest(guest.id) }}>Видалити</button>
                                                     </div>
                                                     <div className='w-full'>
-                                                        <tbody className='bg-gray-100 p-3 m-2 rounded-xl w-full'>
+                                                        <tbody className='bg-gray-100 p-3 m-2 rounded-xl w-full '>
                                                             {guest.guest.map((dish, i) => {
                                                                 return (
-                                                                    <tr key={i} className="bg-white border-b border-gray-300 text-gray-700">
-                                                                        <td className="px-3 py-3">
+                                                                    <tr key={i} className="bg-white border-b border-gray-300 text-gray-700 text-xl">
+                                                                        <td className="w-[10%] px-3 py-3">
                                                                             {dish.name}
                                                                         </td>
-                                                                        <td className="px-20 py-3 text-center">
+                                                                        <td className="px-10 py-3 text-center">
                                                                             1
                                                                         </td>
                                                                         <td className="px-3 py-3 text-center">
                                                                             {dish.value}
                                                                         </td>
-                                                                        <td className="px-14 py-3 text-center">
+                                                                        <td className="px-3 py-3 text-center">
                                                                             {dish.value}
                                                                         </td>
                                                                     </tr>
@@ -142,26 +142,28 @@ export const NewOrderModal = ({ setOpenNewOrderMenu, setOpenPayOrder, openPayOrd
                                     <h2 className="text-lg font-medium mb-5">Доступні товари для замовлення</h2>
                                     <button onClick={() => {
                                         setCurrentCategoryFood('')
-                                    }} className="text-lg font-medium mb-10 bg-blue-100 px-4 py-1 rounded-xl hover:bg-blue-200">Назад</button>
+                                    }} className="text-lg font-medium mb-10 bg-blue-100 px-5 py-2 rounded-xl hover:bg-blue-200">Назад</button>
                                 </div>
                                 <div className="">
-                                    <ul className="flex flex-wrap gap-10">
+                                    <ul className="flex flex-wrap gap-10 justify-center">
                                         {currentCategoryFood ? currentCategoryFood.items.map((item, i) => (
                                             <li key={i} className="bg-gray-100 rounded-lg shadow-md cursor-pointer" onClick={() => { selectFoodForGuest(currentGuest, item) }}>
-                                                <img className="w-[260px] h-[200px] object-cover object-[50% 100%] rounded-t-lg" src={item.src} alt={item.name} />
-                                                <div className="font-thin text-lg px-4 py-2">{item.name}</div>
+                                                <img className="w-[350px] h-[200px] object-cover object-[50% 100%] rounded-t-lg" src={item.src} alt={item.name} />
+                                                <div className="font-thin px-4 py-2 text-xl">{item.name}</div>
                                                 <div className="flex justify-between">
-                                                    <div className=" flex items-center font-thin px-4 py-2"> <img className="w-4 mr-1" src={Time} alt="" />{item.time} хвилин</div>
-                                                    <div className="font-thin px-4 py-2">Ціна {item.value} ₴</div>
+                                                    <div className="flex items-center font-thin px-4 py-2 text-lg"> <img className="w-4 mr-1" src={Time} alt="" />{item.time} хвилин</div>
+                                                    
+                                                    <div className="font-medium px-4 py-2 text-xl">{item.value} ₴</div>
                                                 </div>
+                                                <div className="flex items-center text-gray-400 font-thin px-4 py-2 text-s"> залишилося <span className='text-red-800 mx-2'> { item.amount } </span> шт.</div>
                                             </li>
                                         )) : MenuItems.map((item, i) => (
                                             <li key={i} onClick={() => {
                                                 setCurrentCategoryFood(item);
 
-                                            }} className="bg-gray-100 rounded-lg shadow-md cursor-pointer">
-                                                <img className="w-[260px] h-[200px] object-cover object-[50% 100%] rounded-t-lg" src={item.logo} alt={item.alt} />
-                                                <div className="font-thin text-lg px-4 py-2">{item.title}</div>
+                                            }} className="bg-gray-100 rounded-lg shadow-md cursor-pointer ">
+                                                <img className="w-[350px] h-[200px] object-cover object-[50% 100%] rounded-t-lg" src={item.logo} alt={item.alt} />
+                                                <div className="font-thin text-xl px-4 py-2">{item.title}</div>
                                             </li>
                                         ))}
                                     </ul>

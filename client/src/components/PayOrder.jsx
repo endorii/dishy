@@ -69,7 +69,7 @@ export const PayOrder = ({ setOpenPayOrder, currentOrder }) => {
                         </div>
                         <div className='flex gap-[20%] justify-center items-center text-white'>
                             <button className='bg-red-600 px-6 py-4 text-xl font-medium hover:bg-red-700'>Закрити без оплати</button>
-                            <button onClick={() => {closeOrder(currentOrder._id); setOpenPayOrder(false); dispatch(fetchOrders())}} className='bg-green-600 px-6 py-4 text-xl font-medium hover:bg-green-700'>Сплатити замовлення</button>
+                            <button onClick={async () => {await closeOrder(currentOrder._id); setOpenPayOrder(false); dispatch(fetchOrders())}} className='bg-green-600 px-6 py-4 text-xl font-medium hover:bg-green-700'>Сплатити замовлення</button>
                         </div>
                     </div>
                 </div>

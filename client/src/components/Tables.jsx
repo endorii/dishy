@@ -1,10 +1,14 @@
-import { useState } from 'react';
-import People from '../assets/icons/people.svg';
-import CloseMini from '../assets/icons/close_mini.svg';
+import { useEffect, useState } from 'react';
 import { NewOrderModal } from './NewOrderModal';
 import { Modal } from './Modal';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchOrders } from '../store/slices/ordersSlice';
 
 export const Tables = () => {
+    
+    const dispatch = useDispatch();
+
+    const { orders } = useSelector(state => state.orders);
 
     const tables = [
         { table_id: 1, busy: false, booked: false },
@@ -45,56 +49,41 @@ export const Tables = () => {
         { table_id: 36, busy: false, booked: false },
     ];
 
-    const [open, setOpen] = useState({});
     const [openNewOrderMenu, setOpenNewOrderMenu] = useState(false);
     const [openPayOrder, setOpenPayOrder] = useState(false);
 
     const [currentTable, setCurrentTable] = useState();
 
-    const guests = [1, 2, 3, 4, 5, 6]
+    useEffect(() => {
+        dispatch(fetchOrders());
+    }, [])
 
     return (
         <>
             {openNewOrderMenu ? <Modal>
-                <NewOrderModal setOpenNewOrderMenu={setOpenNewOrderMenu} setOpenPayOrder={setOpenPayOrder} openPayOrder={openPayOrder} currentTable={currentTable}/>
+                <NewOrderModal setOpenNewOrderMenu={setOpenNewOrderMenu} setOpenPayOrder={setOpenPayOrder} openPayOrder={openPayOrder} currentTable={currentTable} />
             </Modal> : null}
-            <div className="flex flex-col w-screen text-white justify-center bg-gray-600">
+            <div className="flex flex-col w-full text-white justify-center bg-gray-600">
                 <div className='flex justify-end p-3'>
-                    <button className='px-6 py-3 bg-green-600 rounded-lg hover:bg-green-700' onClick={() => {
+                    <button className='px-6 py-3 bg-green-600 rounded-lg hover:bg-green-700 text-lg' onClick={() => {
                         setOpenNewOrderMenu(true)
                     }}>Нове замовлення</button>
                 </div>
                 <div className="h-auto bg-gray-200 text-black">
-                    <div className="flex flex-wrap p-4 ">
-                        {tables.map((table) => (
-
-                            //Change this into table component
-
-                            <div onClick={() => {setCurrentTable(table.table_id)}} key={table.table_id} className="relative flex flex-col items-center justify-center w-1/6 p-8">
-                                <button onClick={() => {
-                                    setOpen(prevState => ({ [table.table_id]: !prevState[table.table_id] }));
-                                }} className=" h-12 bg-gray-700 text-white rounded-md w-[200px] h-[60px] hover:bg-gray-800">
-                                    Столик {table.table_id}
-                                </button>
-                                {open[table.table_id] ? <div className='absolute bottom-0 bg-gray-800 p-5 rounded-xl'>
-                                    <img className='absolute top-3 right-3 w-6' src={CloseMini} alt="" onClick={() => {
-                                        setOpen({})
-                                    }} />
-                                    <p className='text-center text-lg font-medium text-white'>Вкажіть кількість гостей</p>
-                                    <ul className='flex justify-between gap-2 flex-wrap text-center p-3'>
-                                        {guests.map(guest => {
-                                            return (
-                                                <li className='w-[30%] h-full '>
-                                                    <button onClick={() => {setOpenNewOrderMenu(true);}} className='text-lg font-medium bg-gray-200 px-5 py-2 rounded-xl'>
-                                                        {guest}
-                                                    </button>
-                                                </li>
-                                            )
-                                        })}
-                                    </ul>
-                                </div> : null}
-                            </div>
-                        ))}
+                    <div className="flex flex-wrap p-4 text-xl justify-between overflow-x-auto">
+                        {tables.map((table) => {
+                            let isTableBusy = orders.some(order => order.tableNumber === table.table_id && order.isOpen !== false);
+                            return (
+                                <div onClick={() => { setCurrentTable(table.table_id) }} key={table.table_id} className="relative flex flex-col items-center w-1/6 p-4">
+                                    <button
+                                        onClick={() => { setOpenNewOrderMenu(true); }} disabled={isTableBusy}
+                                        className={ isTableBusy ? 'bg-red-800 text-white rounded-md w-[160px] h-[160px] cursor-not-allowed' : 'bg-green-600 text-white rounded-md w-[160px] h-[160px] hover:bg-gray-800' }
+                                    >
+                                        Столик {table.table_id}
+                                    </button>
+                                </div>
+                            )
+                        })}
                     </div>
                 </div>
             </div>
