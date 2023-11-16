@@ -1,14 +1,26 @@
 import { MenuItems } from "../../../../functions";
 import Search from '../../../../assets/icons/search.svg'
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { DishListItem } from "./DishListItem";
 import { Modal } from '../../../../components/Modal'
 import { AddDishModal } from "../../../../components/AddDishModal";
+import { fetchMenu } from "../../../../store/slices/menuSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchMenuItems } from "../../../../store/slices/menuItemsSlice";
 
 const Dishes = () => {
 
     const [searchInput, setSearchInput] = useState('');
-    const [openAddDishModal, setOpenAddDishModal] = useState(false)
+    const [openAddDishModal, setOpenAddDishModal] = useState(false);
+
+    const dispatch = useDispatch();
+
+    const { menuItems } = useSelector(state => state.menuItems);
+
+    useEffect(() => {
+        dispatch(fetchMenuItems());
+        dispatch(fetchMenu());
+    }, [])
 
     return (
         <>
@@ -61,19 +73,17 @@ const Dishes = () => {
                         </thead>
                         <tbody >
                             {
-                                MenuItems.length > 0 ? MenuItems.map((item) =>
-                                    item.items.map((dish, i) => {
-                                        return dish.name.toLowerCase().includes(searchInput.toLowerCase()) ? (
-
-                                            <DishListItem dish={dish} key={i} />
-
-                                        ) : null;
-                                    })
-                                ) : null
+                                menuItems.length > 0 ?
+                                    menuItems.map((item, i) => (
+                                        item.name.toLowerCase().includes(searchInput.toLowerCase()) ? <DishListItem item={item} key={i} /> : null
+                                    ))
+                                    :
+                                    <h2 className='text-4xl p-6 text-center font-light bg-white'>Страв не знайдено</h2>
                             }
+
                         </tbody>
                     </table>
-                    {MenuItems.length > 0 ? null : <h2 className='text-4xl p-6 text-center font-light bg-white'>Страв не знайдено</h2>}
+
                 </div>
 
             </div>

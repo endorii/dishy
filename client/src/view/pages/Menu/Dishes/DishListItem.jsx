@@ -1,6 +1,6 @@
 import { useState } from "react"
 
-export const DishListItem = ({ dish }) => {
+export const DishListItem = ({ item }) => {
 
     const [openInfo, setOpenInfo] = useState(false);
 
@@ -10,16 +10,16 @@ export const DishListItem = ({ dish }) => {
                 setOpenInfo(!openInfo)
             }}>
                 <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
-                    {dish.name}
+                    {item.name}
                 </th>
                 <td className="px-6 py-4">
-                    {dish.value}
+                    {item.value}
                 </td>
                 <td className="px-6 py-4">
-                    {dish.time}
+                    {item.time}
                 </td>
                 <td className="px-6 py-4">
-                    {dish.amount}
+                    {item.amount}
                 </td>
                 <td className="px-2 py-1 text-right">
                     <a
@@ -41,7 +41,7 @@ export const DishListItem = ({ dish }) => {
             {openInfo ?
                 <div className="flex flex-col justify-center items-center w-full h-auto bg-white m-5 p-[5%]">
                     <div className="font-medium text-lg mb-2">Інгредієнти для приготування:</div>
-                    <div className="flex flex-col justify-start w-full p-2 text-lg gap-1">{dish.ingredients ? dish.ingredients.map((ingredient, i) => (
+                    <div className="flex flex-col justify-start w-full p-2 text-lg gap-1">{item.ingredients ? item.ingredients.map((ingredient, i) => (
                         <div key={i}>{ingredient}</div>
                     )) : <div className="flex flex-col justify-center items-center w-full h-auto bg-white m-5 p-[5%]">
                         <div className="font-medium text-2xl mb-2">Вибачте, інгредієнти не доступні</div>
