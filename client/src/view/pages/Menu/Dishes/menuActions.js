@@ -14,7 +14,7 @@ export const getMenuCategories = async () => {
     try {
         const response = await axios.get("http://localhost:5000/api/menu", {headers: {Authorization: `Bearer ${localStorage.getItem('token')}`}});
 
-        return response.data.positions;
+        return response.data;
         
     } catch (e) {
         

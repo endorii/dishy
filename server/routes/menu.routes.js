@@ -10,10 +10,11 @@ router.post('/menu', authMiddleware,
 
             const { category, logo } = req.body;
 
-            const candidate = await Menu.findOne({user: req.user.id, category});
+            const candidate = await Menu.findOne({ user: req.user.id, category });
             if (candidate) {
-                return res.status(400).json({message: 'Невірний запит', errors})
+                return res.status(400).json({ message: 'Невірний запит', errors })
             }
+            
             const menuCategory = new Menu({ user: req.user.id, logo, category })
 
             await menuCategory.save();
@@ -25,5 +26,17 @@ router.post('/menu', authMiddleware,
             res.send({ message: "Помилка сервера" });
         }
     });
+
+router.get('/menu', authMiddleware,
+    async (req, res) => {
+        try {
+            const menu = await Menu.find({ user: req.user.id })
+            return res.json({ menu })
+
+        } catch (e) {
+            console.log(e);
+            res.send({ message: "Помилка сервера" });
+        }
+    })
 
 module.exports = router;
