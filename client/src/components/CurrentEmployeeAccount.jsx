@@ -34,53 +34,63 @@ export const CurrentEmployeeAccount = () => {
 
     return (
         <>
-            <div className="py-10 h-[855px]">
-                <div className="flex w-auto text-center justify-center">
-                    <div className="w-[43%] text-4xl font-thin mt-[6%]">
-                        Час вашого сеансу:
+            <div className="py-10 h-full">
+                <div className="flex text-center justify-center">
+                    <div>
+                        <div className="sticky top-[25%] left-[17%] flex flex-col fustify-center items-center w-[43%] text-4xl font-thin mt-[6%]">
+                            Час вашого сеансу:
 
-                        <div className="text-9xl text-gray-700 font-bold p-10">
-                            {currentTime}
-                        </div>
-                        <div>
-                            <button className="px-6 py-3 bg-red-500 text-3xl text-white rounded-lg" onClick={() => {navigate('/employees'); dispatch(changeIsCurrentEmployee()); dispatch(setCurrentEmployee({})); }}>Завершити робочу зміну</button>
-                        </div>
+                            <div className="text-9xl text-gray-700 font-bold p-10">
+                                {currentTime}
+                            </div>
+                            <div>
+                                <button className="px-6 py-3 bg-red-500 text-3xl text-white rounded-lg" onClick={() => { navigate('/employees'); dispatch(changeIsCurrentEmployee()); dispatch(setCurrentEmployee({})); }}>Завершити робочу зміну</button>
+                            </div>
 
+                        </div>
                     </div>
-                    <div className="w-[43%] bg-white rounded-xl shadow-md">
-                        <p className="text-2xl p-5 font-medium text-gray-700">Загальна інформація:</p>
-                        <ul className="flex flex-col gap-10 p-10 text-left text-xl font-thin">
-                            <li>
-                                <p>
-                                    Імя: {currentEmployee.name}
-                                </p>
-                            </li>
-                            <li>
-                                <p>
-                                    Посада: {currentEmployee.position}
-                                </p>
-                            </li>
-                            <li>
-                                <p>
-                                    Початок робочої зміни о: {startTime.toLocaleTimeString()}
-                                </p>
-                            </li>
-                            <li>
-                                <p>
-                                    Робочі години за весь час: {currentEmployee.totalWorkingTime}
-                                </p>
-                            </li>
-                            <li>
-                                <p>
-                                    Кількість обслужених замовлень\столиків за сьогодні: 10
-                                </p>
-                            </li>
-                            <li>
-                                <p>
-                                    Кількість обслужених замовлень\столиків: 100
-                                </p>
-                            </li>
-                        </ul>
+                    <div className="flex gap-10 w-[43%] flex-col">
+                        <div className=" bg-white rounded-xl shadow-md">
+                            <p className="text-2xl p-5 font-medium text-gray-700">Загальна інформація:</p>
+                            <ul className="flex flex-col gap-10 p-10 text-left text-xl font-thin">
+                                <li>
+                                    <p>
+                                        Імя: {currentEmployee.name}
+                                    </p>
+                                </li>
+                                <li>
+                                    <p>
+                                        Посада: {currentEmployee.position}
+                                    </p>
+                                </li>
+
+                                <li>
+                                    <p>
+                                        Робочі години за весь час: {currentEmployee.totalWorkingTime}
+                                    </p>
+                                </li>
+                                <li>
+                                    <p>
+                                        Кількість обслужених замовлень\столиків: 100
+                                    </p>
+                                </li>
+                            </ul>
+                        </div>
+                        <div className=" bg-white rounded-xl shadow-md">
+                            <p className="text-2xl p-5 font-medium text-gray-700">Інформація за зміну:</p>
+                            <ul className="flex flex-col gap-10 p-10 text-left text-xl font-thin">
+                                <li>
+                                    <p>
+                                        Початок робочої зміни о: {startTime.toLocaleTimeString()}
+                                    </p>
+                                </li>  
+                                <li>
+                                    <p>
+                                        Кількість обслужених замовлень\столиків за зміну: 100
+                                    </p>
+                                </li>          
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </div>
