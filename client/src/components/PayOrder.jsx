@@ -8,8 +8,9 @@ import { fetchOrders } from '../store/slices/ordersSlice'
 
 export const PayOrder = ({ setOpenPayOrder, currentOrder }) => {
 
-    const [cashInputValue, setCashInputValue] = useState(0)
-    const [cardInputValue, setCardInputValue] = useState(0)
+    const [cashInputValue, setCashInputValue] = useState(0);
+    const [cardInputValue, setCardInputValue] = useState(0);
+    const [selectedPaymentMethod, setSelectedPaymentMethod] = useState('cash');
 
     const dispatch = useDispatch();
 
@@ -24,7 +25,7 @@ export const PayOrder = ({ setOpenPayOrder, currentOrder }) => {
                     <div className="bg-gray-200 w-[30%] h-full flex items-center">
                         <PayNumberPad />
                     </div>
-                    <div className="flex-1 flex flex-col bg-white px-32 py-10 overflow-x-auto justify-between">
+                    <div className="flex-1 flex flex-col bg-white px-32 py-10 justify-between">
                         <div>
                             <div className='font-medium text-3xl mb-10'>
                                 <p className='font-thin text-base text-gray-400 mb-5'>Замовлення: {currentOrder._id}</p>
@@ -33,7 +34,7 @@ export const PayOrder = ({ setOpenPayOrder, currentOrder }) => {
 
                             <div>
                                 <ul className='flex flex-col font-medium text-lg gap-1 '>Виберіть спосіб оплати:
-                                    <li className='text-lg border-2 w-full px-4 py-2 rounded-lg hover:border-blue-500'>
+                                    <li onClick={() => {setSelectedPaymentMethod('cash')}} className={`text-lg border-2 w-full px-4 py-2 rounded-lg hover:border-blue-500 ${selectedPaymentMethod === 'cash' ? 'border-blue-500' : null}`}>
                                         <div className='flex w-full justify-between items-center'>
                                             <p>💵 Готівкою</p>
                                             <div className='flex'>
@@ -42,7 +43,7 @@ export const PayOrder = ({ setOpenPayOrder, currentOrder }) => {
                                             </div>
                                         </div>
                                     </li>
-                                    <li className='text-lg border-2 w-full px-4 py-2 rounded-lg hover:border-blue-500'>
+                                    <li onClick={() => {setSelectedPaymentMethod('card')}} className={`text-lg border-2 w-full px-4 py-2 rounded-lg hover:border-blue-500 ${selectedPaymentMethod === 'card' ? 'border-blue-500' : null}`}>
                                         <div className='flex w-full justify-between items-center'>
                                             <p>💳 Карткою</p>
                                             <div className='flex'>

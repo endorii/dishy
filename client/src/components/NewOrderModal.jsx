@@ -23,7 +23,7 @@ import { useDispatch } from 'react-redux';
 export const NewOrderModal = ({ setOpenNewOrderMenu, setOpenPayOrder, openPayOrder, currentTable }) => {
     const [guests, setGuests] = useState([]);
     const [currentCategoryFood, setCurrentCategoryFood] = useState('');
-    const [currentGuest, setCurrentGuest] = useState({})
+    const [currentGuest, setCurrentGuest] = useState({});
 
     const dispatch = useDispatch();
 
@@ -86,7 +86,7 @@ export const NewOrderModal = ({ setOpenNewOrderMenu, setOpenPayOrder, openPayOrd
                                     <div className="p-5 flex flex-col gap-y-3 items-start">
                                         {guests.map((guest, i) => {
                                             return (
-                                                <div key={i} className='bg-white w-full rounded-lg px-8 py-3 cursor-pointer' onClick={() => setCurrentGuest(guest)}>
+                                                <div key={i} className={`bg-white w-full rounded-lg px-8 py-3 cursor-pointer ${currentGuest === guest ? 'border-4 border-blue-400' : null}`} onClick={() => setCurrentGuest(guest)}>
                                                     <div className='flex justify-between px-4 py-5 items-center'>
                                                         <div className="text-lg font-bold">Гість {guest.id}</div>
                                                         <button className="text-lg font-bold px-4 py-2 bg-red-500 text-white rounded-xl" onClick={() => { removeGuest(guest.id) }}>Видалити</button>
