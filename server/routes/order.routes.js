@@ -49,28 +49,4 @@ router.put('/orders/:_id', authMiddleware,
             res.send({ message: "Помилка сервера" });
         }
     });
-
-// router.put('/employees/:_id', authMiddleware,
-//     async (req, res) => {
-//         try {
-//             const { _id } = req.params;
-//             const { name, login, pin, position } = req.body;
-
-//             const updatedEmployee = await Employee.findOneAndUpdate(
-//                 { _id },
-//                 { user: req.user.id, name, login, pin, position },
-//                 { new: true }
-//             );
-
-//             if (!updatedEmployee) {
-//                 return res.status(404).json({ message: `Employee with id ${_id} not found` });
-//             }
-
-//             return res.json({ message: "Employee was updated" });
-//         } catch (e) {
-//             console.log(e);
-//             res.send({ message: "Server error" });
-//         }
-//     });
-
 module.exports = router;

@@ -3,6 +3,8 @@ import { NewOrderModal } from './NewOrderModal';
 import { Modal } from './Modal';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchOrders } from '../store/slices/ordersSlice';
+import { fetchMenuItems } from '../store/slices/menuItemsSlice';
+import { fetchMenu } from '../store/slices/menuSlice';
 
 export const Tables = () => {
     
@@ -56,6 +58,8 @@ export const Tables = () => {
 
     useEffect(() => {
         dispatch(fetchOrders());
+        dispatch(fetchMenu());
+        dispatch(fetchMenuItems());
     }, [])
 
     return (

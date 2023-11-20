@@ -15,7 +15,7 @@ import { NavLink, Link, Outlet } from 'react-router-dom';
 const NestedItem = ({ item }) => (
     <div className="px-1 mt-3 text-blue-600 text-lg font-medium text-gray-800">
         <NavLink className={({ isActive, isPending }) =>
-            isPending ? "pending" : isActive ? "text-[#4e9117] border-r-4 pr-10 border-[#4e9117]" : "font-light"
+            isPending ? "pending" : isActive ? "text-blue-600 border-r-4 pr-10 border-blue-600" : "font-light"
         } to={item.path}>{item.title}</NavLink>
     </div>
 );
@@ -123,8 +123,8 @@ const Account = () => {
                         <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5"></path>
                     </svg>
                 </div>
-                <div className='flex justify-center '>
-                    <Link to='employee/auth/login' className='font-bold text-center'><img className='w-10 ' src={Waiter} alt="" />GO</Link>
+                <div className='flex justify-center w-full '>
+                    <Link to='employee/auth/login' className='font-medium text-center bg-blue-500 px-5 py-3 rounded-lg text-white shadow-md'><img className='w-10 ' src={Waiter} alt="" />GO</Link>
 
                 </div>
                 <hr className='border-t-1 border-slate-300 mt-3' />
