@@ -45,14 +45,15 @@ const Dishes = () => {
                         setSearchInput(e.target.value);
                     }} />
                 </div>
-
                 <div className="relative shadow-md sm:rounded-lg overflow-y-auto">
-
                     <table className="w-full text-sm text-left text-gray-500 ">
                         <thead className="text-xs text-gray-700 uppercase bg-gray-300">
                             <tr>
                                 <th scope="col" className="px-6 py-3">
                                     Назва
+                                </th>
+                                <th scope="col" className="px-6 py-3">
+                                    Категорія
                                 </th>
                                 <th scope="col" className="px-6 py-3">
                                     Ціна
@@ -64,10 +65,13 @@ const Dishes = () => {
                                     Кількість
                                 </th>
                                 <th scope="col" className="px-1 py-1">
-                                    <span className="sr-only">Змінити</span>
+                                    
                                 </th>
                                 <th scope="col" className="px-1 py-1">
-                                    <span className="sr-only">Опції</span>
+                                    
+                                </th>
+                                <th scope="col" className="px-1 py-1">
+                                    
                                 </th>
                             </tr>
                         </thead>
@@ -80,12 +84,9 @@ const Dishes = () => {
                                     :
                                     <h2 className='text-4xl p-6 text-center font-light bg-white'>Страв не знайдено</h2>
                             }
-
                         </tbody>
                     </table>
-
                 </div>
-
             </div>
         </>
     )

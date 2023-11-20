@@ -11,19 +11,23 @@
 // import Mlintsi from "../assets/img/mlintsi.jpg";
 // import Egg from "../assets/img/egg.jpg";
 // import Vareniki from "../assets/img/vareniki.jpg";
+import Test from '../../src/assets/img/test.jpg'
 import Close from '../assets/icons/close.svg'
 import Time from '../assets/icons/time.svg'
 import { useState } from "react";
-import { MenuItems, configureOrder, getTotalInsideOrderValue } from "../functions";
+import { configureOrder, getTotalInsideOrderValue } from "../functions";
 import { Modal } from './Modal';
 import { PayOrder } from './PayOrder';
 import { fetchOrders } from '../store/slices/ordersSlice';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 export const NewOrderModal = ({ setOpenNewOrderMenu, setOpenPayOrder, openPayOrder, currentTable }) => {
     const [guests, setGuests] = useState([]);
     const [currentCategoryFood, setCurrentCategoryFood] = useState('');
     const [currentGuest, setCurrentGuest] = useState({});
+
+    const { menu } = useSelector(state => state.menu.menu);
+    const { menuItems } = useSelector(state => state.menuItems);
 
     const dispatch = useDispatch();
 
@@ -46,6 +50,10 @@ export const NewOrderModal = ({ setOpenNewOrderMenu, setOpenPayOrder, openPayOrd
         const updatedGuests = guests.filter((guest) => guest.id !== guestId);
         setGuests(updatedGuests);
     };
+
+    const filteredDishes = (category, menuItems) => {
+        return menuItems.filter((dish) => dish.toCategory === category)
+    }
 
     return (
         <>
@@ -76,13 +84,9 @@ export const NewOrderModal = ({ setOpenNewOrderMenu, setOpenPayOrder, openPayOrd
                                                 <th scope="col" className="px-1 py-3">
                                                     Загалом
                                                 </th>
-                                                <th scope="col" className="px-1 py-3">
-
-                                                </th>
                                             </tr>
                                         </thead>
                                     </table>
-
                                     <div className="p-5 flex flex-col gap-y-3 items-start">
                                         {guests.map((guest, i) => {
                                             return (
@@ -119,21 +123,15 @@ export const NewOrderModal = ({ setOpenNewOrderMenu, setOpenPayOrder, openPayOrd
                                         <button onClick={() => addGuest()} className="text-lg font-medium" >+ Додати гостя</button>
                                     </div>
                                 </div>
-
                                 <div className="flex flex-col gap-3 m-7 rounded-lg">
                                     <div className="flex justify-center bg-white px-7 py-5 rounded-lg">
-                                        <button onClick={() => { configureOrder(guests, currentTable); dispatch(fetchOrders()); setOpenNewOrderMenu(false) }} className="w-full bg-sky-500 p-3 rounded-lg text-white font-medium">Відправити на кухню</button>
-
+                                        <button onClick={async () => { configureOrder(guests, currentTable); dispatch(fetchOrders()); setOpenNewOrderMenu(false) }} className="w-full bg-sky-500 p-3 rounded-lg text-white font-medium">Відправити на кухню</button>
                                     </div>
                                     <div className='bg-white rounded-lg p-7 flex flex-col gap-3'>
                                         <div className="flex justify-between items-center">
                                             <div className="font-thin text-2xl">Разом до сплати</div>
                                             <div className="text-xl font-medium">{getTotalInsideOrderValue(guests)} ₴</div>
                                         </div>
-                                        {/* <div className=" flex justify-between">
-                                            <button className="bg-white p-3 border-2 text-blue-500 border-blue-200 text-2xl rounded-lg text-blue-600 font-medium w-[47%]">. . .</button>
-                                            <button onClick={() => { setOpenPayOrder(true); setcurrentOrder() }} className="w-[47%] bg-green-500 p-3 rounded-lg text-white font-medium">Оплатити замовлення</button>
-                                        </div> */}
                                     </div>
                                 </div>
                             </div>
@@ -146,26 +144,27 @@ export const NewOrderModal = ({ setOpenNewOrderMenu, setOpenPayOrder, openPayOrd
                                 </div>
                                 <div className="">
                                     <ul className="flex flex-wrap gap-10 justify-center">
-                                        {currentCategoryFood ? currentCategoryFood.items.map((item, i) => (
-                                            <li key={i} className="bg-gray-100 rounded-lg shadow-md cursor-pointer" onClick={() => { selectFoodForGuest(currentGuest, item) }}>
-                                                <img className="w-[350px] h-[200px] object-cover object-[50% 100%] rounded-t-lg" src={item.src} alt={item.name} />
-                                                <div className="font-thin px-4 py-2 text-xl">{item.name}</div>
-                                                <div className="flex justify-between">
-                                                    <div className="flex items-center font-thin px-4 py-2 text-lg"> <img className="w-4 mr-1" src={Time} alt="" />{item.time} хвилин</div>
-                                                    
-                                                    <div className="font-medium px-4 py-2 text-xl">{item.value} ₴</div>
-                                                </div>
-                                                <div className="flex items-center text-gray-400 font-thin px-4 py-2 text-s"> залишилося <span className='text-red-800 mx-2'> { item.amount } </span> шт.</div>
-                                            </li>
-                                        )) : MenuItems.map((item, i) => (
-                                            <li key={i} onClick={() => {
-                                                setCurrentCategoryFood(item);
+                                        {currentCategoryFood ? (
+                                            filteredDishes(currentCategoryFood, menuItems).length > 0 ? (
+                                                filteredDishes(currentCategoryFood, menuItems).map((dish, i) => (
+                                                    <li key={i} className="bg-gray-100 rounded-lg shadow-md cursor-pointer" onClick={() => { selectFoodForGuest(currentGuest, dish) }}>
+                                                        <img className="w-[350px] h-[200px] object-cover object-[50% 100%] rounded-t-lg" src={Test} alt={dish.name} />
+                                                        <div className="font-thin px-4 py-2 text-xl">{dish.name}</div>
+                                                        <div className="flex justify-between">
+                                                            <div className="flex items-center font-thin px-4 py-2 text-lg"> <img className="w-4 mr-1" src={Time} alt="" />{dish.time} хвилин</div>
 
-                                            }} className="bg-gray-100 rounded-lg shadow-md cursor-pointer ">
-                                                <img className="w-[350px] h-[200px] object-cover object-[50% 100%] rounded-t-lg" src={item.logo} alt={item.alt} />
-                                                <div className="font-thin text-xl px-4 py-2">{item.title}</div>
+                                                            <div className="font-medium px-4 py-2 text-xl">{dish.value} ₴</div>
+                                                        </div>
+                                                        <div className="flex items-center text-gray-400 font-thin px-4 py-2 text-s"> залишилося <span className='text-red-800 mx-2'> {dish.amount} </span> шт.</div>
+                                                    </li>
+                                                ))
+                                            ) : (<div className="text-center text-5xl font-thin">Товарів не знайдено</div>)
+                                        ) : (menu.map((category, i) => (
+                                            <li key={i} onClick={() => {setCurrentCategoryFood(category.category);}} className="bg-gray-100 rounded-lg shadow-md cursor-pointer ">
+                                                <img className="w-[350px] h-[200px] object-cover object-[50% 100%] rounded-t-lg" src={Test} alt={category.alt} />
+                                                <div className="font-thin text-xl px-4 py-2">{category.category}</div>
                                             </li>
-                                        ))}
+                                        )))}
                                     </ul>
                                 </div>
                             </div>

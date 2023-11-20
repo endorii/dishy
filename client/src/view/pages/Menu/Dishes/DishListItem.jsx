@@ -1,17 +1,31 @@
 import { useState } from "react"
+import { deleteMenuItem } from "./menuItemActions";
+import { fetchMenuItems } from "../../../../store/slices/menuItemsSlice";
+import { useDispatch } from "react-redux";
+import { Modal } from "../../../../components/Modal";
+import { EditMenuItemModal } from "./EditMenuItemModal";
 
 export const DishListItem = ({ item }) => {
 
     const [openInfo, setOpenInfo] = useState(false);
 
+    const dispatch = useDispatch();
+    const [editModal, setEditModal] = useState(false);
+
     return (
         <>
-            <tr className="bg-white border-b border-gray-300 text-gray-700 cursor-pointer" onClick={() => {
-                setOpenInfo(!openInfo)
-            }}>
+            {editModal ? <Modal>
+                <EditMenuItemModal setEditModal={setEditModal} currentDish={item}/>
+            </Modal> : null}
+
+
+            <tr className="bg-white border-b border-gray-300 text-gray-700 cursor-pointer" >
                 <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
                     {item.name}
                 </th>
+                <td className="px-6 py-4">
+                    {item.toCategory}
+                </td>
                 <td className="px-6 py-4">
                     {item.value}
                 </td>
@@ -22,19 +36,16 @@ export const DishListItem = ({ item }) => {
                     {item.amount}
                 </td>
                 <td className="px-2 py-1 text-right">
-                    <a
-                        // onClick={async () => {
-                        //     setCurrentEmployee(employee)
-                        //     setEditEmployeeModalOpen(true);
-                        //     dispatch(fetchEmployees())
-                        // }}
-
-                        href="#" className="font-medium text-blue-600 hover:underline">Редагувати</a>
+                    <button onClick={() => {setOpenInfo(!openInfo)}}
+                        className="font-medium text-blue-600 hover:underline">Інформація</button>
+                </td>
+                <td className="px-2 py-1 text-center">
+                    <button onClick={() => {setEditModal(true)}}
+                        className="font-medium text-blue-600 hover:underline">Редагувати</button>
                 </td>
                 <td className="px-2 py-1 text-left">
-                    <a
-                        // onClick={async () => { await deleteEmployee(employee._id); dispatch(fetchEmployees()) }} 
-                        href="#" className="font-medium text-blue-600 hover:underline">Видалити</a>
+                    <button onClick={() => {deleteMenuItem(item._id); dispatch(fetchMenuItems())}}
+                        className="font-medium text-blue-600 hover:underline">Видалити</button>
                 </td>
 
             </tr>

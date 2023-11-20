@@ -5,6 +5,8 @@ import { PayOrder } from "./PayOrder";
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchOrders } from "../store/slices/ordersSlice";
 import { getTotalOrderValue } from "../functions";
+import { fetchMenu } from "../store/slices/menuSlice";
+import { fetchMenuItems } from "../store/slices/menuItemsSlice";
 
 export const Orders = () => {
 
@@ -19,6 +21,8 @@ export const Orders = () => {
 
     useEffect(() => {
         dispatch(fetchOrders());
+        dispatch(fetchMenu());
+        dispatch(fetchMenuItems());
     }, [])
 
     return (

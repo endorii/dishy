@@ -39,4 +39,47 @@ router.get('/menuItems', authMiddleware,
         }
     })
 
+router.put('/menuItems/:_id', authMiddleware,
+    async (req, res) => {
+        try {
+            const { _id } = req.params;
+            const { dishName, dishPrice, dishTime, dishAmount, dishWeight, dishCategory, dishIngredients, dishLogo } = req.body;
+
+            const updatedMenuItem = await MenuItem.findOneAndUpdate(
+                { _id },
+                { user: req.user.id, name: dishName, value: dishPrice, time: dishTime, amount: dishAmount, weight: dishWeight, toCategory: dishCategory, ingredients: dishIngredients, src: dishLogo },
+                { new: true }
+            );
+
+            if (!updatedMenuItem) {
+                return res.status(404).json({ message: `Товар з id ${_id} не знайдено` });
+            }
+
+            return res.json({ message: "Товар було оновлено" });
+        } catch (e) {
+            console.log(e);
+            res.send({ message: "Server error" });
+        }
+    });
+
+router.delete('/menuItems/:_id', authMiddleware,
+    async (req, res) => {
+        try {
+
+            const { _id } = req.params;
+
+            const menuItems = await MenuItem.findOneAndDelete({ user: req.user.id, _id })
+
+            if (!menuItems) {
+                return res.status(404).json({ message: `Товар з id ${_id} не знайдено` });
+            }
+
+            return res.json({ message: "Товар було видалено" });
+
+        } catch (e) {
+            console.log(e);
+            res.send({ message: "Помилка сервера" });
+        }
+    })
+
 module.exports = router;
