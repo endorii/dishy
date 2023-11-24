@@ -7,6 +7,8 @@ const positionsRouter = require('./routes/positions.rotes');
 const menuRouter = require('./routes/menu.routes');
 const menuItemRouter = require('./routes/menuItem.routes');
 const ordersRouter = require("./routes/order.routes");
+const needsRouter = require("./routes/needs.routes")
+const contactTextsRouter = require('./routes/contactTexts.routes');
 const app = express();
 const PORT = config.get('PORT')
 const cors = require('cors');
@@ -19,6 +21,8 @@ app.use("/api/", positionsRouter);
 app.use("/api/", menuRouter);
 app.use("/api/", menuItemRouter);
 app.use("/api/", ordersRouter);
+app.use('/api/', needsRouter);
+app.use('/api/', contactTextsRouter);
 
 const start = async () => {
     try {

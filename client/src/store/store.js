@@ -6,6 +6,8 @@ import currentEmployeeSlice from "./slices/currentEmployee.Slice";
 import ordersSlice from "./slices/ordersSlice";
 import menuSlice from "./slices/menuSlice";
 import menuItemsSlice from "./slices/menuItemsSlice";
+import needsSlice from "./slices/needs.Slice";
+import contactTextsSlice from "./slices/contactTexts.Slice";
 
 const rootReducer = {
     user: userSlice,
@@ -14,7 +16,9 @@ const rootReducer = {
     currentEmployee: currentEmployeeSlice,
     orders: ordersSlice,
     menu: menuSlice,
-    menuItems: menuItemsSlice
+    menuItems: menuItemsSlice,
+    needs: needsSlice,
+    contactsTexts: contactTextsSlice,
 }
 
 const store = configureStore({
