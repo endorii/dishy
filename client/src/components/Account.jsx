@@ -74,11 +74,13 @@ const Accordion = ({ menuOpen, setMenuOpen }) => {
                 ]
         },
         {
-            title: "Доступ", icon: Access, children:
+            title: "Персонал", icon: Access, children:
                 [
                     { title: "Працівники", path: "employees" },
                     { title: "Посади", path: "positions" },
-                    { title: "Касси", path: "cash-registers" }
+                    { title: "Касси", path: "cash-registers" },
+                    { title: "Зворотній зв'язок", path: "feedback" },
+                    { title: "Потреби", path: "needs" }
                 ]
         },
 
