@@ -27,6 +27,8 @@ import { Orders } from './components/Orders';
 import { CurrentEmployeeAccount } from './components/CurrentEmployeeAccount';
 import { Sales } from './view/pages/Statistis/Sales/Sales';
 import { Checks } from './view/pages/Statistis/Checks/Checks';
+import { Feedback } from './components/Feedback';
+import { Needs } from './components/Needs';
 
 const router = createBrowserRouter(
     createRoutesFromElements(
@@ -49,6 +51,8 @@ const router = createBrowserRouter(
                 <Route path='account' element={<UserAccount />}/>
                 <Route path='sales' element={<Sales/>}/>
                 <Route path='checks' element={<Checks/>}/>
+                <Route path='feedback' element={<Feedback/>}/>
+                <Route path='needs' element={<Needs/>}/>
             </Route>
 
             <Route path='employee/auth' element={<EmployeeAuthLayout />}>
