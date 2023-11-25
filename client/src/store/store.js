@@ -18,7 +18,7 @@ const rootReducer = {
     menu: menuSlice,
     menuItems: menuItemsSlice,
     needs: needsSlice,
-    contactsTexts: contactTextsSlice,
+    contactTexts: contactTextsSlice,
 }
 
 const store = configureStore({
