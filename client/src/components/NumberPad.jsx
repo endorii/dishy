@@ -5,25 +5,26 @@ import { useDispatch } from "react-redux";
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { fetchCurrentEmployee } from "../store/slices/currentEmployee.Slice";
-import { loginCurrentEmployee } from "../view/pages/Access/Employees/employee";
+import { loginCurrentEmployee, loginEmployee } from "../view/pages/Access/Employees/employee";
 
 export const NumberPad = () => {
 
     const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9];
-    const [inputText, setInputText] = useState('');
+    const [pinInput, setPinInput] = useState('');
+    const [foundedEmployee, setFoundedEmployee] = useState({});
     const [open, setOpen] = useState(false);
 
     const dispatch = useDispatch()
 
     const handleClick = (number) => {
         console.log(`Кнопка ${number} натиснута`);
-        if (inputText.length < 4) {
-            setInputText(prevState => prevState + `${number}`);
+        if (pinInput.length < 4) {
+            setPinInput(prevState => prevState + `${number}`);
         }
     }
-
+    
     const clearPad = () => {
-        setInputText('');
+        setPinInput('');
     }
 
     useEffect(() => {
@@ -32,7 +33,7 @@ export const NumberPad = () => {
     return (
         <>
             {open ?
-                <NumPadWelcomeModal setOpen={setOpen} />
+                <NumPadWelcomeModal setOpen={setOpen} foundedEmployee={foundedEmployee}/>
                 : null}
             <ToastContainer
                 position="top-right"
@@ -46,7 +47,7 @@ export const NumberPad = () => {
                 pauseOnHover={false}
                 theme="light" />
             <div className="flex justify-center m-10 sm:mx-auto sm:w-full sm:max-w-sm ">
-                <input className="w-full h-20 bg-gray-400/10 rounded-lg text-center font-bold text-white text-6xl" type="password" value={inputText} onChange={(e) => setInputText(e.target.value)} />
+                <input className="w-full h-20 bg-gray-400/10 rounded-lg text-center font-bold text-white text-6xl" type="password" value={pinInput} onChange={(e) => setPinInput(e.target.value)} />
             </div>
 
             <div className="flex flex-wrap justify-center text-white gap-y-5 gap-x-10">
@@ -62,11 +63,12 @@ export const NumberPad = () => {
                     0
                 </button>
                 <button onClick={() => {
-                    dispatch(loginCurrentEmployee(inputText));
+                    // dispatch(loginEmployee(pinInput))
+                    console.log(foundedEmployee);
                     dispatch(fetchCurrentEmployee());
                     setOpen(true)
 
-                }} disabled={inputText.length < 4} className="w-1/2 text-center bg-emerald-400/10 w-24 h-24 text-2xl hover:bg-emerald-400/30 font-medium disabled:opacity-25 disabled:hover:bg-emerald-400/10">
+                }} disabled={pinInput.length < 4} className="w-1/2 text-center bg-emerald-400/10 w-24 h-24 text-2xl hover:bg-emerald-400/30 font-medium disabled:opacity-25 disabled:hover:bg-emerald-400/10">
                     Go
                 </button>
             </div>

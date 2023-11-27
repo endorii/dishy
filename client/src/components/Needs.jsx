@@ -30,7 +30,7 @@ export const Needs = () => {
                                 Контент
                             </th>
                             <th scope="col" className="px-1 py-3 text-center">
-
+                                
                             </th>
                         </tr>
                     </thead>
@@ -55,7 +55,6 @@ export const Needs = () => {
                                 </tr>
                             </tbody>
                         </>
-
                     ) : null}
                 </table>
                 {needs.length > 0 ? null : <h2 className='text-4xl p-6 text-center font-light bg-white'> не знайдено</h2>}

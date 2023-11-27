@@ -19,8 +19,6 @@ const UserAccount = () => {
         }
     }, [token])
 
-    
-
     return (
         <div className='flex flex-col' >
             <div className="flex justify-between ">
