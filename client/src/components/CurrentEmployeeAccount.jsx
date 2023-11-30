@@ -1,15 +1,13 @@
 import { useEffect, useState } from "react"
 import { useSelector } from "react-redux"
-import { logout, setCurrentEmployee } from "../store/slices/currentEmployee.Slice"
 import { useNavigate } from "react-router-dom"
 import { useDispatch } from "react-redux"
-import { changeIsCurrentEmployee } from "../view/pages/Access/Employees/employee"
 import { addNeed } from "./needs.actions"
 import { addContactText } from "./contactText.actions"
 
 export const CurrentEmployeeAccount = () => {
 
-    const currentEmployee = useSelector(state => state.currentEmployee.currentEmployee)
+    const {currentEmployee} = useSelector(state => state.currentEmployee)
     const startTime = new Date('Fri Oct 24 2023 10:30:57 GMT+0300');
     const navigate = useNavigate();
 
@@ -18,7 +16,7 @@ export const CurrentEmployeeAccount = () => {
     const [contactAreaText, setContactAreaText] = useState('');
     const [wishesAreaText, setWishesAreaText] = useState('');
 
-    const dispatch = useDispatch();
+    // const dispatch = useDispatch();
 
     const getCurrentOnlineTime = (startTime) => {
         const now = new Date();
@@ -50,7 +48,7 @@ export const CurrentEmployeeAccount = () => {
                                 {currentTime}
                             </div>
                             <div>
-                                <button className="px-6 py-3 bg-red-500 text-3xl text-white rounded-lg" onClick={async () => { navigate('/employees'); dispatch(logout({})); dispatch(changeIsCurrentEmployee());}}>Завершити робочу зміну</button>
+                                <button className="px-6 py-3 bg-red-500 text-3xl text-white rounded-lg" onClick={async () => { navigate('/employees');}}>Завершити робочу зміну</button>
                             </div>
                         </div>
                     </div>

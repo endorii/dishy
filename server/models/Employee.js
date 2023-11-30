@@ -6,11 +6,11 @@ const Employee = new Schema({
     login: { type: String, require: true, unique: true },
     pin: { type: String, require: true, unique: true },
     position: { type: String, require: true },
-    isCurrent: { type: Boolean, default: false },
-    totalWorkingTime: { type: String, default: "0" },
+    isOnline: { type: Boolean, default: false },
     workingTime: [{
-        start: { type: Date, required: true },
-        end: { type: Date, required: true }
+        start: { type: String, required: true, default: "0" },
+        end: { type: String, required: true, default: "0" },
+        total: { type: String, default: "0" }
     }]
 })
 

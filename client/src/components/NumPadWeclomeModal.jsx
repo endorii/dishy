@@ -1,15 +1,15 @@
 import { useEffect, useState } from "react";
-import { fetchCurrentEmployee } from "../store/slices/currentEmployee.Slice";
+import { fetchOnlineEmployees } from "../store/slices/onlineEmployee.Slice";
 import { useDispatch, useSelector } from "react-redux";
 import { Modal } from "./Modal";
 import { useNavigate } from "react-router-dom";
-import { changeIsCurrentEmployee } from "../view/pages/Access/Employees/employee";
 import { toast } from 'react-toastify';
+import { loginEmployee } from "../view/pages/Access/Employees/employee";
+import { setCurrentEmployee } from "../store/slices/currentEmployee.Slice";
 
-export const NumPadWelcomeModal = ({ setOpen }) => {
+export const NumPadWelcomeModal = ({ setOpen, employee, setEmployee }) => {
 
     const dispatch = useDispatch();
-    const { currentEmployee } = useSelector(state => state.currentEmployee);
     const navigate = useNavigate();
 
     const [now, setNow] = useState(new Date().toLocaleTimeString());
@@ -29,11 +29,8 @@ export const NumPadWelcomeModal = ({ setOpen }) => {
         const timer = setInterval(() => {
             setNow(new Date().toLocaleTimeString());
         }, 1000);
-
-        //need be fixed 
-
-        dispatch(fetchCurrentEmployee());
-        dispatch(fetchCurrentEmployee());
+    
+        
         return () => clearInterval(timer);
     }, []);
 
@@ -42,18 +39,22 @@ export const NumPadWelcomeModal = ({ setOpen }) => {
             <div className='flex justify-center '>
                 <div className='absolute bg-gray-200 shadow-xl w-1/3 h-auto z-10 rounded-md mt-16'>
                     <div className='flex flex-col items-center mx-3 gap-4 mt-5'>
-                        {currentEmployee ?
+                        {employee.name ?
                             <>
-                                <div className="font-thin text-xl">Вітаємо, {currentEmployee.name}</div>
+                                <div className="font-thin text-xl">Вітаємо, {employee.name}</div>
                                 <div className="font-thin text-xl">Розпочати робочу зміну?</div>
                                 <div className="font-thin text-xl">Початок зміни о: {now}</div>
                                 <div className="flex flex-row gap-x-5 mt-4">
                                     <button className="flex items-center bg-red-500 hover:bg-red-600 rounded-lg mb-7 px-7 py-2 text-white font-medium drop-shadow-md" onClick={() => {
-                                        dispatch(changeIsCurrentEmployee());
+                                        setEmployee({})
                                         setOpen(false)
                                     }}>Ні</button>
                                     <div>
-                                        <button onClick={() => {
+                                        <button onClick={async () => {
+                                            await loginEmployee(employee.pin);
+                                            dispatch(setCurrentEmployee(employee));
+                                            dispatch(fetchOnlineEmployees());
+                                            
                                             setOpen(false);
                                             notify();
                                             setTimeout(() => {
@@ -71,7 +72,7 @@ export const NumPadWelcomeModal = ({ setOpen }) => {
                                 }} className="flex items-center bg-green-500 hover:bg-green-600 rounded-lg mb-7 px-7 py-2 text-white font-medium drop-shadow-md">Ок</button>
                             </>}
 
-                        <div className="absolute top-1 right-1 cursor-pointer" onClick={() => { setOpen(false) }}>✖</div>
+                        <div className="absolute top-1 right-1 cursor-pointer" onClick={() => { setEmployee({}); setOpen(false) }}>✖</div>
                     </div>
                 </div>
             </div>

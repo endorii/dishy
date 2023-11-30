@@ -4,15 +4,16 @@ import { NumPadWelcomeModal } from "./NumPadWeclomeModal";
 import { useDispatch } from "react-redux";
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { fetchCurrentEmployee } from "../store/slices/currentEmployee.Slice";
-import { loginCurrentEmployee, loginEmployee } from "../view/pages/Access/Employees/employee";
+
+import { foundEmployee } from "../view/pages/Access/Employees/employee";
+import { fetchOnlineEmployees } from "../store/slices/onlineEmployee.Slice";
 
 export const NumberPad = () => {
 
     const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9];
     const [pinInput, setPinInput] = useState('');
-    const [foundedEmployee, setFoundedEmployee] = useState({});
     const [open, setOpen] = useState(false);
+    const [employee, setEmployee] = useState({});
 
     const dispatch = useDispatch()
 
@@ -22,18 +23,19 @@ export const NumberPad = () => {
             setPinInput(prevState => prevState + `${number}`);
         }
     }
-    
+
     const clearPad = () => {
         setPinInput('');
     }
 
     useEffect(() => {
-        dispatch(fetchCurrentEmployee())
+        dispatch(fetchOnlineEmployees());
     }, [])
+
     return (
         <>
             {open ?
-                <NumPadWelcomeModal setOpen={setOpen} foundedEmployee={foundedEmployee}/>
+                <NumPadWelcomeModal setOpen={setOpen} employee={employee} setEmployee={setEmployee}/>
                 : null}
             <ToastContainer
                 position="top-right"
@@ -62,10 +64,9 @@ export const NumberPad = () => {
                 <button onClick={() => handleClick(0)} className="w-1/2 text-center bg-gray-400/10 w-24 h-24 text-2xl hover:bg-gray-400/30">
                     0
                 </button>
-                <button onClick={() => {
-                    // dispatch(loginEmployee(pinInput))
-                    console.log(foundedEmployee);
-                    dispatch(fetchCurrentEmployee());
+                <button onClick={async () => {
+                    await foundEmployee(pinInput, setEmployee)
+                    
                     setOpen(true)
 
                 }} disabled={pinInput.length < 4} className="w-1/2 text-center bg-emerald-400/10 w-24 h-24 text-2xl hover:bg-emerald-400/30 font-medium disabled:opacity-25 disabled:hover:bg-emerald-400/10">

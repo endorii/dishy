@@ -1,6 +1,7 @@
 const Router = require('express');
 const Employee = require('../models/Employee');
 const authMiddleware = require('../middlewares/auth.middleware');
+const { trusted } = require('mongoose');
 const router = new Router();
 
 router.post('/employees', authMiddleware,
@@ -32,6 +33,20 @@ router.get('/employees', authMiddleware,
     async (req, res) => {
         try {
             const employees = await Employee.find({ user: req.user.id });
+
+            return res.json({ employees });
+
+        } catch (e) {
+            console.log(e);
+            res.send({ message: "Помилка сервера" });
+        }
+    }
+);
+
+router.get('/onlineEmployee', authMiddleware,
+    async (req, res) => {
+        try {
+            const employees = await Employee.find({ isOnline: true, user: req.user.id });
 
             return res.json({ employees });
 
@@ -83,59 +98,40 @@ router.delete('/employees/:_id', authMiddleware,
         }
     });
 
-router.get('/currentEmployee', authMiddleware,
-    async (req, res) => {
-        try {
-            const currentEmployee = await Employee.findOne({ user: req.user.id, isCurrent: true });
-            return res.json({ currentEmployee });
-        } catch (e) {
-            console.log(e);
-            res.send({ message: "Помилка сервера" });
-        }
-    }
-);
-
-router.post('/currentEmployee', authMiddleware,
+router.post('/employeeByPin', authMiddleware,
     async (req, res) => {
         try {
             const { pin } = req.body;
-            const currentEmployee = await Employee.findOne({ pin, user: req.user.id });
-            if (currentEmployee) {
+            const employee = await Employee.findOne({ pin, user: req.user.id });
 
-                await Employee.updateMany({ user: req.user.id }, { isCurrent: false });
-
-                await Employee.updateOne({ _id: currentEmployee._id }, { isCurrent: true });
-
-            } else {
-                res.status(404).json({ message: 'Співробітник не знайдений' });
+            if (!employee) {
+                return res.status(404).json({ message: "Employee not found" });
             }
+
+            return res.json({ employee });
         } catch (e) {
-            console.log(e);
-            res.send({ message: "Помилка сервера" })
+            console.error(e);
+            res.status(500).json({ message: "Internal server error" });
         }
     }
 );
 
-router.put('/currentEmployee', authMiddleware,
+router.post('/loginEmployee', authMiddleware,
     async (req, res) => {
         try {
-            const currentEmployee = await Employee.findOneAndUpdate(
-                { isCurrent: true, user: req.user.id }, // умова пошуку
-                { isCurrent: false, user: req.user.id }, // оновлення поля
-                { new: true } // повернення оновленого документа
-            );
+            const { pin } = req.body;
+            const employee = await Employee.findOneAndUpdate({ pin, user: req.user.id,}, {pin, user: req.user.id, isOnline: true}, {new: true});
 
-            if (!currentEmployee) {
-                return res.status(404).json({ message: 'Співробітник не знайдений' });
+            if (!employee) {
+                return res.status(404).json({ message: "Employee not found" });
             }
 
-            res.json({ message: 'Співробітник успішно оновлений', employee: currentEmployee });
-        } catch (err) {
-            console.error(err);
-            res.status(500).json({ message: 'Помилка сервера' });
+            return res.json({ employee });
+        } catch (e) {
+            console.error(e);
+            res.status(500).json({ message: "Internal server error" });
         }
-    });
-
-
+    }
+);
 
 module.exports = router;

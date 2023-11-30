@@ -1,5 +1,4 @@
 import axios from "axios";
-import { setCurrentEmployee } from "../../../../store/slices/currentEmployee.Slice";
 
 export const addEmployee = async (name, login, pin, position) => {
     try {
@@ -24,11 +23,11 @@ export const getAllEmployees = async () => {
     }
 }
 
-export const getCurrentEmployee = async () => {
+export const getOnlineEmployees = async () => {
     try {
-        const response = await axios.get("http://localhost:5000/api/currentEmployee", { headers: { Authorization: `Bearer ${localStorage.getItem('token')}` } });
+        const response = await axios.get("http://localhost:5000/api/onlineEmployee", { headers: { Authorization: `Bearer ${localStorage.getItem('token')}` } });
 
-        return response.data.currentEmployee;
+        return response.data.employees;
 
     } catch (e) {
 
@@ -46,11 +45,20 @@ export const deleteEmployee = async (_id) => {
     }
 }
 
-export const deleteСurrentEmployee = async (_id) => {
+export const foundEmployee = async (pin, setEmployee) => {
     try {
-        const response = await axios.delete(`http://localhost:5000/api/currentEmployee/${_id}`, { headers: { Authorization: `Bearer ${localStorage.getItem('token')}` } });
-        console.log(response.data.message);
-        return response.data
+        const response = await axios.post(`http://localhost:5000/api/employeeByPin`, { pin }, { headers: { Authorization: `Bearer ${localStorage.getItem('token')}` } });
+        setEmployee(response.data.employee)
+        // return response.data.employee;
+    } catch (e) {
+        console.log(e.response.data.message);
+    }
+}
+
+export const loginEmployee = async (pin) => {
+    try {
+        const response = await axios.post(`http://localhost:5000/api/loginEmployee`, { pin }, { headers: { Authorization: `Bearer ${localStorage.getItem('token')}` } });
+        return response.data.employee;
     } catch (e) {
         console.log(e.response.data.message);
     }
@@ -63,36 +71,5 @@ export const editEmployee = async (_id, name, login, pin, position) => {
         return response.data
     } catch (e) {
         console.log(e.response.data.message);
-    }
-}
-
-export const loginCurrentEmployee = (pin) => {
-    return async dispatch => {
-        try {
-            const response = await axios.post("http://localhost:5000/api/currentEmployee", { pin }, { headers: { Authorization: `Bearer ${localStorage.getItem('token')}` } });
-
-            dispatch(setCurrentEmployee(response.data));
-            console.log(response.data);
-
-        } catch (e) {
-            console.log(e.response.data.message);
-        }
-    }
-}
-
-export const changeIsCurrentEmployee = () => {
-    return async dispatch => {
-        try {
-            const response = await axios.put("http://localhost:5000/api/currentEmployee",
-                { isCurrent: false }, // Дані, які потрібно надіслати на сервер
-                { headers: { Authorization: `Bearer ${localStorage.getItem('token')}` } }
-            );
-
-            dispatch(setCurrentEmployee({}));
-            console.log(response.data);
-
-        } catch (e) {
-            console.log(e.response);
-        }
     }
 }

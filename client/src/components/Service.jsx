@@ -4,12 +4,12 @@ import { useDispatch, useSelector } from "react-redux";
 import GreenDot from '../assets/img/green_dot.png'
 import RedDot from '../assets/img/red_dot.png'
 import { useEffect } from "react";
-import { fetchCurrentEmployee } from "../store/slices/currentEmployee.Slice";
+
 
 export const Service = () => {
     const dispatch = useDispatch();
     useEffect(() => {
-        dispatch(fetchCurrentEmployee());
+        
     }, [])
     const { name } = useSelector(state => state.currentEmployee.currentEmployee);
     const { isAuth } = useSelector(state => state.currentEmployee);
